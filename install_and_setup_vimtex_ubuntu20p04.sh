@@ -398,6 +398,8 @@ nnoremap S :YcmCompleter GoTo<CR>
 nnoremap x :YcmCompleter GetType<CR>
 nnoremap _ :YcmCompleter RefactorRename 
 nnoremap Y :YcmCompleter GetDoc<CR>
+
+" Activate this with K (shift-k)
 command -nargs=1 Googleit :!python3 ~/.cfiles/Googleit.py <args>
 set keywordprg=:Googleit
 
@@ -442,8 +444,9 @@ nnoremap S :YcmCompleter GoTo<CR>
 nnoremap x :YcmCompleter GetType<CR>
 nnoremap _ :YcmCompleter RefactorRename 
 nnoremap Y :YcmCompleter GetDoc<CR>
-" K is the commanmd (shift k i.e. capitol k)
-command -nargs=1 Googleit :!python3 ~/.cfiles/Googleit.py <args>
+
+" Activate this with K (shift-k)
+command -nargs=1 Googleit :!python3 ~/.pyfiles/Googleit.py <args>
 set keywordprg=:Googleit
 
 EOF
@@ -496,6 +499,10 @@ function ShutdownFunctions()
   silent exec "!kill $(ps aux | grep '[p]ython3.*main.py' | awk '{print $2}')"
 endfunction
 
+" Activate this with K (shift-k)
+command -nargs=1 Googleit :!python3 ~/.vimfiles/Googleit.py <args>
+set keywordprg=:Googleit
+
 EOF
 
 
@@ -528,7 +535,7 @@ mkdir -p ~/.pyfiles
 cp py.ycm_extra_conf.py ~/.pyfiles/.ycm_extra_conf.py
 # Dont actually need to do this below to get urxvt settings to take
 #echo 'xrdb ~/.Xresources' >> ~/.xinitrc
-
+mkdir -p ~/.vimfiles
 
 # Setup auto google
 cat >> ~/.cfiles/Googleit.py << 'EOF'
@@ -540,7 +547,8 @@ subprocess.Popen(['google-chrome-stable', 'http://www.google.com/search?q='+
 EOF
 
 chmod guo+x ~/.cfiles/Googleit.py
-
+cp ~/.cfiles/Googleit.py ~/.pyfiles/
+cp ~/.cfiles/Googleit.py ~/.vimfiles/
 
 # Get backgrounds
 wget -O ~/Pictures/winter1.jpg http://wallpaperim.net/_data/i/upload/2014/09/23/20140923661374-3acd5e08-me.jpg
