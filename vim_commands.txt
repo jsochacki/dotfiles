@@ -1,0 +1,79 @@
+# Find files in all directories upstream from cd
+:find filename
+:find *ename
+:find fil<tab>
+
+# Query path variable setting
+:set path?
+
+# File jumping with multiple files open
+# to look at all open files
+:ls
+# Switch to file
+:b unique_subset_of_file_name
+# Switch to file (tab will jump betweeen them
+:b non_unique_subset_of_file_name <tab>
+
+# Splitting
+ #open up new file and split window horizontally
+:sp filename
+# open with 10 lines
+:10sp filename
+# Open and vertical split
+:vsp filename
+:Vex (vertical split)
+:Sex (horizontal split)
+# Increase size of current split by 5 lines
+Ctrl-w 5+<
+# Reduce by 1
+Ctrl-w -
+#Max out the height of the current split
+ctrl + w _
+#Max out the width of the current split
+ctrl + w |
+Ctrl-w h Ctrl-w ←	Shift focus to split on left of current
+Ctrl-w l Ctrl-w →	Shift focus to split on right of current
+Ctrl-w j Ctrl-w ↓	Shift focus to split below the current
+Ctrl-w k Ctrl-w ↑	Shift focus to split above the current
+# Equal Splits
+Ctrl-w =
+# Swap top/bottom or left/right split
+Ctrl+W R
+# Break out current window into a new tabview
+Ctrl+W T
+# Close every window in the current tabview but the current one
+Ctrl+W o
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+# Autocomplete
+ctrl-x <option listed on bottom>
+ctrl-x <ctrl-D> definition based completion
+ctrl-x <ctrl-I> include based completion
+ctrl-x <ctrl-O> object/method based completion
+ctrl-x <ctrl-N> Current file based completion
+ctrl-x <ctrl-P> Current file based completion
+ctrl-x <ctrl-V> Command Line based completion
+ctrl-x <ctrl-f> File name based completion
+ctrl-N Anything based completion
+ctrl-n and ctrl-p cycle different directions through the options
+ctrl-x <option listed on bottom>
+
+# Netrw file browser
+# Start in .
+:edit .
+i edit view styles
+d create directory
+D delete directory
+v open in horizontal tab
+t open in tab
+s change sort type
+r reverse sort type
+:help netrw-browse-maps
+
+#Snippets
+nnoremap command :-lread filename<CR>keypresses
+
+#abbreviations

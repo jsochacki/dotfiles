@@ -1,0 +1,16 @@
+#Need to put this in the vimrc or the local vimrc
+#when deving so that when you run <C-W><C-F> on a word or gf
+#(note C-O will bring you back to the original file)
+#It knows where to look for the files
+#let &path.="src/include,/usr/include/AL,"
+#Basically have a way to add all the relevant paths in your repo to vim for searching dynamically
+
+#set includeexpr=substitute(v:fname,'\\.','/','g')
+
+#"='-I'.substitute(&path, ',', '\n-I', 'g')<cr>p
+
+#set makeprg=make\ -C\ ../build\ -j9
+#THis is how you set custom make options for vim that run when you run :make
+
+#You can execute any shell command from Vim’s command mode if you prepend it with !
+#So, to run your great program, you just type :!./my_great_program.
