@@ -500,8 +500,8 @@ function ShutdownFunctions()
 endfunction
 
 " Activate this with K (shift-k)
-command -nargs=1 Googleit :!python3 ~/.vimfiles/Googleit.py <args>
-set keywordprg=:Googleit
+"command -nargs=1 Googleit :!python3 ~/.vimfiles/Googleit.py <args>
+"set keywordprg=:Googleit
 
 EOF
 
