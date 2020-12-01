@@ -542,7 +542,7 @@ set updatetime=500
 "inoremap <F1> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 "nnoremap <F1> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
-inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures markdown-create "./figures/"'<CR><CR>:w<CR>
+inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures markdown-create "'.getline('.').'" "./figures/"'<CR><CR>:w<CR>
 nnoremap <F2> : silent exec '!diagrams-net-figures edit "./figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
 "This is required to get actual auto figure insertion
@@ -551,10 +551,10 @@ autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h')
 
 
 " Starts autocompilation at .tex file open and cleansup at close and shortcut watcher
-augroup vimtex_event_1
+augroup marktex_event_1
   au!
-  au User VimtexEventQuit     call ShutdownFunctions()
-  au User VimtexEventInitPost call StartupFunctions()
+  au User MarktexEventQuit     call ShutdownFunctions()
+  au User MarktexEventInitPost call StartupFunctions()
 augroup END
 
 " TODO need to modify for markdown rendered with pandoc and opened with zathura
