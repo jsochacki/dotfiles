@@ -481,7 +481,7 @@ autocmd BufNewFile * :write
 autocmd CursorHold,CursorHoldI * update
 set updatetime=500
 
-inoremap <F1> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+inoremap <F1> <Esc>: silent exec '.!inkscape-figures latex-create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <F1> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
 inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures latex-create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
@@ -538,31 +538,29 @@ autocmd BufNewFile * :write
 autocmd CursorHold,CursorHoldI * update
 set updatetime=500
 
-"TODO update the inkscape-figures repo to accomodate inkscape files in markdown
-"inoremap <F1> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
-"nnoremap <F1> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+inoremap <F1> <Esc>: silent exec '.!inkscape-figures markdown-create "'.getline('.').'" "./figures/"'<CR><CR>:w<CR>
+nnoremap <F1> : silent exec '!inkscape-figures edit "./figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
 inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures markdown-create "'.getline('.').'" "./figures/"'<CR><CR>:w<CR>
 nnoremap <F2> : silent exec '!diagrams-net-figures edit "./figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
-autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h')
+autocmd CursorHold * call RecompileMarkdown() 
 
-
-" Starts autocompilation at .tex file open and cleansup at close and shortcut watcher
-augroup marktex_event_1
-  au!
-  au User MarktexEventQuit     call ShutdownFunctions()
-  au User MarktexEventInitPost call StartupFunctions()
-augroup END
+autocmd VimEnter * call StartupFunctions()
 
 " TODO need to modify for markdown rendered with pandoc and opened with zathura
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
-"function StartupFunctions()
-  "call vimtex#compiler#compile()
-  "silent exec '!python3 ~/.local/lib/python3.8/site-packages/inkscape-latex-shortcuts/main.py &'
-"endfunction
+function RecompileMarkdown()
+  silent exec '!update_tex_figures.sh ' expand('%:p:h')
+  silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-5],'.pdf'],'') ' &'
+endfunction
+
+function StartupFunctions()
+  call RecompileMarkdown()
+  silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-5],'.pdf'],'') ' &'
+endfunction
 "function ShutdownFunctions()
   "call vimtex#compiler#clean(0)
   "silent exec "!kill $(ps aux | grep '[p]ython3.*main.py' | awk '{print $2}')"
