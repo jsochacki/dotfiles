@@ -639,6 +639,13 @@ vim +PlugInstall +qa
 # Install a decent browser
 ./Chrome_Setup.sh
 
+# Install pandoc
+wget https://github.com/jgm/pandoc/releases/download/2.11.2/pandoc-2.11.2-linux-amd64.tar.gz
+# strip-componenets means instead of /usr/local/pandoc/bin/* and /usr/local/pandoc/share/* will
+# infact and instead land in /usr/local/bin and /usr/local/share
+sudo tar xvzf pandoc-2.11.2-linux-amd64.tar.gz --strip-components 1 -C /usr/local/
+rm pandoc-2.11.2-linux-amd64.tar.gz
+
 # install diagrams.net
 sudo snap install drawio
 
