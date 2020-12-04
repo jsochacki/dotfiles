@@ -761,7 +761,71 @@ snippet nnp "New paragraph" iA
 $0
 endsnippet
 
-snippet booktemplate "book template" b
+snippet usingbooktemplate "use book template style file" b
+\documentclass[letterpaper, 10pt, titlepage, oneside]{book}
+\usepackage{systems_book}
+
+%Page order
+% This is one traditional page order for books.
+
+% Frontmatter
+%   Half-title
+%   Empty
+%   Title page
+%   Information (copyright notice, ISBN, etc.)
+%   Dedication if any, else empty
+%   Table of contents
+%   List of figures (can be in the backmatter too)
+%   Preface chapter
+% Mainmatter
+%   Main topic
+% Appendix
+%   Some subordinate chapters
+% Backmatter
+%   Bibliography
+%   Glossary / Index
+
+\setheaderandfooter{${1:John Sochacki}}
+
+\begin{document}
+
+\maketitleandtoc{${2:Title}}{${1:John Sochacki}}{${3:Date}}
+
+%Actual Content below
+\part{Preface}
+   $0
+
+\renewcommand{\abstractname}{Preface}
+   This is the abstract \par
+
+%Items after this will get numbers when generated
+\mainmatter
+
+\part{Part 1}
+
+   \chapter{Chapter 1}
+      content
+      \section{Section 1}
+            
+            \vspace{10pt}
+%\import{./}{filename.tex}
+
+\appendix
+\part{appendix info}
+   Appendix here \par
+
+\backmatter
+\part{Post Appendix}
+   COntent here \par
+
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
+
+\end{document}
+
+endsnippet
+
+snippet inlinebooktemplate "inline book template" b
 \documentclass[letterpaper, 10pt, titlepage, oneside]{book}
 
 % figure support
