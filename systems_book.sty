@@ -15,16 +15,23 @@
 %\usepackage{tabularx} % For tabular formatting
 \usepackage[justification=centering]{caption} %To get centered long captions
 \usepackage[nottoc]{tocbibind}
-\usepackage[obeyspaces,spaces]{url}
-\usepackage{hyperref}
-\usepackage{graphicx}
+\usepackage[obeyspaces,spaces]{url} % for creation of paths with spaces and special characters with \path{\\}
+\usepackage{hyperref} % for creation of href's and urls
+\usepackage{graphicx} % for instertion of non pdf images
+%\usepackage{xargs} % for easier to use default arguements for functions
+\usepackage{pdfpages} % for inclusion of pdf's into the doc
 
-\graphicspath{ {./figures/} }
+
+\graphicspath{ {./images/} }
 
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}
 }
+
+%NEED TO CHECK THESE AND ADD THE graphicx ones
+\newcommand{\incpdf}[2]{\includepdf[pages={#1}]{#2.pdf}}
+\newcommand{\incpdfcustomargs}[2]{\includepdf[#1]{#2.pdf}}
 
 \pdfsuppresswarningpagegroup=1
 
