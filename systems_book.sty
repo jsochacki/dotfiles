@@ -21,17 +21,19 @@
 %\usepackage{xargs} % for easier to use default arguements for functions
 \usepackage{pdfpages} % for inclusion of pdf's into the doc
 
-
-\graphicspath{ {./images/} }
-
+% for inkscape figures use
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}
 }
 
-%NEED TO CHECK THESE AND ADD THE graphicx ones
-\newcommand{\incpdf}[2]{\includepdf[pages={#1}]{#2.pdf}}
-\newcommand{\incpdfcustomargs}[2]{\includepdf[#1]{#2.pdf}}
+% for the graphicx package
+\graphicspath{ {./images/} } 
+\newcommand{\incgraphics}[2][\textwidth]{\includegraphics[width=#1]{#2}}
+
+% for pdfpages
+\newcommand{\incpdf}[2]{\includepdf[pages={#1}]{./images/#2.pdf}}
+\newcommand{\incpdfcustomargs}[2]{\includepdf[#1]{./images/#2.pdf}}
 
 \pdfsuppresswarningpagegroup=1
 
