@@ -761,6 +761,22 @@ snippet nnp "New paragraph" iA
 $0
 endsnippet
 
+snippet reffig "insert a figure reference" b
+~\ref{fig:$0}
+endsnippet
+
+snippet reffigpage "insert a figure page number reference" b
+~\pageref{fig:$0}
+endsnippet
+
+snippet reftab "insert a table reference" b
+~\ref{table:$0}
+endsnippet
+
+snippet reftabpage "insert a table page number reference" b
+~\pageref{table:$0}
+endsnippet
+
 snippet usingbooktemplate "use book template style file" b
 \documentclass[letterpaper, 10pt, titlepage, oneside]{book}
 \usepackage{systems_book}
