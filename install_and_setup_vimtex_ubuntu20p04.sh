@@ -148,9 +148,9 @@ cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 wget -O $homedir/Pictures/winter1.jpg http://wallpaperim.net/_data/i/upload/2014/09/23/20140923661374-3acd5e08-me.jpg
 wget -O $homedir/Pictures/winter2.jpg https://cache.desktopnexus.com/wallpapers/391/391188-1920x1080-beautiful-winter-landscape-1920x1080-wallpaper-568.jpg
 wget -O $homedir/Pictures/winter3.jpg http://www.bhmpics.com/walls/dead_snow_winter-other.jpg
-wget -O $homedir/Pictures/winter4.jpg https://wallpapercave.com/wp/0sCOQyE.jpg
-wget -O $homedir/Pictures/winter5.jpg https://wallpapercave.com/wp/mc5kprj.jpg
-wget -O $homedir/Pictures/winter6.jpg https://wallpapercave.com/wp/jNHBSir.jpg
+#wget -O $homedir/Pictures/winter4.jpg https://wallpapercave.com/wp/0sCOQyE.jpg
+#wget -O $homedir/Pictures/winter5.jpg https://wallpapercave.com/wp/mc5kprj.jpg
+#wget -O $homedir/Pictures/winter6.jpg https://wallpapercave.com/wp/jNHBSir.jpg
 wget -O $homedir/Pictures/winter7.jpg https://images.alphacoders.com/727/727275.png
 wget -O $homedir/Pictures/winter8.jpg https://images.unsplash.com/photo-1482358625854-d7d631ba1858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80
 wget -O $homedir/Pictures/winter9.jpg http://www.wallpaperstop.com/wallpapers/nature-wallpapers/winter-wallpapers/winter-candle-1920x1200-164125.jpg
