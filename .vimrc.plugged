@@ -51,6 +51,7 @@ let g:tex_conceal_frac=1
 
 setlocal spell
 set spelllang=en_us
+" Enables automatic fixing of miss-spelled words under cursor
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Get Utilisnip plugin for snippits
