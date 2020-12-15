@@ -27,6 +27,18 @@
     \import{./figures/}{#2.pdf_tex}
 }
 
+% setting up font type for url
+% \urlstyle{tt} % This is the defalut and is monospace
+\urlstyle{same} % This is to make them the current font being used
+
+% setting up colors for hyperref package (href and hyperref)
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
 % for the graphicx package
 \graphicspath{ {./images/} } 
 \newcommand{\incimg}[2][\textwidth]{\includegraphics[width=#1]{#2}}
