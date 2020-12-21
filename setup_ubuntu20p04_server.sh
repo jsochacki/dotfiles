@@ -9,7 +9,7 @@ homedir=$(pwd)
 cd $TMPDIR
 
 % Need to get X display server starter for i3
-sudo apt install xinit
+sudo apt install -y xinit
 
 # Get git, curl, and make
 sudo apt-get install -y git curl make
