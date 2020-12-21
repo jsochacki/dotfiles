@@ -144,6 +144,8 @@ chmod guo+x $homedir/.cfiles/Googleit.py
 cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
 cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 
+mkdir -p $homedir/Pictures
+
 # Get backgrounds
 wget -O $homedir/Pictures/winter1.jpg http://wallpaperim.net/_data/i/upload/2014/09/23/20140923661374-3acd5e08-me.jpg
 wget -O $homedir/Pictures/winter2.jpg https://cache.desktopnexus.com/wallpapers/391/391188-1920x1080-beautiful-winter-landscape-1920x1080-wallpaper-568.jpg
