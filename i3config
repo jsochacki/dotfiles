@@ -14,6 +14,9 @@ exec --no-startup-id vmware-user-suid-wrapper
 # Add background
 exec --no-startup-id feh --randomize --bg-fill ~/Pictures/*
 
+# Update dotfiles repo
+exec --no-startup-id bash ~/git/dotfiles/update_git.sh
+
 # Set up near borderless windows for URxvt
 #hide_edge_borders both
 #new_window 0pixel
