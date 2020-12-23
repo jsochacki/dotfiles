@@ -1,6 +1,6 @@
 # dotfiles
 My Dotfiles :)
-run ./install_and_setup_vimtex_ubuntu20p04.sh
+run ./setup_ubuntu20p04_server.sh
 
 That will get you everything.
 
