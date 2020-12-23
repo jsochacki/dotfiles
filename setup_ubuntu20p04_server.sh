@@ -15,7 +15,10 @@ sudo apt install -y xinit
 sudo apt-get install -y git curl make
 
 # Get vim
-sudo apt-get install -y vim build-essential clang-format
+#sudo apt-get install -y vim build-essential clang-format
+
+# Get Cpp development dependencies
+sudo apt-get install -y build-essential clang-format
 
 # you need to run this from the git directory
 
@@ -116,6 +119,9 @@ cp cpp.snippets $homedir/.vim/UltiSnips/
 cp c.snippets $homedir/.vim/UltiSnips/
 cp cu.snippets $homedir/.vim/UltiSnips/
 
+# Install vim, you need to wait until python 3 is setup as we compile with
+# python 3
+./setup_vim.sh
 
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
 ./install_and_setup_youcompleteme.sh
@@ -183,5 +189,9 @@ echo '# Adding i3 autolaunch' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
 echo 'startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
+
+# Do VMWARE specific setup at the end
+./setup_vmware_clipboard.sh
+./setup_vmware_share.sh
 
 source $homedir/.bashrc
