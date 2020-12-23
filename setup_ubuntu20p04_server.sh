@@ -96,28 +96,42 @@ sudo apt-get install -y xclip pdf2svg
 
 cd $TMPDIR
 #"install" my script and files
-cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
+ln -s $TMPDIR/update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
+#cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 
 # Do some vimrc setup
-cp .vimrc.plugged $homedir/
-cp .vimrc.normal $homedir/
-cp .vimrc.colors $homedir/
-cp .vimrc.custom $homedir/
-cp .vimrc $homedir/
+ln -s $TMPDIR/.vimrc.plugged $homedir/
+ln -s $TMPDIR/.vimrc.normal $homedir/
+ln -s $TMPDIR/.vimrc.colors $homedir/
+ln -s $TMPDIR/.vimrc.custom $homedir/
+ln -s $TMPDIR/.vimrc $homedir/
+#cp .vimrc.plugged $homedir/
+#cp .vimrc.normal $homedir/
+#cp .vimrc.colors $homedir/
+#cp .vimrc.custom $homedir/
+#cp .vimrc $homedir/
 
 # Do some filetype specific setup
 mkdir -p  $homedir/.vim/ftplugin/
-cp c.vim $homedir/.vim/ftplugin/
-cp python.vim $homedir/.vim/ftplugin/
-cp tex.vim $homedir/.vim/ftplugin/
-cp markdown.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/python.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/tex.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
+#cp c.vim $homedir/.vim/ftplugin/
+#cp python.vim $homedir/.vim/ftplugin/
+#cp tex.vim $homedir/.vim/ftplugin/
+#cp markdown.vim $homedir/.vim/ftplugin/
 
 # Do some non vimrc setup
 mkdir -p $homedir/.vim/UltiSnips
-cp tex.snippets $homedir/.vim/UltiSnips/
-cp cpp.snippets $homedir/.vim/UltiSnips/
-cp c.snippets $homedir/.vim/UltiSnips/
-cp cu.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/tex.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/cpp.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/c.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
+#cp tex.snippets $homedir/.vim/UltiSnips/
+#cp cpp.snippets $homedir/.vim/UltiSnips/
+#cp c.snippets $homedir/.vim/UltiSnips/
+#cp cu.snippets $homedir/.vim/UltiSnips/
 
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3
@@ -129,26 +143,36 @@ cp cu.snippets $homedir/.vim/UltiSnips/
 
 # Copy over scripts and config files
 mkdir -p $homedir/.local/bin
-cp myclang-format.py3 $homedir/.local/bin/clang-format.py
-cp .clang-format $homedir/
+ln -s $TMPDIR/myclang-format.py3 $homedir/.local/bin/clang-format.py
+ln -s $TMPDIR/.clang-format $homedir/
+#cp myclang-format.py3 $homedir/.local/bin/clang-format.py
+#cp .clang-format $homedir/
 mkdir -p $homedir/.config/zathura/
-cp zathurarc $homedir/.config/zathura/
+ln -s $TMPDIR/zathurarc $homedir/.config/zathura/
+#cp zathurarc $homedir/.config/zathura/
 mkdir -p $homedir/.config/i3/
-cp i3config $homedir/.config/i3/config
-cp .Xresources $homedir/
+ln -s $TMPDIR/i3config $homedir/.config/i3/config
+ln -s $TMPDIR/.Xresources $homedir/
+#cp i3config $homedir/.config/i3/config
+#cp .Xresources $homedir/
 mkdir -p $homedir/.cfiles
-cp c.ycm_extra_conf.py $homedir/.cfiles/.ycm_extra_conf.py
+ln -s $TMPDIR/c.ycm_extra_conf.py $homedir/.cfiles/.ycm_extra_conf.py
+#cp c.ycm_extra_conf.py $homedir/.cfiles/.ycm_extra_conf.py
 mkdir -p $homedir/.pyfiles
-cp py.ycm_extra_conf.py $homedir/.pyfiles/.ycm_extra_conf.py
+ln -s $TMPDIR/py.ycm_extra_conf.py $homedir/.pyfiles/.ycm_extra_conf.py
+#cp py.ycm_extra_conf.py $homedir/.pyfiles/.ycm_extra_conf.py
 # Dont actually need to do this below to get urxvt settings to take
 #echo 'xrdb $homedir/.Xresources' >> $homedir/.xinitrc
 mkdir -p $homedir/.vimfiles
 
 # Setup auto google
-cp Googleit.py $homedir/.cfiles/
+ln -s $TMPDIR/Googleit.py $homedir/.cfiles/
+#cp Googleit.py $homedir/.cfiles/
 chmod guo+x $homedir/.cfiles/Googleit.py
-cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
-cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
+ln -s $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
+ln -s $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
+#cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
+#cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 
 mkdir -p $homedir/Pictures
 
