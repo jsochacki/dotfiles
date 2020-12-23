@@ -183,6 +183,5 @@ echo '# Adding i3 autolaunch' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
 echo 'startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
-echo '' >> $homedir/.bashrc
 
 source $homedir/.bashrc

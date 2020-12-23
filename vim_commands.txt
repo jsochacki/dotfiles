@@ -6,6 +6,23 @@
 # Query path variable setting
 :set path?
 
+# Editing
+<C-U> deletes to the beginning of the line from cursor
+
+<C-o> command lets you go to normal mode when in insert mode and run command and
+then takes you back to insert mode so, if insert mode <C-o> dd will delete a
+line and put you back into insert mode (this is arguably more or the same amount
+of work as esc dd i though)
+
+w jumps to the beginning of the next word
+b jumps to the beginning of the previous word
+$ jumps to the end of the line
+^ jumps to the beginning of the line
+These can be used in combination with d, numbers and y to get cut control
+<shift-A> jumps to the end of the line and enters insert mode
+<shift-I> jumps to the beginning of the line and enters insert mode
+
+
 # File jumping with multiple files open
 # to look at all open files
 :ls
