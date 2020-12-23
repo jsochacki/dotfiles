@@ -211,8 +211,7 @@ sudo snap install drawio
 echo '' >> $homedir/.bashrc
 echo '# Adding i3 autolaunch and dotfiles auto pull' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
-echo "   cd $homedir/git/dotfiles" >> $homedir/.bashrc
-echo '   git pull' >> $homedir/.bashrc
+echo "   cd $homedir/git/dotfiles && git pull" >> $homedir/.bashrc
 echo '   startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
 
