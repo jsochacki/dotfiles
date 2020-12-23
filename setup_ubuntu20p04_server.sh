@@ -209,9 +209,14 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 sudo snap install drawio
 
 echo '' >> $homedir/.bashrc
-echo '# Adding i3 autolaunch and dotfiles auto pull' >> $homedir/.bashrc
+echo '# Adding dotfiles auto pull' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
 echo "   source $homedir/git/dotfiles/update_git.sh" >> $homedir/.bashrc
+echo 'fi' >> $homedir/.bashrc
+
+echo '' >> $homedir/.bashrc
+echo '# Adding i3 autolaunch' >> $homedir/.bashrc
+echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
 echo '   startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
 
