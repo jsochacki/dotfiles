@@ -21,6 +21,7 @@ set wildmenu
 
 
 " Add basic vim Setup Options here
+set backspace=indent,eol,start
 set tabstop=3
 set softtabstop=3
 set shiftwidth=3
