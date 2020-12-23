@@ -210,13 +210,8 @@ sudo snap install drawio
 
 echo '' >> $homedir/.bashrc
 echo '# Adding i3 autolaunch and dotfiles auto pull' >> $homedir/.bashrc
-echo 'function update_git()' >> $homedir/.bashrc
-echo '{' >> $homedir/.bashrc
-echo '   cd ~/git/dotfiles && git pull' >> $homedir/.bashrc
-echo '}' >> $homedir/.bashrc
-echo '' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
-echo "   update_git" >> $homedir/.bashrc
+echo "   source $homedir/git/dotfiles/update_git.sh" >> $homedir/.bashrc
 echo '   startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
 
