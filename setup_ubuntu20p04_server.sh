@@ -208,11 +208,15 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 # install diagrams.net
 sudo snap install drawio
 
+# Launch i3
 echo '' >> $homedir/.bashrc
 echo '# Adding i3 autolaunch' >> $homedir/.bashrc
 echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
 echo '   startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
+
+# Install Libre office
+sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
 
 # Do VMWARE specific setup at the end
 ./setup_vmware_clipboard.sh
