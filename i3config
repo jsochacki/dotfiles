@@ -18,7 +18,7 @@ exec --no-startup-id feh --randomize --bg-fill ~/Pictures/*
 exec --no-startup-id bash ~/git/dotfiles/update_git.sh
 
 # Bind screenshot button
-bindsym Print ~/git/dotfiles/snip.sh
+bindsym Print --release exec "bash ~/git/dotfiles/snip.sh"
 
 # Set up near borderless windows for URxvt
 #hide_edge_borders both
