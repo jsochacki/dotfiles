@@ -35,6 +35,9 @@ nnoremap <F3> : call CompilePptx() <CR>
 " Enable pptx preview from f4 keypress
 nnoremap <F4> : call PreviewPptx() <CR>
 
+" Open inkscape for image paste into current directory on F5
+nnoremap <F5> : silent exec '!inkscape &' <CR><CR>:redraw!<CR>
+
 " Autodetects if template is there in root or not and compiles with it if
 " available
 function CompilePptx()
