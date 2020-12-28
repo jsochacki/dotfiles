@@ -1,6 +1,9 @@
 "cat >> ~/.vim/ftplugin/markdown.vim << 'EOF'
 " markdown specific settings
 
+" Required to let YCM work on markdown
+let g:ycm_filetype_blacklist = {}
+
 " Crucial to allow ycm and ultisnips to work together
 " cant tab complete ultisnips if you don't do this
 " free per https://vim.fandom.com/wiki/Unused_keys
