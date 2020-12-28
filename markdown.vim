@@ -29,6 +29,31 @@ nnoremap <F1> : silent exec '!inkscape-figures edit "./figures/" > /dev/null 2>&
 inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures markdown-create "'.getline('.').'" "./figures/"'<CR><CR>:w<CR>
 nnoremap <F2> : silent exec '!diagrams-net-figures edit "./figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
+" Enable pptx compilation from f3 keypress
+nnoremap <F3> : call CompilePptx() <CR>
+
+" Enable pptx preview from f4 keypress
+nnoremap <F4> : call PreviewPptx() <CR>
+
+" Autodetects if template is there in root or not and compiles with it if
+" available
+function CompilePptx()
+   if filereadable("template.pptx")
+      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' --reference-doc template.pptx &'
+   else
+      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' &'
+   endif
+   :redraw!
+endfunction
+
+" Preview the pptx if it exists
+function PreviewPptx()
+   if filereadable(join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],''))
+      silent exec '!libreoffice ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' &'
+   endif
+   :redraw!
+endfunction
+
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * call RecompileMarkdown() 
