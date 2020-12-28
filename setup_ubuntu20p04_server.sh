@@ -125,6 +125,7 @@ ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
 # Do some non vimrc setup
 mkdir -p $homedir/.vim/UltiSnips
 ln -s $TMPDIR/tex.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/markdown.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cpp.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/c.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
