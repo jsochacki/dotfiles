@@ -5,19 +5,13 @@ snippet comment "Insert A Comment" b
 $0
 endsnippet
 
-snippet eol "End Of List" b
-
-<!-- end of list -->
-
-$0
-endsnippet
-
 snippet table "Table" b
-$1          $2     $3           $4
--------     ------ ----------   -------
+|  $2  |  $3   |  $4  |
+| :--  | :--:  | --:  |
+|  $0  |       |      |
+|      |       |      |
 
--------     ------ ----------   -------
-Table:  $0
+Table:  $1
 endsnippet
 
 snippet list "Un Numbered List" b
@@ -160,10 +154,53 @@ snippet bo "Bold" b
 **$0**
 endsnippet
 
+snippet strike "Strike Through" b
+~~$0~~
+endsnippet
+
+snippet task "Task List" b
+
+- [x] ${1:Task1}
+- [ ] ${2:Task2}
+- [ ] ${3:Task3}
+
+$0
+endsnippet
+
+snippet eol "End Of List" b
+
+<!-- end of list -->
+
+$0
+endsnippet
+
+snippet pptfns "Power Point Force New Slide" bA
+
+------------------
+
+$0
+endsnippet
+
 snippet ppttitle "Power Point Title slide" bA
 % ${1:Title}
 % ${2:Author}
 % ${3:Date}
+
+$0
+endsnippet
+
+snippet ppttheme "Power Point Title slide With Theme Definition" bA
+% ${1:Title}
+% ${2:Author}
+% ${3:Date}
+
+---
+output: 
+  powerpoint_presentation:
+    reference_doc: template.pptx
+    % ${4:slide_level: 3 # use this to override default}
+---
+
 $0
 endsnippet
 
@@ -171,12 +208,14 @@ snippet ppttitlewimg "Power Point Title slide With Background Image Definition" 
 % ${1:Title}
 % ${2:Author}
 % ${3:Date}
+
 ---
 parallaxBackgroundImage: ${4:PathToBackgroundImage}
 title-slide-attributes:
     data-background-image: ${5:PathToTitleImage}
     data-background-size: contain
 ---
+
 $0
 endsnippet
 
@@ -190,6 +229,7 @@ title-slide-attributes:
     data-background-image: ${5:PathToTitleImage}
     data-background-size: contain
 ---
+
 $0
 endsnippet
 
@@ -234,7 +274,9 @@ snippet pptnumlist "Power Point Non-Incremental Numbered List" b
 endsnippet
 
 snippet pptpause "Power Point Pause" b
+
 . . .
+
 $0
 endsnippet
 
@@ -248,6 +290,17 @@ endsnippet
 
 snippet pptcols "Power Point Content In Columns" b
 :::::::::::::: {.columns}
+::: {.column}
+$1
+:::
+::: {.column}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptccols "Power Point Content In Columns With Custom Width" b
+:::::::::::::: {.columns}
 ::: {.column width="${1:50}%"}
 $3
 :::
@@ -257,9 +310,20 @@ $0
 ::::::::::::::
 endsnippet
 
-snippet pptcolsao "Power Point Content In Columns With Additional Options" b
+snippet pptccolstw "Power Point Content In Columns With Additional Options Text Width Columns" b
+:::::::::::::: {.columns align=top .onlytextwidth}
+::: {.column width="${1:50}%" align=${3:center}}
+$4
+:::
+::: {.column width="${2:50}%" align=${3:center}}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptccolscw "Power Point Content In Columns With Additional Options Custom Width Columns" b
 :::::::::::::: {.columns align=center totalwidth=8em}
-::: {.column width="${1:50}%"}
+::: {.column width="${1:50}%" align=${3:bottom}}
 $4
 :::
 ::: {.column width="${2:50}%" align=${3:bottom}}
@@ -268,24 +332,8 @@ $0
 ::::::::::::::
 endsnippet
 
-snippet pptcolsao2 "Power Point Content In Columns With Additional Options 2" b
-:::::::::::::: {.columns align=top .onlytextwidth}
-::: {.column width="${1:50}%" align=${2:center}}
-$4
-:::
-::: {.column width="${3:50}%"}
-$0
-:::
-::::::::::::::
-endsnippet
-
 snippet pptssbi "Power Point Set Single Slide Backround Image" b
 ## ${1:HeadingText} {data-background-image="${2:PathToImage}"}
-$0
-endsnippet
-
-snippet pptfns "Power Point Force New Slide" bA
-------------------
 $0
 endsnippet
 
