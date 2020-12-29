@@ -220,6 +220,9 @@ echo 'fi' >> $homedir/.bashrc
 # Install Libre office
 sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
 
+# Install a rastered image editor since all you have is vector editors currently
+sudo apt-get install -y pinta
+
 # Do VMWARE specific setup at the end
 ./setup_vmware_clipboard.sh
 ./setup_vmware_share.sh

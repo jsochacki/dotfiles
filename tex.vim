@@ -26,6 +26,9 @@ nnoremap <F1> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/"
 inoremap <F2> <Esc>: silent exec '.!diagrams-net-figures latex-create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <F2> : silent exec '!diagrams-net-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
+" Hotkey to copy all snippets to local images folder
+nnoremap <F5> : silent exec '!cp ~/Snips/* ./images/ &' <CR><CR>:redraw!<CR>
+
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h')

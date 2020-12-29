@@ -35,6 +35,9 @@ nnoremap <F3> : call CompilePptx() <CR>
 " Enable pptx preview from f4 keypress
 nnoremap <F4> : call PreviewPptx() <CR>
 
+" Hotkey to copy all snippets to local images folder
+nnoremap <F5> : silent exec '!cp ~/Snips/* ./images/ &' <CR><CR>:redraw!<CR>
+
 " Autodetects if template is there in root or not and compiles with it if
 " available
 function CompilePptx()
