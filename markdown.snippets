@@ -50,29 +50,29 @@ snippet formatted "Make look exacly like you are typing it to look" b
   $0
 endsnippet
 
-snippet cs "Code Snip" b
+snippet cs "Code Snip"
 `$0`
 endsnippet
 
-snippet cb "Code Block" b
+snippet cb "Code Block"
 ```
 $0
 ```
 endsnippet
 
-snippet cbc "Code Block For C" b
+snippet cbc "Code Block For C"
 ```c
 $0
 ```
 endsnippet
 
-snippet cbcpp "Code Block For Cpp" b
+snippet cbcpp "Code Block For Cpp"
 ```cpp
 $0
 ```
 endsnippet
 
-snippet cblatex "Code Block For LaTeX" b
+snippet cblatex "Code Block For LaTeX"
 ```tex
 $0
 ```
@@ -102,59 +102,59 @@ snippet hl6 "Header Level 6" bA
 ###### $0
 endsnippet
 
-snippet mkfn "Define Footnote" b
+snippet mkfn "Define Footnote" bA
 [${1:^FooterNum}]: ${2:Note}
 $0
 endsnippet
 
-snippet reffn "Insert Footnote Reference" b
+snippet reffn "Insert Footnote Reference" A
 [${1:^FooterNum}]$0
 endsnippet
 
-snippet mkref "Make a Reference" b
+snippet mkref "Make a Reference" bA
 [${1:RefNum}]: ${2:LinkOrImagePath} ${3:"Hover Text"}
 $0
 endsnippet
 
-snippet refref "Insert a Reference" b
+snippet refref "Insert a Reference" A
 [${1:Text}][${2:RefNum}]
 $0
 endsnippet
 
-snippet mkdef "Define Definition" b
+snippet mkdef "Define Definition" bA
 *[${1:WordBeingDefined}]: ${2:Definition}
 $0
 endsnippet
 
-snippet mkdeflist "Define Definition List" b
+snippet mkdeflist "Define Definition List" bA
 $1
 :  $0
 endsnippet
 
-snippet img "Insert Image" b
+snippet img "Insert Image"
 ![${1:DisplayName}](${2:ImagePath} ${3:"Hover Text"})
 $0
 endsnippet
 
-snippet link "Insert Link" b
+snippet link "Insert Link"
 [${1:DisplayName}](${2:Link} ${3:"Hover Text"})
 $0
 endsnippet
 
-snippet ilinkedimg "Insert a Linked Image Inline" b
+snippet ilinkedimg "Insert a Linked Image Inline" A
 [![${1:DisplayName}](${2:ImagePath})](${3:Link} ${4:"Hover Text"})
 $0
 endsnippet
 
-snippet it "Italic" b
+snippet it "Italic"
 *$0*
 endsnippet
 
-snippet bo "Bold" b
+snippet bo "Bold"
 **$0**
 endsnippet
 
-snippet strike "Strike Through" b
+snippet strike "Strike Through"
 ~~$0~~
 endsnippet
 
@@ -186,6 +186,112 @@ snippet ppttitle "Power Point Title slide" bA
 % ${2:Author}
 % ${3:Date}
 
+$0
+endsnippet
+
+snippet pptilist "Power Point Incremental Un Numbered List" bA
+::: incremental
+
+- $1
+- $2
+- $0
+
+:::
+endsnippet
+
+snippet pptlist "Power Point Non-Incremental Un Numbered List" bA
+::: nonincremental
+
+- $1
+- $2
+- $0
+
+:::
+endsnippet
+
+snippet pptinumlist "Power Point Incremental Numbered List" bA
+::: incremental
+
+1. $1
+2. $2
+3. $0
+
+:::
+endsnippet
+
+snippet pptnumlist "Power Point Non-Incremental Numbered List" bA
+::: nonincremental
+
+1. $1
+2. $2
+3. $0
+
+:::
+endsnippet
+
+snippet pptpause "Power Point Pause" bA
+
+. . .
+
+$0
+endsnippet
+
+snippet pptsn "Power Point Speaker Notes" bA
+::: notes
+
+$0
+
+:::
+endsnippet
+
+snippet pptcols "Power Point Content In Columns" bA
+:::::::::::::: {.columns}
+::: {.column}
+$1
+:::
+::: {.column}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptccols "Power Point Content In Columns With Custom Width" bA
+:::::::::::::: {.columns}
+::: {.column width="${1:50}%"}
+$3
+:::
+::: {.column width="${2:50}%"}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptccolstw "Power Point Content In Columns With Additional Options
+Text Width Columns" bA
+:::::::::::::: {.columns align=top .onlytextwidth}
+::: {.column width="${1:50}%" align=${3:center}}
+$4
+:::
+::: {.column width="${2:50}%" align=${3:center}}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptccolscw "Power Point Content In Columns With Additional Options
+Custom Width Columns" bA
+:::::::::::::: {.columns align=center totalwidth=8em}
+::: {.column width="${1:50}%" align=${3:bottom}}
+$4
+:::
+::: {.column width="${2:50}%" align=${3:bottom}}
+$0
+:::
+::::::::::::::
+endsnippet
+
+snippet pptssbi "Power Point Set Single Slide Backround Image" bA
+## ${1:HeadingText} {data-background-image="${2:PathToImage}"}
 $0
 endsnippet
 
@@ -230,110 +336,6 @@ title-slide-attributes:
     data-background-size: contain
 ---
 
-$0
-endsnippet
-
-snippet pptilist "Power Point Incremental Un Numbered List" b
-::: incremental
-
-- $1
-- $2
-- $0
-
-:::
-endsnippet
-
-snippet pptlist "Power Point Non-Incremental Un Numbered List" b
-::: nonincremental
-
-- $1
-- $2
-- $0
-
-:::
-endsnippet
-
-snippet pptinumlist "Power Point Incremental Numbered List" b
-::: incremental
-
-1. $1
-2. $2
-3. $0
-
-:::
-endsnippet
-
-snippet pptnumlist "Power Point Non-Incremental Numbered List" b
-::: nonincremental
-
-1. $1
-2. $2
-3. $0
-
-:::
-endsnippet
-
-snippet pptpause "Power Point Pause" b
-
-. . .
-
-$0
-endsnippet
-
-snippet pptsn "Power Point Speaker Notes" b
-::: notes
-
-$0
-
-:::
-endsnippet
-
-snippet pptcols "Power Point Content In Columns" b
-:::::::::::::: {.columns}
-::: {.column}
-$1
-:::
-::: {.column}
-$0
-:::
-::::::::::::::
-endsnippet
-
-snippet pptccols "Power Point Content In Columns With Custom Width" b
-:::::::::::::: {.columns}
-::: {.column width="${1:50}%"}
-$3
-:::
-::: {.column width="${2:50}%"}
-$0
-:::
-::::::::::::::
-endsnippet
-
-snippet pptccolstw "Power Point Content In Columns With Additional Options Text Width Columns" b
-:::::::::::::: {.columns align=top .onlytextwidth}
-::: {.column width="${1:50}%" align=${3:center}}
-$4
-:::
-::: {.column width="${2:50}%" align=${3:center}}
-$0
-:::
-::::::::::::::
-endsnippet
-
-snippet pptccolscw "Power Point Content In Columns With Additional Options Custom Width Columns" b
-:::::::::::::: {.columns align=center totalwidth=8em}
-::: {.column width="${1:50}%" align=${3:bottom}}
-$4
-:::
-::: {.column width="${2:50}%" align=${3:bottom}}
-$0
-:::
-::::::::::::::
-endsnippet
-
-snippet pptssbi "Power Point Set Single Slide Backround Image" b
-## ${1:HeadingText} {data-background-image="${2:PathToImage}"}
 $0
 endsnippet
 
