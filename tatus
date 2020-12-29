@@ -1,0 +1,81 @@
+[1mdiff --git a/i3config b/i3config[m
+[1mindex 078d6d4..30342e2 100755[m
+[1m--- a/i3config[m
+[1m+++ b/i3config[m
+[36m@@ -29,6 +29,9 @@[m [mnew_float pixel 0[m
+ [m
+ set $mod Mod1+Ctrl[m
+ [m
+[32m+[m[32m# Bind clipboard to snip button[m
+[32m+[m[32mbindsym Shift+Print --release exec "bash ~/git/dotfiles/clip2snip.sh"[m
+[32m+[m
+ # Font for window titles. Will also be used by the bar unless a different font[m
+ # is used in the bar {} block below.[m
+ font pango:monospace 12[m
+[1mdiff --git a/markdown.vim b/markdown.vim[m
+[1mindex fdcc657..828e4dc 100644[m
+[1m--- a/markdown.vim[m
+[1m+++ b/markdown.vim[m
+[36m@@ -35,9 +35,6 @@[m [mnnoremap <F3> : call CompilePptx() <CR>[m
+ " Enable pptx preview from f4 keypress[m
+ nnoremap <F4> : call PreviewPptx() <CR>[m
+ [m
+[31m-" Open inkscape for image paste into current directory on F5[m
+[31m-nnoremap <F5> : silent exec '!inkscape &' <CR><CR>:redraw!<CR>[m
+[31m-[m
+ " Autodetects if template is there in root or not and compiles with it if[m
+ " available[m
+ function CompilePptx()[m
+[1mdiff --git a/snip.sh b/snip.sh[m
+[1mindex c558600..de5965d 100755[m
+[1m--- a/snip.sh[m
+[1m+++ b/snip.sh[m
+[36m@@ -1,24 +1,31 @@[m
+ #!/bin/bash[m
+ [m
+[32m+[m[32m# Here we assume only png files are in Snips[m
+[32m+[m[32m# and that those files are just named 1.png, 2.png and so on[m
+[32m+[m
+ current_number=1[m
+[32m+[m[32mfile=$(ls ~/Snips/ | sort -g -r | head -n 1)[m
+ [m
+[31m-for file in `ls ~/Snips/ |sort -g -r`[m
+[31m-do[m
+[31m-    filename=$(basename "$file")[m
+[31m-    extension=${filename##*.}[m
+[31m-    filename=${filename%.*}[m
+[32m+[m[32mif [ ! -z $file ][m
+[32m+[m[32mthen[m
+[32m+[m[32m   filename=$(basename "$file")[m
+[32m+[m[32m   extension=${filename##*.}[m
+[32m+[m[32m   filename=${filename%.*}[m
+ [m
+[31m-    echo "$filename $extension"[m
+[31m-    echo "$extension"[m
+[31m-    if [ $extension == "png" ][m
+[31m-    then[m
+[31m-       if [ $filename -ge 1 ][m
+[31m-       then[m
+[31m-           current_number=$(($filename + 1))[m
+[31m-        else[m
+[31m-           current_number=1[m
+[31m-       fi[m
+[32m+[m[32m   echo "$filename $extension"[m
+[32m+[m[32m   echo "$extension"[m
+[32m+[m[32m   if [ $extension == "png" ][m
+[32m+[m[32m   then[m
+[32m+[m[32m      if [ $filename -ge 1 ][m
+[32m+[m[32m      then[m
+[32m+[m[32m          current_number=$(($filename + 1))[m
+[32m+[m[32m      else[m
+[32m+[m[32m          current_number=1[m
+[32m+[m[32m      fi[m
+       echo "$current_number"[m
+[31m-    fi[m
+[31m-done[m
+[32m+[m[32m   fi[m
+[32m+[m[32melse[m
+[32m+[m[32m   current_number=1[m
+[32m+[m[32mfi[m
+[32m+[m
+ import ~/Snips/$current_number.png[m

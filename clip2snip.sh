@@ -28,4 +28,4 @@ else
    current_number=1
 fi
 
-import ~/Snips/$current_number.png
+xclip -selection clipboard -t image/png -o > ~/Snips/$current_number.png
