@@ -216,17 +216,18 @@ sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans 
 # Install a rastered image editor since all you have is vector editors currently
 sudo apt-get install -y pinta
 
+
 # Get Data Grabbing Tools
 wget https://www.digitizeit.de/downloads/DigitizeIt_unix.zip
 unzip DigitizeIt_unix.zip -x __*
 chmod ugo+x DigitizeIt_unix/DigitizeIt.jar
-mv DigitizeIt_unix /opt/digitizelt
+sudo mv DigitizeIt_unix /opt/digitizelt
 rm DigitizeIt_unix.zip
 
 wget https://www.datathief.org/Datathief.jar
 chmod ugo+x Datathief.jar
-mkdir -p /opt/datathiefIII
-mv Datathief.jar /opt/datathiefIII/
+sudo mkdir -p /opt/datathiefIII
+sudo mv Datathief.jar /opt/datathiefIII/
 
 # Add Data Grabbing Tools To Path
 echo '' >> $homedir/.bashrc
@@ -234,7 +235,8 @@ echo '# Adding path for Data Grabbing Tools' >> $homedir/.bashrc
 echo 'export PATH="/opt/datathiefIII:/opt/digitizelt:$PATH"' >> $homedir/.bashrc
 
 #Do now so you can finish setup without leaving the script
-export PATH=$homedir/.local/bin:$PATH
+export PATH=/opt/datathiefIII:/opt/digitizelt:$PATH
+
 
 # Launch i3 on startup
 echo '' >> $homedir/.bashrc
