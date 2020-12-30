@@ -210,18 +210,38 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 # install diagrams.net
 sudo snap install drawio
 
-# Launch i3
-echo '' >> $homedir/.bashrc
-echo '# Adding i3 autolaunch' >> $homedir/.bashrc
-echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
-echo '   startx' >> $homedir/.bashrc
-echo 'fi' >> $homedir/.bashrc
-
 # Install Libre office
 sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
 
 # Install a rastered image editor since all you have is vector editors currently
 sudo apt-get install -y pinta
+
+# Get Data Grabbing Tools
+wget https://www.digitizeit.de/downloads/DigitizeIt_unix.zip
+unzip DigitizeIt_unix.zip -x __*
+chmod ugo+x DigitizeIt_unix/DigitizeIt.jar
+mv DigitizeIt_unix /opt/digitizelt
+rm DigitizeIt_unix.zip
+
+wget https://www.datathief.org/Datathief.jar
+chmod ugo+x Datathief.jar
+mkdir -p /opt/datathiefIII
+mv Datathief.jar /opt/datathiefIII/
+
+# Add Data Grabbing Tools To Path
+echo '' >> $homedir/.bashrc
+echo '# Adding path for Data Grabbing Tools' >> $homedir/.bashrc
+echo 'export PATH="/opt/datathiefIII:/opt/digitizelt:$PATH"' >> $homedir/.bashrc
+
+#Do now so you can finish setup without leaving the script
+export PATH=$homedir/.local/bin:$PATH
+
+# Launch i3 on startup
+echo '' >> $homedir/.bashrc
+echo '# Adding i3 autolaunch' >> $homedir/.bashrc
+echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bashrc
+echo '   startx' >> $homedir/.bashrc
+echo 'fi' >> $homedir/.bashrc
 
 # Do VMWARE specific setup at the end
 ./setup_vmware_clipboard.sh
