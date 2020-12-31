@@ -43,9 +43,9 @@ nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/'
 " available
 function CompilePptx()
    if filereadable("template.pptx")
-      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' --reference-doc template.pptx &'
+      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' --toc --reference-doc template.pptx &'
    else
-      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' &'
+      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' --toc &'
    endif
    :redraw!
 endfunction
@@ -68,7 +68,7 @@ autocmd VimEnter * call StartupFunctions()
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function RecompileMarkdown()
   silent exec '!update_tex_figures.sh ' expand('%:p:h')
-  silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
+  silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' -toc &'
 endfunction
 
 function StartupFunctions()
