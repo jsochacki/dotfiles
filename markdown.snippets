@@ -78,10 +78,35 @@ $0
 ```
 endsnippet
 
-snippet "hl([1-6])" "Header Level N" brA
-`!p snip.rv = int(match.group(1))*'#'` ${1: Section Title}
+# Issue here is it bashes the clipboard with section title
+#snippet "hl([1-6])" "Header Level N" brA
+#`!p snip.rv = int(match.group(1))*'#'` ${1: Section Title}
+#
+#$0
+#endsnippet
 
-$0
+snippet hl1 "Header Level 1" bA	
+## $0	
+endsnippet	
+
+snippet hl2 "Header Level 2" bA	
+## $0	
+endsnippet	
+
+snippet hl3 "Header Level 3" bA	
+### $0	
+endsnippet	
+
+snippet hl4 "Header Level 4" bA	
+#### $0	
+endsnippet	
+
+snippet hl5 "Header Level 5" bA	$0
+##### $0	
+endsnippet	
+
+snippet hl6 "Header Level 6" bA	
+###### $0	
 endsnippet
 
 snippet mkfn "Define Footnote" bA
