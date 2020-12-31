@@ -78,28 +78,10 @@ $0
 ```
 endsnippet
 
-snippet hl1 "Header Level 1" bA
-# $0
-endsnippet
+snippet "hl([1-6])" "Header Level N" brA
+`!p snip.rv = int(match.group(1))*'#'` ${1: Section Title}
 
-snippet hl2 "Header Level 2" bA
-## $0
-endsnippet
-
-snippet hl3 "Header Level 3" bA
-### $0
-endsnippet
-
-snippet hl4 "Header Level 4" bA
-#### $0
-endsnippet
-
-snippet hl5 "Header Level 5" bA
-##### $0
-endsnippet
-
-snippet hl6 "Header Level 6" bA
-###### $0
+$0
 endsnippet
 
 snippet mkfn "Define Footnote" bA
@@ -132,12 +114,17 @@ $1
 endsnippet
 
 snippet img "Insert Image"
-![$1](images/$1)
+![${2:DisplayName}](${1:ImagePath})
 $0
 endsnippet
 
 snippet imgp "Insert Image plus hover text"
-![${1:DisplayName}](${2:ImagePath} ${3:"Hover Text"})
+![${2:DisplayName}](${1:ImagePath} ${3:"Hover Text"})
+$0
+endsnippet
+
+snippet imgf "Insert Image Fast" A
+![$2](images/$1)
 $0
 endsnippet
 
