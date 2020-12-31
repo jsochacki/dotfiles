@@ -1,26 +1,3 @@
-snippet liflot "List of Figures and List of Tables" bA
-
-\listoffigures
-
-\listoftables
-
-$0
-endsnippet
-
-snippet pb "Insert pagebreak that leaves whitespace at the bottom of the page" b
-
-\newpage
-
-$0
-endsnippet
-
-snippet pbs "Insert pagebreak that expands items on page to take entire page" b
-
-\pagebreak
-
-$0
-endsnippet
-
 snippet comment "Insert A Comment" b
 
 [//]: # ($1)
@@ -210,6 +187,47 @@ endsnippet
 snippet eol "End Of List" b
 
 <!-- end of list -->
+
+$0
+endsnippet
+
+snippet liflot "List of Figures and List of Tables" bA
+
+\listoffigures
+
+\listoftables
+
+$0
+endsnippet
+
+snippet pb "Insert pagebreak that leaves whitespace at the bottom of the page" b
+
+\newpage
+
+$0
+endsnippet
+
+snippet pbs "Insert pagebreak that expands items on page to take entire page" b
+
+\pagebreak
+
+$0
+endsnippet
+
+snippet sod "Start Of document" b
+% ${1:Title}
+% ${2:Author}
+% ${3:Date}
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+\listoftables
+
+\newpage
 
 $0
 endsnippet
