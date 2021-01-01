@@ -193,7 +193,41 @@ snippet eol "End Of List" b
 $0
 endsnippet
 
-# Pandoc LaTeX Specific Markdown Snippits
+# Pandoc LaTeX math Specific Markdown Snippits
+
+snippet nnim "No Number Inline Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+snippet nmm "Numbered Multirow Math" bA
+\begin{center}
+\begin{align}
+	&$1
+  &$0
+\end{align}
+\end{center}
+endsnippet
+
+snippet nse "Numbered Single Row Equation" bA
+\begin{center}
+\begin{equation}
+	$0
+\end{equation}
+\end{center}
+endsnippet
+
+snippet nndm "No Number Display Math (same as \begin{align*}" bA
+\[
+    &${1:${VISUAL}}
+.\] &$0
+endsnippet
+
+# Pandoc LaTeX non math Specific Markdown Snippits
 
 snippet pb "Insert pagebreak that leaves whitespace at the bottom of the page" b
 
