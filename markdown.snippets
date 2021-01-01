@@ -231,12 +231,12 @@ endsnippet
 # Pandoc LaTeX non math Specific Markdown Snippits
 
 snippet imgr "Insert Image And Make Referenceable"
-![${3:DisplayName}\label{fig:${2:${1/\W+/-/g}}}](${1:ImagePath})
+![${3:DisplayName}\label{fig:${2:${1/^.+(?=\.[^.]+$)}}}](${1:ImagePath})
 $0
 endsnippet
 
 snippet imgfr "Insert Image Fast And Make Referenceable"
-![${3:$1}\label{fig:${2:${1/\W+/-/g}}}](images/$1)
+![${3:DisplayName}\label{fig:${2:${1/^.+(?=\.[^.]+$)}}}](images/$1)
 $0
 endsnippet
 
