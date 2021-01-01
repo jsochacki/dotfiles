@@ -788,12 +788,15 @@ snippet reftabpage "insert a table page number reference"
 ~\pageref{tab:$1}$0
 endsnippet
 
+# should be lower case like Appendix~\ref{appendix:a}
 snippet refapp "insert an appendix reference"
 Appendix~\ref{appendix:$1}$0
 endsnippet
 
+# SHould be lower case like \label{appendix:a}
 snippet mkapp "Make an appendix reference"
-Appendix $1 \label{appendix:${1/[A-Z]/\L$0/}}$0
+\label{appendix:$1}
+$0
 endsnippet
 
 snippet usingbooktemplate "use book template style file" b
