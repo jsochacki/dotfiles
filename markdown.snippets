@@ -234,12 +234,12 @@ endsnippet
 # with no default that becomes ${VISUAL/search/replace/options}
 # This doesn't work ![${2:DisplayName}\label{fig:${1/.*/^.+(?=\.[^.]+$)/}}](${1:ImagePath}) so do
 snippet imgr "Insert Image And Make Referenceable"
-![${2:DisplayName}\label{fig:${1/.*/$1^.+(?=\.[^.]+$)/}}](${1:ImagePath})
+![${2:DisplayName}\label{fig:${1/.*\.(\w{3,})$//gi}}](${1:ImagePath})
 $0
 endsnippet
 
 snippet imgfr "Insert Image Fast And Make Referenceable"
-![${2:DisplayName}\label{fig:${1/.*/$1.png/}}](images/$1)
+![${2:DisplayName}\label{fig:${1/.*\.(\w{3,})$//gi}}](images/$1)
 $0
 endsnippet
 
