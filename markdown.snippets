@@ -233,12 +233,12 @@ endsnippet
 # Ultisnips are ${VISUAL:default/search/replace/options}
 # with no default that becomes ${VISUAL/search/replace/options}
 snippet imgr "Insert Image And Make Referenceable"
-![${2:DisplayName}\label{fig:${1/.*/^.+(?=\.[^.]+$)/}}](${1:ImagePath})
+![${2:DisplayName}\label{fig:${1/.*/$1^.+(?=\.[^.]+$)/}}](${1:ImagePath})
 $0
 endsnippet
 
 snippet imgfr "Insert Image Fast And Make Referenceable"
-![${2:DisplayName}\label{fig:${1/.*/^.+(?=\.[^.]+$)/}}](images/$1)
+![${2:DisplayName}\label{fig:${1/.*/$1^.+(?=\.[^.]+$)/}}](images/$1)
 $0
 endsnippet
 
