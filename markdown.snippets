@@ -191,11 +191,21 @@ snippet eol "End Of List" b
 $0
 endsnippet
 
-snippet liflot "List of Figures and List of Tables" bA
+snippet frontmatter "Table Of Contents, List of Figures, and List of Tables" bA
+
+\newpage
+
+\toc
+
+\newpage
 
 \listoffigures
 
+\newpage
+
 \listoftables
+
+\newpage
 
 $0
 endsnippet
@@ -218,6 +228,10 @@ snippet sod "Start Of document" b
 % ${1:Title}
 % ${2:Author}
 % ${3:Date}
+
+\newpage
+
+\toc
 
 \newpage
 
