@@ -191,25 +191,6 @@ snippet eol "End Of List" b
 $0
 endsnippet
 
-snippet frontmatter "Table Of Contents, List of Figures, and List of Tables" bA
-
-\newpage
-
-\toc
-
-\newpage
-
-\listoffigures
-
-\newpage
-
-\listoftables
-
-\newpage
-
-$0
-endsnippet
-
 snippet pb "Insert pagebreak that leaves whitespace at the bottom of the page" b
 
 \newpage
@@ -224,14 +205,32 @@ snippet pbs "Insert pagebreak that expands items on page to take entire page" b
 $0
 endsnippet
 
-snippet sod "Start Of document" b
-% ${1:Title}
-% ${2:Author}
-% ${3:Date}
+snippet sod "Start Of Document" b
+---
+title: ${1:Title}
+author: ${2:Author}
+date: ${3:Date}
+header-includes:
+   -  \usepackage{fancyhdr}
+   -  \pagestyle{fancy}
+   - \rhead{\fancyplain{pg \thepage}{pg \thepage}}
+   - \lhead{\fancyplain{${4:John Sochacki}}{${4:John Sochacki}}}
+   - \chead{\fancyplain{\leftmark}{\leftmark}}
+   - \cfoot{\fancyplain{}{}}
+   - \rfoot{\fancyplain{revision 0.0}{revision 0.0}}
+   - \renewcommand{\contentsname}{Table Of Contents}
+   - \renewcommand{\listfigurename}{Figures}
+   - \renewcommand{\listtablename}{Tables}
+   - \setcounter{tocdepth}{7}
+---
+
+\thispagestyle{empty}
+
+\maketitle
 
 \newpage
 
-\toc
+\tableofcontents
 
 \newpage
 
@@ -242,21 +241,6 @@ snippet sod "Start Of document" b
 \listoftables
 
 \newpage
-
-$0
-endsnippet
-
-snippet pptfns "Power Point Force New Slide" bA
-
-------------------
-
-$0
-endsnippet
-
-snippet ppttitle "Power Point Title slide" bA
-% ${1:Title}
-% ${2:Author}
-% ${3:Date}
 
 $0
 endsnippet
@@ -297,21 +281,6 @@ snippet pptnumlist "Power Point Non-Incremental Numbered List" bA
 1. $1
 2. $2
 3. $0
-
-:::
-endsnippet
-
-snippet pptpause "Power Point Pause" bA
-
-. . .
-
-$0
-endsnippet
-
-snippet pptsn "Power Point Speaker Notes" bA
-::: notes
-
-$0
 
 :::
 endsnippet
@@ -358,6 +327,36 @@ $4
 $0
 :::
 ::::::::::::::
+endsnippet
+
+snippet pptfns "Power Point Force New Slide" bA
+
+------------------
+
+$0
+endsnippet
+
+snippet ppttitle "Power Point Title slide" bA
+% ${1:Title}
+% ${2:Author}
+% ${3:Date}
+
+$0
+endsnippet
+
+snippet pptpause "Power Point Pause" bA
+
+. . .
+
+$0
+endsnippet
+
+snippet pptsn "Power Point Speaker Notes" bA
+::: notes
+
+$0
+
+:::
 endsnippet
 
 snippet pptssbi "Power Point Set Single Slide Backround Image" bA
