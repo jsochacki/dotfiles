@@ -1,3 +1,5 @@
+# Vanilla Markdown Snippets
+
 snippet comment "Insert A Comment" b
 
 [//]: # ($1)
@@ -191,6 +193,8 @@ snippet eol "End Of List" b
 $0
 endsnippet
 
+# Pandoc LaTeX Specific Markdown Snippits
+
 snippet pb "Insert pagebreak that leaves whitespace at the bottom of the page" b
 
 \newpage
@@ -245,6 +249,8 @@ header-includes:
 $0
 endsnippet
 
+# Pandoc LaTeX Power Point Specific Markdown Snippits
+
 snippet pptilist "Power Point Incremental Un Numbered List" bA
 ::: incremental
 
@@ -296,6 +302,38 @@ $0
 ::::::::::::::
 endsnippet
 
+snippet pptfns "Power Point Force New Slide" bA
+
+------------------
+
+$0
+endsnippet
+
+snippet ppttitle "Power Point Title slide" bA
+% ${1:Title}
+% ${2:Author}
+% ${3:Date}
+
+$0
+endsnippet
+
+snippet pptpause "Power Point Pause" bA
+
+. . .
+
+$0
+endsnippet
+
+snippet pptsn "Power Point Speaker Notes" bA
+::: notes
+
+$0
+
+:::
+endsnippet
+
+# Pandoc LaTeX beamer, Slidy, s5, etc... Specific Markdown Snippits
+
 snippet pptccols "Power Point Content In Columns With Custom Width" bA
 :::::::::::::: {.columns}
 ::: {.column width="${1:50}%"}
@@ -327,36 +365,6 @@ $4
 $0
 :::
 ::::::::::::::
-endsnippet
-
-snippet pptfns "Power Point Force New Slide" bA
-
-------------------
-
-$0
-endsnippet
-
-snippet ppttitle "Power Point Title slide" bA
-% ${1:Title}
-% ${2:Author}
-% ${3:Date}
-
-$0
-endsnippet
-
-snippet pptpause "Power Point Pause" bA
-
-. . .
-
-$0
-endsnippet
-
-snippet pptsn "Power Point Speaker Notes" bA
-::: notes
-
-$0
-
-:::
 endsnippet
 
 snippet pptssbi "Power Point Set Single Slide Backround Image" bA
