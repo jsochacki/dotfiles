@@ -283,6 +283,34 @@ snippet ltablera "Referenceable Table with Caption After Table" b
 
 endsnippet
 
+snippet ltableimgr "Referenceable Image Based Table with Caption After Table" b
+
+![${3:DisplayName}](images/$2)
+
+\begin{table}[${1:htpb}]
+\begin{center}
+\caption{${4:$3}}
+\label{tab:${2/\.(\w{3,})$//gi}}
+\end{center}
+\end{table}
+
+$0
+endsnippet
+
+snippet ltablefigr "Referenceable Figure Based Table with Caption After Table" b
+
+![${3:DisplayName}](figures/$2)
+
+\begin{table}[${1:htpb}]
+\begin{center}
+\caption{${4:$3}}
+\label{tab:${2/\.(\w{3,})$//gi}}
+\end{center}
+\end{table}
+
+$0
+endsnippet
+
 snippet lreffig "insert a figure reference"
 Figure \ref{fig:$1}$0
 endsnippet
