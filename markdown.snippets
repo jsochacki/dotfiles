@@ -285,28 +285,28 @@ endsnippet
 
 snippet ltableimgr "Referenceable Image Based Table with Caption After Table" b
 
-![${3:DisplayName}](images/$2)
-
 \begin{table}[${1:htpb}]
 \begin{center}
-\caption{${4:$3}}
-\label{tab:${2/\.(\w{3,})$//gi}}
+	\incimg$2{$3}
+	\caption{${4:$3}}
+	\label{tab:${5:${3/\W+//g}}}
 \end{center}
 \end{table}
+endsnippet
 
 $0
 endsnippet
 
 snippet ltablefigr "Referenceable Figure Based Table with Caption After Table" b
 
-![${3:DisplayName}](figures/$2)
-
 \begin{table}[${1:htpb}]
 \begin{center}
-\caption{${4:$3}}
-\label{tab:${2/\.(\w{3,})$//gi}}
+	\incfig$2{$3}
+	\caption{${4:$3}}
+	\label{tab:${5:${3/\W+//g}}}
 \end{center}
 \end{table}
+endsnippet
 
 $0
 endsnippet
@@ -352,13 +352,20 @@ title: ${1:Title}
 author: ${2:Author}
 date: ${3:Date}
 header-includes:
-   -  \usepackage{fancyhdr}
-   -  \pagestyle{fancy}
+   - \usepackage{fancyhdr}
+   - \usepackage{mathptmx}
+   - \usepackage{amsmath}
+   - \usepackage{indentfirst}
+   - \usepackage{graphicx}
+   - \pagestyle{fancy}
+   - \graphicspath{ {./images/} } 
    - \rhead{\fancyplain{pg \thepage}{pg \thepage}}
    - \lhead{\fancyplain{${4:John Sochacki}}{${4:John Sochacki}}}
    - \chead{\fancyplain{\leftmark}{\leftmark}}
    - \cfoot{\fancyplain{}{}}
    - \rfoot{\fancyplain{revision 0.0}{revision 0.0}}
+   - \newcommand{\incfig}[2][1]{\def\svgwidth{#1\columnwidth}\import{./figures/}{#2.pdf_tex}}
+   - \newcommand{\incimg}[2][\textwidth]{\includegraphics[width=#1]{#2}}
    - \renewcommand{\contentsname}{Table Of Contents}
    - \renewcommand{\listfigurename}{Figures}
    - \renewcommand{\listtablename}{Tables}
