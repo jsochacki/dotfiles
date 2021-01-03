@@ -74,9 +74,22 @@ endif
 endfunction
 nnoremap <C-H> :call Toggle_transparent_background()<CR>
 
+" remap for normal mode
 nnoremap j h
 nnoremap k j
 nnoremap l k
 nnoremap ; l
+
+" remap for operator-pending mode
+onoremap j h
+onoremap k j
+onoremap l k
+onoremap ; l
+
+" remap for visual select mode
+xnoremap j h
+xnoremap k j
+xnoremap l k
+xnoremap ; l
 
 "EOF

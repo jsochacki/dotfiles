@@ -14,6 +14,7 @@ snippet table "Table" b
 |      |       |      |
 
 Table:  $1
+
 endsnippet
 
 snippet list "Un Numbered List" b
@@ -200,136 +201,40 @@ snippet eol "End Of List" b
 $0
 endsnippet
 
-# Pandoc LaTeX math Specific Markdown Snippits
-
-snippet lnnim "No Number Inline Math" wA
-$${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
-endsnippet
-
-snippet lnmm "Numbered Multirow Math" bA
-\begin{center}
-\begin{align}
-   &$1 \\${2:[10pt]}
-   &$0.
-\end{align}
-\end{center}
-endsnippet
-
-snippet lnse "Numbered Single Row Equation" bA
-\begin{center}
-\begin{equation}
-   $0
-\end{equation}
-\end{center}
-endsnippet
-
-# Pandoc LaTeX non math Specific Markdown Snippits
-
-snippet lmkfig "Make Figure Label"
-\label{fig:$1}$0
-endsnippet
-
-snippet lmktab "Make Table Label"
-\label{tab:$1}$0
-endsnippet
-
-# SHould be lower case like \label{appendix:a}
-snippet lmkapp "Make an appendix reference"
-\label{appendix:$1}
-$0
-endsnippet
+# Pandoc LaTeX non math Specific Markdown Snippets
 
 # Ultisnips are ${VISUAL:default/search/replace/options}
 # with no default that becomes ${VISUAL/search/replace/options}
-snippet limgfr "Insert Image Fast And Make Referenceable"
+snippet limgfr "Insert Referencable Image Fast"
 ![${2:DisplayName}\label{fig:${1/\.(\w{3,})$//gi}}](images/$1)
 $0
 endsnippet
 
-snippet ltablerb "Referenceable Table with Caption Before Table" b
+snippet ltabler "Referenceable Table" b
 
-\begin{table}[${1:htpb}]
-\begin{center}
-\caption{$2}
-\label{tab:${2/\W+/-/g}}
-\end{center}
-\end{table}
-
-|  $3  |  $4   |  $5  |
+|  $2  |  $3   |  $4  |
 | :--  | :--:  | --:  |
 |  $0  |       |      |
 |      |       |      |
 
-endsnippet
-
-snippet ltablera "Referenceable Table with Caption After Table" b
-
-|  $3  |  $4   |  $5  |
-| :--  | :--:  | --:  |
-|  $0  |       |      |
-|      |       |      |
-
-\begin{table}[${1:htpb}]
-\begin{center}
-\caption{$2}
-\label{tab:${2/\W+/-/g}}
-\end{center}
-\end{table}
+Table: $1
+\label{tab:${1/\W+/-/g}}
 
 endsnippet
 
-snippet ltableimgr "Referenceable Image Based Table with Caption After Table" b
+snippet lsod "Start Of Document" b
+---
+title: ${1:Title}
+author: ${2:Author}
+date: ${3:Date}
+header-includes:
+   - \usepackage{systems_book_md}
+   - \setheaderandfooter{${4:$2}}{${5:0.0}}
+---
 
-\begin{table}[${1:htpb}]
-\begin{center}
-	\incimg$2{$3}
-	\caption{${4:$3}}
-	\label{tab:${5:${3/\W+//g}}}
-\end{center}
-\end{table}
-endsnippet
+\newpage
 
 $0
-endsnippet
-
-snippet ltablefigr "Referenceable Figure Based Table with Caption After Table" b
-
-\begin{table}[${1:htpb}]
-\begin{center}
-	\incfig$2{$3}
-	\caption{${4:$3}}
-	\label{tab:${5:${3/\W+//g}}}
-\end{center}
-\end{table}
-endsnippet
-
-$0
-endsnippet
-
-snippet lreffig "insert a figure reference"
-Figure \ref{fig:$1}$0
-endsnippet
-
-snippet lreffigpage "insert a figure page number reference"
- \pageref{fig:$1}$0
-endsnippet
-
-snippet lreftab "insert a table reference"
-Table \ref{tab:$1}$0
-endsnippet
-
-snippet lreftabpage "insert a table page number reference"
- \pageref{tab:$1}$0
-endsnippet
-
-# should be lower case like Appendix \ref{appendix:a}
-snippet lrefapp "insert an appendix reference"
-Appendix \ref{appendix:$1}$0
 endsnippet
 
 snippet lpb "Insert pagebreak that leaves whitespace at the bottom of the page" b
@@ -346,54 +251,101 @@ snippet lpbs "Insert pagebreak that expands items on page to take entire page" b
 $0
 endsnippet
 
-snippet lsod "Start Of Document" b
----
-title: ${1:Title}
-author: ${2:Author}
-date: ${3:Date}
-header-includes:
-   - \usepackage{fancyhdr}
-   - \usepackage{mathptmx}
-   - \usepackage{amsmath}
-   - \usepackage{indentfirst}
-   - \usepackage{graphicx}
-   - \pagestyle{fancy}
-   - \graphicspath{ {./images/} } 
-   - \rhead{\fancyplain{pg \thepage}{pg \thepage}}
-   - \lhead{\fancyplain{${4:John Sochacki}}{${4:John Sochacki}}}
-   - \chead{\fancyplain{\leftmark}{\leftmark}}
-   - \cfoot{\fancyplain{}{}}
-   - \rfoot{\fancyplain{revision 0.0}{revision 0.0}}
-   - \newcommand{\incfig}[2][1]{\def\svgwidth{#1\columnwidth}\import{./figures/}{#2.pdf_tex}}
-   - \newcommand{\incimg}[2][\textwidth]{\includegraphics[width=#1]{#2}}
-   - \renewcommand{\contentsname}{Table Of Contents}
-   - \renewcommand{\listfigurename}{Figures}
-   - \renewcommand{\listtablename}{Tables}
-   - \setcounter{tocdepth}{7}
----
+# The rest of this section wont show up in pptxs
+snippet lutableimgr "Referenceable Image Based Table with Caption After Table" b
 
-\thispagestyle{empty}
-
-\maketitle
-
-\newpage
-
-\tableofcontents
-
-\newpage
-
-\listoffigures
-
-\newpage
-
-\listoftables
-
-\newpage
+\begin{table}[${1:htpb}]
+\begin{center}
+	\incimg$2{$3}
+	\caption{${4:${3/\W+/ /g}}}
+	\label{tab:${5:$3}}
+\end{center}
+\end{table}
 
 $0
 endsnippet
 
-# Pandoc LaTeX Power Point Specific Markdown Snippits
+snippet lutablefigr "Referenceable Figure Based Table with Caption After Table" b
+
+\begin{table}[${1:htpb}]
+\begin{center}
+	\incfig$2{$3}
+	\caption{${4:${3/\W+/ /g}}}
+	\label{tab:${5:$3}}
+\end{center}
+\end{table}
+
+$0
+endsnippet
+
+snippet lureffig "insert a figure reference"
+Figure \ref{fig:$1}$0
+endsnippet
+
+snippet lureffigpage "insert a figure page number reference"
+ \pageref{fig:$1}$0
+endsnippet
+
+snippet lureftab "insert a table reference"
+Table \ref{tab:$1}$0
+endsnippet
+
+snippet lureftabpage "insert a table page number reference"
+ \pageref{tab:$1}$0
+endsnippet
+
+# should be lower case like Appendix \ref{appendix:a}
+snippet lurefapp "insert an appendix reference"
+Appendix \ref{appendix:$1}$0
+endsnippet
+
+# Avoid using these when possible as they don't serve much purpose on their own
+# and are dealt with above with figures and tables in a cohesive way that works
+# better
+snippet lumkfig "Make Figure Label"
+\label{fig:$1}$0
+endsnippet
+
+snippet lumktab "Make Table Label"
+\label{tab:$1}$0
+endsnippet
+
+# SHould be lower case like \label{appendix:a}
+snippet lumkapp "Make an appendix reference"
+\label{appendix:$1}
+$0
+endsnippet
+
+# Pandoc LaTeX math Specific Markdown Snippets
+
+# This whole section will show up in pptxs
+snippet lunnim "No Number Inline Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+snippet lunmm "Numbered Multirow Math" bA
+\begin{center}
+\begin{align}
+   &$1 \\\\${2:[10pt]}
+   &$0.
+\end{align}
+\end{center}
+endsnippet
+
+snippet lunse "Numbered Single Row Equation" bA
+\begin{center}
+\begin{equation}
+   $0
+\end{equation}
+\end{center}
+endsnippet
+
+# Pandoc LaTeX Power Point Specific Markdown Snippets
 
 snippet pptilist "Power Point Incremental Un Numbered List" bA
 ::: incremental
