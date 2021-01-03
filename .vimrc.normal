@@ -38,7 +38,9 @@ highlight ColorColumn ctermbg=darkgray
 " Note using syntax on means vim will override your syntax settings vs enable where it will not
 syntax enable
 " Turn on line numbers
-set nu
+set number
+" Turn on column numbers
+set ruler
 " Enable mouse
 set mouse=a
 set ttymouse=xterm2

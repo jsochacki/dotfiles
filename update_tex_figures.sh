@@ -19,5 +19,8 @@ do
   if [ ${i##*.} == "svg" ]
   then
     inkscape $i --export-area-page --export-dpi 300 --export-pdf ${i%.*}.pdf --export-latex ${i%.*}.svg
+    tmpfile=${i##*/}
+    convert ${i%.*}.pdf $1/images/${tmpfile%.*}.png
   fi
 done
+

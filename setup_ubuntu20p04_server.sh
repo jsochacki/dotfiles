@@ -238,6 +238,15 @@ echo 'export PATH="/opt/datathiefIII:/opt/digitizelt:$PATH"' >> $homedir/.bashrc
 export PATH=/opt/datathiefIII:/opt/digitizelt:$PATH
 
 
+# Make it so ImageMagic Can turn pdf files into png files
+IMGMGK_FULLPATH=$(sudo find /etc/ -name 'ImageMagick*')
+IMGMGK_POLICY_FULLFILE="$IMGMGK_FULLPATH/policy.xml"
+if [ -f "$IMGMGK_POLICY_FULLFILE" ];
+then
+   sudo sed -i 's@<policy domain="coder" rights="none" pattern="PDF" />@<policy domain="coder" rights="read | write" pattern="PDF" />@' $IMGMGK_POLICY_FULLFILE
+fi
+
+
 # Launch i3 on startup
 echo '' >> $homedir/.bashrc
 echo '# Adding i3 autolaunch' >> $homedir/.bashrc
