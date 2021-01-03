@@ -86,9 +86,9 @@
 \rfoot{\fancyplain{}{Chapter \thechapter}}
 }
 
-\renewcommand{\contentsname}{Table Of Contents}
-\renewcommand{\listfigurename}{Figures}
-\renewcommand{\listtablename}{Tables}
+\AtBeginDocument{\renewcommand{\contentsname}{Table Of Contents}}
+\AtBeginDocument{\renewcommand{\listfigurename}{Figures}}
+\AtBeginDocument{\renewcommand{\listtablename}{Tables}}
 
 \newcommand{\maketitleandtoc}[3]
 {
