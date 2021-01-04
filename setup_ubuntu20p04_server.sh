@@ -258,4 +258,8 @@ echo 'fi' >> $homedir/.bashrc
 ./setup_vmware_clipboard.sh
 ./setup_vmware_share.sh
 
+
+# Dont let there be swap, ever
+sudo swapoff -a
+
 source $homedir/.bashrc
