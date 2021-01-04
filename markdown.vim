@@ -67,7 +67,7 @@ autocmd VimEnter * call StartupFunctions()
 " TODO need to modify for markdown rendered with pandoc and opened with zathura
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function RecompileMarkdown()
-  silent exec '!update_tex_figures.sh ' expand('%:p:h')
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
   silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
 endfunction
 

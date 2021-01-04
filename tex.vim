@@ -31,7 +31,7 @@ nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/'
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
-autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h')
+autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
 
 
 " Starts autocompilation at .tex file open and cleansup at close and shortcut watcher
