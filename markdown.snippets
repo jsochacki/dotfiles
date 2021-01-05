@@ -226,6 +226,35 @@ snippet lsod "Start Of Document" b
 ---
 title: ${1:Title}
 author: ${2:Author}
+header-includes:
+   - \usepackage{systems_book_md}
+   - \setheaderandfooter{${3:$2}}{${4:0.0}}
+---
+
+\maketoc
+
+$0
+endsnippet
+
+snippet lpb "Insert pagebreak that leaves whitespace at the bottom of the page" b
+
+\newpage
+
+$0
+endsnippet
+
+snippet lpbs "Insert pagebreak that expands items on page to take entire page" b
+
+\pagebreak
+
+$0
+endsnippet
+
+
+snippet lsodwdate "Start Of Document With Date But Will Cause PPTX Requires Repair Error Upon Opening In Windows" b
+---
+title: ${1:Title}
+author: ${2:Author}
 date: ${3:Date}
 header-includes:
    - \usepackage{systems_book_md}
