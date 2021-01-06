@@ -29,6 +29,9 @@ nnoremap <F2> : silent exec '!diagrams-net-figures edit "'.b:vimtex.root.'/figur
 " Hotkey to copy all snippets to local images folder
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+" Hotkey to make all plots
+nnoremap <F6> : silent exec '!make_linear_xy_plots.sh ' expand('%:p:h') ' > /dev/null 2>&1'
+
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
