@@ -97,6 +97,7 @@ sudo apt-get install -y xclip pdf2svg
 cd $TMPDIR
 #"install" my script and files
 ln -s $TMPDIR/update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
+ln -s $TMPDIR/make_linear_xy_plots.sh $homedir/.local/bin/make_linear_xy_plots.sh
 #cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 
 # Do some vimrc setup
@@ -238,11 +239,16 @@ echo 'export PATH="/opt/datathiefIII:/opt/digitizelt:$PATH"' >> $homedir/.bashrc
 export PATH=/opt/datathiefIII:/opt/digitizelt:$PATH
 
 
-# Make it so ImageMagic Can turn pdf files into png files
+# Install gnuplot
+sudo apt-get install -y gnuplot
+
+
+# Make it so ImageMagic Can turn pdf and PS files into png files
 IMGMGK_FULLPATH=$(sudo find /etc/ -name 'ImageMagick*')
 IMGMGK_POLICY_FULLFILE="$IMGMGK_FULLPATH/policy.xml"
 if [ -f "$IMGMGK_POLICY_FULLFILE" ];
 then
+   sudo sed -i 's@<policy domain="coder" rights="none" pattern="PS" />@<policy domain="coder" rights="read | write" pattern="PS" />@' $IMGMGK_POLICY_FULLFILE
    sudo sed -i 's@<policy domain="coder" rights="none" pattern="PDF" />@<policy domain="coder" rights="read | write" pattern="PDF" />@' $IMGMGK_POLICY_FULLFILE
 fi
 
