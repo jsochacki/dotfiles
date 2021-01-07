@@ -3,6 +3,54 @@
 # Make sure no file names have -inc in them naturally or else they will be
 # removed
 
+# Variable heredoc generation options
+#VAR+=$"test line 1
+#"
+#VAR+=$'test line 2\n'
+#VAR+="expanded string"$'\n'
+#VAR+='end'
+#echo "$VAR"
+
+function_make_gnuplot_linear_xy_plot_command () {
+NEWLINE=$'\n'
+COMMAND='datafile = "'$1'"'$NEWLINE
+COMMAND+='labels = system("head -2 '$1' | tail -1")'$NEWLINE
+COMMAND+=$NEWLINE
+COMMAND+="set datafile separator ','"$NEWLINE
+COMMAND+='set datafile commentschars "#"'$NEWLINE
+COMMAND+="set datafile missing 'NaN'"$NEWLINE
+COMMAND+=$NEWLINE
+COMMAND+='set style data line'$NEWLINE
+COMMAND+='set title word(labels, 1)'$NEWLINE
+COMMAND+='set xlabel word(labels, 2)'$NEWLINE
+COMMAND+='set ylabel word(labels, 3)'$NEWLINE
+let NUMBER_OF_FIELDS=$(awk '{print NF}' $1 | head -2 | tail -1)
+let ADDITIONAL_PLOTS=$NUMBER_OF_FIELDS-3
+if [ $ADDITIONAL_PLOTS -gt 0 ]
+then
+   let baseargs=3
+   for ((num=0; num < ADDITIONAL_PLOTS; num++))
+   do
+      let baseargs+=1
+      COMMAND+='set ylabel word(labels, '$baseargs')'$NEWLINE
+   done
+fi
+COMMAND+=$NEWLINE
+COMMAND+='set terminal cairolatex \'$NEWLINE
+COMMAND+='pdf \'$NEWLINE
+COMMAND+='standalone \'$NEWLINE
+COMMAND+="header '\usepackage{transparent} \usepackage{xcolor} \usepackage{graphicx} \usepackage{mathptmx} \usepackage[english]{babel} \usepackage[utf8]{inputenc} \usepackage{amsmath}' \\"$NEWLINE
+COMMAND+="font 'Times-Roman,10' \\"$NEWLINE
+COMMAND+='transparent \'$NEWLINE
+COMMAND+='blacktext'$NEWLINE
+COMMAND+=$NEWLINE
+COMMAND+='set output "'$2'/figures/'$3'.tex"'$NEWLINE
+COMMAND+=$NEWLINE
+COMMAND+='plot "'$1'"'$NEWLINE
+COMMAND+=$NEWLINE
+echo "$COMMAND"
+}
+
 # $1 should be the full file path and full file name of the file being plotted
 # /home/myproject/csvdata/data.csv
 # $2 should be the full file path of the parent folder of folder containing the file being plotted
@@ -11,30 +59,9 @@
 # data
 function_make_linear_xy_plot () {
 
-gnuplot -p << EOF
-datafile = "$1"
-labels = system("head -2 $1 | tail -1")
-
-set datafile separator ','
-set datafile commentschars "#"
-set datafile missing 'NaN'
-
-set style data lines
-set title word(labels, 1)
-set xlabel word(labels, 2)
-set ylabel word(labels, 3)
-
-set terminal cairolatex \
-             pdf \
-             standalone \
-             header '\usepackage{transparent} \usepackage{xcolor} \usepackage{graphicx} \usepackage{mathptmx} \usepackage[english]{babel} \usepackage[utf8]{inputenc} \usepackage{amsmath}' \
-             font 'Times-Roman,10' \
-             transparent \
-             blacktext
-set output "$2/figures/$3.tex"
-
-plot "$1"
-
+GNUPLOT_COMMAND=$(function_make_gnuplot_linear_xy_plot_command $1 $2 $3)
+gnuplot << EOF
+$GNUPLOT_COMMAND
 EOF
 
 cd $2/figures
