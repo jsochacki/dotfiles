@@ -30,7 +30,7 @@ nnoremap <F2> : silent exec '!diagrams-net-figures edit "'.b:vimtex.root.'/figur
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
 " Hotkey to make all plots
-nnoremap <F6> : silent exec '!make_linear_xy_plots.sh ' expand('%:p:h') ' > /dev/null 2>&1'
+nnoremap <F6> : silent exec '!make_linear_xy_plots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script

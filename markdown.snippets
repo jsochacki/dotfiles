@@ -159,7 +159,7 @@ $0
 endsnippet
 
 snippet imgf "Insert Image Fast"
-![${2:$1}](images/$1)
+![${1/\W+/ /gi}](images/$1)
 $0
 endsnippet
 

@@ -8,6 +8,9 @@ cd
 homedir=$(pwd)
 cd $TMPDIR
 
+# Inkscape fails to install if you don't
+sudo apt-get update -y
+
 # Need to get X display server starter for i3
 sudo apt install -y xinit
 
