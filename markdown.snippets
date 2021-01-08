@@ -206,7 +206,14 @@ endsnippet
 # Ultisnips are ${VISUAL:default/search/replace/options}
 # with no default that becomes ${VISUAL/search/replace/options}
 snippet limgfr "Insert Referencable Image Fast"
-![${2:DisplayName}\label{fig:${1/\.(\w{3,})$//gi}}](images/$1)
+![${4:${3/\w+\s*/\u$0/g}}
+$5\label{fig:${1/\.(\w{3,})$//gi}}]
+$6(images/$1)
+$0 ${3:${2/\W+/ /gi}} ${2:${1/\.(\w{3,})$//gi}}
+endsnippet
+
+snippet limgfrs "Insert Referencable Image Fast Safe"
+![${1/\W+/ /gi}$2\label{fig:${1/\.(\w{3,})$//gi}}](images/$1)
 $0
 endsnippet
 
@@ -262,20 +269,6 @@ header-includes:
 ---
 
 \maketoc
-
-$0
-endsnippet
-
-snippet lpb "Insert pagebreak that leaves whitespace at the bottom of the page" b
-
-\newpage
-
-$0
-endsnippet
-
-snippet lpbs "Insert pagebreak that expands items on page to take entire page" b
-
-\pagebreak
 
 $0
 endsnippet
