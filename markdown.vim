@@ -71,7 +71,7 @@ autocmd VimEnter * call StartupFunctions()
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function RecompileMarkdown()
   silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
-  silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
+  silent exec '!pandoc -s -f markdown-implicit_figures -t pdf ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
 endfunction
 
 function StartupFunctions()
