@@ -20,21 +20,17 @@ COMMAND+="set datafile separator ','"$NEWLINE
 COMMAND+='set datafile commentschars "#"'$NEWLINE
 COMMAND+="set datafile missing 'NaN'"$NEWLINE
 COMMAND+=$NEWLINE
+COMMAND+='set key noautotitle'$NEWLINE
+COMMAND+=$NEWLINE
+#COMMAND+='set key on fixed right top horizontal box title "Data" center'$NEWLINE
+COMMAND+='set key on fixed right top horizontal'$NEWLINE
+COMMAND+=$NEWLINE
+COMMAND+='set grid lt 1 lw 1 lc rgb "#000000"'$NEWLINE
+COMMAND+=$NEWLINE
 COMMAND+='set style data line'$NEWLINE
 COMMAND+='set title word(labels, 1)'$NEWLINE
 COMMAND+='set xlabel word(labels, 2)'$NEWLINE
 COMMAND+='set ylabel word(labels, 3)'$NEWLINE
-let NUMBER_OF_FIELDS=$(awk '{print NF}' $1 | head -2 | tail -1)
-let ADDITIONAL_PLOTS=$NUMBER_OF_FIELDS-3
-if [ $ADDITIONAL_PLOTS -gt 0 ]
-then
-   let baseargs=3
-   for ((num=0; num < ADDITIONAL_PLOTS; num++))
-   do
-      let baseargs+=1
-      COMMAND+='set ylabel word(labels, '$baseargs')'$NEWLINE
-   done
-fi
 COMMAND+=$NEWLINE
 COMMAND+='set terminal cairolatex \'$NEWLINE
 COMMAND+='pdf \'$NEWLINE
@@ -46,7 +42,21 @@ COMMAND+='blacktext'$NEWLINE
 COMMAND+=$NEWLINE
 COMMAND+='set output "'$2'/figures/'$3'.tex"'$NEWLINE
 COMMAND+=$NEWLINE
-COMMAND+='plot "'$1'"'$NEWLINE
+COMMAND+='plot "'$1'" using 1:2 title word(labels, 4) lw 3'
+let NUMBER_OF_FIELDS=$(awk '{print NF}' $1 | head -2 | tail -1)
+let ADDITIONAL_PLOTS=$NUMBER_OF_FIELDS-4
+if [ $ADDITIONAL_PLOTS -gt 0 ]
+then
+   let baseargs=4
+   let columnnum=2
+   for ((num=0; num < ADDITIONAL_PLOTS; num++))
+   do
+      let baseargs+=1
+      let columnnum+=1
+      COMMAND+=", ''"' using 1:'$columnnum' title word(labels, '$baseargs') lw 3'
+   done
+fi
+COMMAND+=$NEWLINE #This one just ends the long plot line
 COMMAND+=$NEWLINE
 echo "$COMMAND"
 }
