@@ -100,7 +100,7 @@ sudo apt-get install -y xclip pdf2svg
 cd $TMPDIR
 #"install" my script and files
 ln -s $TMPDIR/update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
-ln -s $TMPDIR/make_linear_xy_plots.sh $homedir/.local/bin/make_linear_xy_plots.sh
+ln -s $TMPDIR/make_gnuplots.sh $homedir/.local/bin/make_gnuplots.sh
 #cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 
 # Do some vimrc setup

@@ -40,7 +40,7 @@ nnoremap <F4> : call PreviewPptx() <CR>
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
 " Hotkey to make all plots
-nnoremap <F6> : silent exec '!make_linear_xy_plots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
+nnoremap <F6> : silent exec '!make_gnuplots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
 
 " Autodetects if template is there in root or not and compiles with it if
 " available
