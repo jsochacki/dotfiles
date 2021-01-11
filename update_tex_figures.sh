@@ -79,8 +79,7 @@ do
   if [ ! -f "$i" ]; then continue; fi
   if [ ${i##*.} == "pdf_tex" ]
   then
-     function_render_pdf_tex $i
-    echo "$i is being pdf processed"
+    function_render_pdf_tex $i
   fi
 done
 
@@ -104,4 +103,9 @@ do
 done
 
 cd $1
-rm $1/build/*
+
+if [ -f $1/build/* ]
+then
+   rm $1/build/*
+fi
+
