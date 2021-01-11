@@ -9,7 +9,7 @@ do
   if [ ! -f "$i" ]; then continue; fi
   if [ ${i##*.} == "gp" ]
   then
-     echo $i
+     #echo $i
      gnuplot $i
   fi
 done
@@ -28,11 +28,11 @@ do
      parent_path=${full_path%/*} # the full parent path i.e. "/home"
      file_with_extension=${i##*/} # just the filename with the extension i.e. "file.gp"
      file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
-     echo $file_with_extension
-     echo $file_only.pdf
-     echo $parent_path/figures/
-     echo $parent_path/figures/$file_only.pdf
-     echo $parent_path/images/$file_only.png
+     #echo $file_with_extension
+     #echo $file_only.pdf
+     #echo $parent_path/figures/
+     #echo $parent_path/figures/$file_only.pdf
+     #echo $parent_path/images/$file_only.png
      pdflatex -interaction=nonstopmode $file_with_extension
      mv $file_only.pdf $parent_path/figures/
      convert -density 600 -quality 100 $parent_path/figures/$file_only.pdf $parent_path/images/$file_only.png

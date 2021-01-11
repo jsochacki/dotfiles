@@ -23,10 +23,19 @@ snippet beg "begin{} / end{}" bA
 \\end{$1}
 endsnippet
 
-snippet img "Image environment" b
-\begin{figure}[${1:htpb}]
+snippet fig "Figure environment" b
+\begin{figure}[${1:!htpb}]
 	\centering
-	\incimg$2{$3}
+	\incfig$2{$3}
+	\caption{${4:$3}}
+	\label{fig:${5:${3/\W+/-/g}}}
+\end{figure}
+endsnippet
+
+snippet img "Image environment" b
+\begin{figure}[${1:!htpb}]
+	\centering
+	\incimg$2{$3.png}
 	\caption{${4:$3}}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}

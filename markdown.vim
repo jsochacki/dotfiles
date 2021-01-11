@@ -42,6 +42,9 @@ nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/'
 " Hotkey to make all plots
 nnoremap <F6> : silent exec '!make_gnuplots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
 
+" Hotkey to re-open zathura and preview the file for when it crashes
+nnoremap <F12> : call StartupFunctions() <CR>
+
 " Autodetects if template is there in root or not and compiles with it if
 " available
 function CompilePptx()
