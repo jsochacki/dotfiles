@@ -64,7 +64,7 @@ filetowrite = sprintf("%s.tex", resultantfilename)
 fullparentpath = system("pwd")
 fullfiledata1 = sprintf("%s/csv-data/%s", fullparentpath, filetoplot1)
 fullfiledata2 = sprintf("%s/csv-data/%s", fullparentpath, filetoplot2)
-fullfileoutput = sprintf("%s/build/%s", fullparentpath, filetowrite)
+fullfileoutput = sprintf("%s/build/gnuplot/%s", fullparentpath, filetowrite)
 
 set terminal cairolatex \
 pdf \

@@ -5,6 +5,23 @@
 ###############################################################################
 # This is the portion where I define functions to be used by the script
 
+function_run_or_not () {
+
+PROCEED=
+
+if [ ! -f "$1" ]
+then
+   touch $1
+   # Note not an actual bool since bash has none but just a string named true
+   # if you don't assign a string though it will eval to false so acts as bool
+   # the way that I use it here
+   PROCEED=true
+fi
+
+echo "$PROCEED"
+
+}
+
 # $1 is the pdf_tex full file name and path
 # This function makes the compilable tex file in the build directory
 # Note that it uses the pdf file in the figures folder still
@@ -15,7 +32,7 @@ parent_path=${full_path%/*} # the full parent path i.e. "/home"
 file_with_extension=${1##*/} # just the filename with the extension i.e. "file.gp"
 file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
 
-full_file_out=$parent_path/build/$file_only.tex
+full_file_out=$parent_path/build/figures/$file_only.tex
 
 # Make the complete tex file
 cat >> $full_file_out << 'EOF'
@@ -45,13 +62,22 @@ sed -i "s@$file_only.pdf@$parent_path/figures/$file_only.pdf@" $full_file_out
 
 }
 
+function_svg_to_pdf_pdf_tex_and_render () {
 
-###############################################################################
-# This is the actual script portion
+if [ "$2" == "-f" ]
+then
+   files=$(find $1/figures)
+elif [ "$2" == "-m" ]
+then
+   files=$(find $1/figures -mmin -0.1)
+elif [ "$2" == "-mc" ]
+then
+   files=$(find $1/figures -mmin $3)
+else
+   exit 1
+fi
 
-# First we turn all svgs into pdfs and pdf_tex for latex and use in later steps
-modified_files=$(find $1/figures -mmin -0.5)
-for i in ${modified_files}
+for i in ${files}
 do
   # This is so you dont attempt to convert directories or symbolic links etc..
   # and just convert actual local svg files
@@ -65,14 +91,9 @@ do
   fi
 done
 
+# First we turn all svgs into pdfs and pdf_tex for latex and use in later steps
 
-# Now we turn all pdf_tex into pngs for use in markdown
-#all_pdf_tex_files=$(find $1/figures)
-#for i in ${all_pdf_tex_files}
-
-# Now we turn all MODIFIED only pdf_tex into pngs for use in markdown
-modified_files=$(find $1/figures -mmin -0.1)
-for i in ${modified_files}
+for i in ${files}
 do
   # This is so you dont attempt to convert directories or symbolic links etc..
   # and just convert actual local pdf_tex files
@@ -83,9 +104,15 @@ do
   fi
 done
 
-cd $1/build
+}
 
-all_tex_files=$(find $1/build)
+function_render_tex_files () {
+
+BUILD_DIR=$1/build/figures
+
+cd $BUILD_DIR
+
+all_tex_files=$(find $BUILD_DIR)
 for i in ${all_tex_files}
 do
   # This is so you dont attempt to convert directories or symbolic links etc..
@@ -93,16 +120,80 @@ do
   if [ ! -f "$i" ]; then continue; fi
   if [ ${i##*.} == "tex" ]
   then
-     full_path=${i%/*} # the full path i.e. "/home/dir"
-     parent_path=${full_path%/*} # the full parent path i.e. "/home"
      file_with_extension=${i##*/} # just the filename with the extension i.e. "file.gp"
      file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
      pdflatex -interaction=nonstopmode $file_with_extension
-     convert -colorspace RGB -density 600 -quality 100 $file_only.pdf $parent_path/images/$file_only.png
+     convert -colorspace RGB -density 600 -quality 100 $file_only.pdf $1/images/$file_only.png
   fi
 done
 
 cd $1
 
-[[ $(ls $1/build/) ]] && rm $1/build/*
+}
 
+function_run_mode () {
+
+OPTION_VAL=
+TIME_VAL=
+case "$2" in
+   -force | -f) echo "Running on all figures regardless of update time"
+      OPTION_VAL="-f"
+      ;;
+   -modified | -m) echo "Running only on figures modified in the last 6 seconds"
+      OPTION_VAL="-m"
+      ;;
+   -modified-custom | -mc) echo "Running only on figures modified in the last custom set number of seconds"
+      OPTION_VAL="-mc"
+      TIME_VAL=$3
+      ;;
+   *) echo "No such command $2 supported for update_tex_figures.sh currently"
+      ;;
+esac
+
+function_svg_to_pdf_pdf_tex_and_render $1 $OPTION_VAL $TIME_VAL
+function_render_tex_files $1
+
+}
+
+
+###############################################################################
+# This is the actual script portion
+
+if [ $# -lt 2 ] || [ $# -gt 3 ]
+then
+   echo "Usage : Argument 1: $1 needs to be the base dir of the project with the / at the
+end, i.e. /home/project"
+   echo "Usage : Argument 2: $2 needs to be the run mode command selected i.e.
+   -force, -modified, etc...."
+   echo "Usage : Argument 3 (optional): $3 the custom time to look for modified
+   files, only for when passing run mode -mc, in the form \"-0.1\" for 6 seconds,
+   \"-0.5\" for 30 seconds etc..."
+   exit 1
+fi
+
+BUILD_DIR=$1/build/figures
+
+MUTEX_LOCK="$BUILD_DIR/.figures_lock"
+RUN_BUILD=$(function_run_or_not $MUTEX_LOCK)
+
+# Exit if already in process
+if [ ! $RUN_BUILD ]
+then
+   exit 1
+fi
+
+if [ $# -eq 3 ]
+then
+   function_run_mode $1 $2 $3
+else
+   function_run_mode $1 $2 "-0.1"
+fi
+
+FILES_TO_CLEAN=($(ls $BUILD_DIR))
+if [ ${#FILES_TO_CLEAN[@]} -gt 0 ]
+then
+   rm $BUILD_DIR/*
+fi
+
+# Only a nuclear 9 will skip this part i.e. kill -9
+trap "rm $MUTEX_LOCK" EXIT

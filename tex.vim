@@ -29,13 +29,16 @@ nnoremap <F2> : silent exec '!diagrams-net-figures edit "'.b:vimtex.root.'/figur
 " Hotkey to copy all snippets to local images folder
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+" Hotkey to make all figures
+nnoremap <F11> : call ForceCompileAllFigures() <CR>
+
 " Hotkey to make all plots
-nnoremap <F6> : silent exec '!make_gnuplots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
+nnoremap <F12> : call ForceCompileAllPlots() <CR>
+
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
-autocmd CursorHold * : silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
-
+autocmd CursorHold * call RecompilePlotsAndFigures()
 
 " Starts autocompilation at .tex file open and cleansup at close and shortcut watcher
 augroup vimtex_event_1
@@ -43,6 +46,23 @@ augroup vimtex_event_1
   au User VimtexEventQuit     call ShutdownFunctions()
   au User VimtexEventInitPost call StartupFunctions()
 augroup END
+
+function RecompilePlotsAndFigures()
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
+  :redraw!
+  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
+  :redraw!
+endfunction
+
+function ForceCompileAllFigures()
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -f > /dev/null 2>&1 &'
+  :redraw!
+endfunction
+
+function ForceCompileAllPlots()
+  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -f > /dev/null 2>&1 &'
+  :redraw!
+endfunction
 
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function StartupFunctions()

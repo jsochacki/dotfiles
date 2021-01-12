@@ -39,19 +39,20 @@ nnoremap <F4> : call PreviewPptx() <CR>
 "nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && cp ~/Snips/* ./images/ && rm ~/Snips/*' <CR><CR>:redraw!<CR>
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
-" Hotkey to make all plots
-nnoremap <F6> : silent exec '!make_gnuplots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
+" Hotkey to make all figures
+nnoremap <F11> : call ForceCompileAllFigures() <CR>
 
-" Hotkey to re-open zathura and preview the file for when it crashes
-nnoremap <F12> : call RecompileMarkdown() <CR>
+" Hotkey to make all plots
+nnoremap <F12> : call ForceCompileAllPlots() <CR> 
+
 
 " Autodetects if template is there in root or not and compiles with it if
 " available
 function CompilePptx()
    if filereadable("template.pptx")
-      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' --reference-doc template.pptx &'
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpptx ' expand('%:r') ' > /dev/null 2>&1 &'
    else
-      silent exec '!pandoc -s ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pptx'],'') ' &'
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpptxnt ' expand('%:r') ' > /dev/null 2>&1 &'
    endif
    :redraw!
 endfunction
@@ -66,20 +67,25 @@ endfunction
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
-" Recompiles on :w entry (i.e. manual save)
-autocmd  BufWritePost * call RecompileMarkdown() 
-" Ok for small simple markdown files but for mine with all teh scripts running
-" and image conversion this leads to a lot of failed pdf viewing so don't do it
-" Recompiles on cursor pause of 500ms in normal entry mode
-"autocmd  CursorHold * call RecompileMarkdown() 
-
+autocmd CursorHold * call RecompileMarkdown()
 autocmd VimEnter * call StartupFunctions()
-autocmd VimLeave * call ShutdownFunctions()
 
 function RecompileMarkdown()
-  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1 &'
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
-  silent exec '!pandoc -s -f markdown-implicit_figures -t pdf ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
+  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
+  :redraw!
+  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
+  :redraw!
+endfunction
+
+function ForceCompileAllFigures()
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -f > /dev/null 2>&1 &'
+  :redraw!
+endfunction
+
+function ForceCompileAllPlots()
+  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -f > /dev/null 2>&1 &'
   :redraw!
 endfunction
 
@@ -87,20 +93,6 @@ function StartupFunctions()
   call RecompileMarkdown()
   silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
 endfunction
-function ShutdownFunctions()
-  silent exec '![[ $(ls ' join([expand('%:p:h'),'/build/'],'') ') ]] && rm ' join([expand('%:p:h'),'/build/','*'],'') ' &'
-endfunction
-
-" Theoretically more stable but really slow and still not that good tbh
-"function RecompileMarkdown()
-"  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
-"  :redraw!
-"  silent exec '!pandoc -s -f markdown-implicit_figures -t latex ' @% ' -o ' join([expand('%:p:h'),'/build/',expand('%:r'),'.tex'],'') ' > /dev/null 2>&1'
-"  :redraw!
-"  silent exec '!pdflatex -interaction=nonstopmode -synctex=1 ' join([expand('%:p:h'),'/build/',expand('%:r'),'.tex'],'') ' -o ' join([expand('%:p:h'),'/build/',expand('%:r'),'.pdf'],'') ' > /dev/null 2>&1'
-"  :redraw!
-"  silent exec '!mv ' join([expand('%:p:h'),'/build/',expand('%:r'),'.pdf'],'') join([expand('%:p:h'),'/',expand('%:r'),'.pdf'],'') ' &'
-"endfunction
 
 " Activate this with K (shift-k)
 "command -nargs=1 Googleit :!python3 ~/.vimfiles/Googleit.py <args>

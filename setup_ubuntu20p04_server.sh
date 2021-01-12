@@ -101,6 +101,7 @@ cd $TMPDIR
 #"install" my script and files
 ln -s $TMPDIR/update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 ln -s $TMPDIR/make_gnuplots.sh $homedir/.local/bin/make_gnuplots.sh
+ln -s $TMPDIR/run_pandoc_commands.sh $homedir/.local/bin/run_pandoc_commands.sh
 #cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 
 # Do some vimrc setup
