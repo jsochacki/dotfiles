@@ -104,8 +104,5 @@ done
 
 cd $1
 
-if [ -f $1/build/* ]
-then
-   rm $1/build/*
-fi
+[[ $(ls $1/build/) ]] && rm $1/build/*
 

@@ -40,7 +40,8 @@ do
 done
 
 cd $1
-rm $1/build/*
+
+[[ $(ls $1/build/) ]] && rm $1/build/*
 
 #echo $i
 #echo ${i##*.} # just the extension without the . i.e. "gp"

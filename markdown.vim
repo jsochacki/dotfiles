@@ -43,7 +43,7 @@ nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/'
 nnoremap <F6> : silent exec '!make_gnuplots.sh ' expand('%:p:h') ' > /dev/null 2>&1' <CR><CR>:redraw!<CR>
 
 " Hotkey to re-open zathura and preview the file for when it crashes
-nnoremap <F12> : call StartupFunctions() <CR>
+nnoremap <F12> : call RecompileMarkdown() <CR>
 
 " Autodetects if template is there in root or not and compiles with it if
 " available
@@ -66,24 +66,40 @@ endfunction
 
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
-autocmd CursorHold * call RecompileMarkdown() 
+" Recompiles on :w entry (i.e. manual save)
+autocmd  BufWritePost * call RecompileMarkdown() 
+" Ok for small simple markdown files but for mine with all teh scripts running
+" and image conversion this leads to a lot of failed pdf viewing so don't do it
+" Recompiles on cursor pause of 500ms in normal entry mode
+"autocmd  CursorHold * call RecompileMarkdown() 
 
 autocmd VimEnter * call StartupFunctions()
+autocmd VimLeave * call ShutdownFunctions()
 
-" TODO need to modify for markdown rendered with pandoc and opened with zathura
-" Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function RecompileMarkdown()
-  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1 &'
+  :redraw!
   silent exec '!pandoc -s -f markdown-implicit_figures -t pdf ' @% ' -o ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
+  :redraw!
 endfunction
 
 function StartupFunctions()
   call RecompileMarkdown()
   silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
 endfunction
-"function ShutdownFunctions()
-  "call vimtex#compiler#clean(0)
-  "silent exec "!kill $(ps aux | grep '[p]ython3.*main.py' | awk '{print $2}')"
+function ShutdownFunctions()
+  silent exec '![[ $(ls ' join([expand('%:p:h'),'/build/'],'') ') ]] && rm ' join([expand('%:p:h'),'/build/','*'],'') ' &'
+endfunction
+
+" Theoretically more stable but really slow and still not that good tbh
+"function RecompileMarkdown()
+"  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' > /dev/null 2>&1'
+"  :redraw!
+"  silent exec '!pandoc -s -f markdown-implicit_figures -t latex ' @% ' -o ' join([expand('%:p:h'),'/build/',expand('%:r'),'.tex'],'') ' > /dev/null 2>&1'
+"  :redraw!
+"  silent exec '!pdflatex -interaction=nonstopmode -synctex=1 ' join([expand('%:p:h'),'/build/',expand('%:r'),'.tex'],'') ' -o ' join([expand('%:p:h'),'/build/',expand('%:r'),'.pdf'],'') ' > /dev/null 2>&1'
+"  :redraw!
+"  silent exec '!mv ' join([expand('%:p:h'),'/build/',expand('%:r'),'.pdf'],'') join([expand('%:p:h'),'/',expand('%:r'),'.pdf'],'') ' &'
 "endfunction
 
 " Activate this with K (shift-k)
