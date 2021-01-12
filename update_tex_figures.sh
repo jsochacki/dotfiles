@@ -50,7 +50,7 @@ sed -i "s@$file_only.pdf@$parent_path/figures/$file_only.pdf@" $full_file_out
 # This is the actual script portion
 
 # First we turn all svgs into pdfs and pdf_tex for latex and use in later steps
-modified_files=$(find $1/figures -mmin -0.1)
+modified_files=$(find $1/figures -mmin -0.5)
 for i in ${modified_files}
 do
   # This is so you dont attempt to convert directories or symbolic links etc..
