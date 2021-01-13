@@ -123,7 +123,8 @@ do
      file_with_extension=${i##*/} # just the filename with the extension i.e. "file.gp"
      file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
      pdflatex -interaction=nonstopmode $file_with_extension
-     convert -colorspace RGB -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
+     convert -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
+     #convert -colorspace RGB -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
   fi
 done
 
