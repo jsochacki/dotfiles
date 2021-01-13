@@ -69,7 +69,7 @@ do
      file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
      pdflatex -interaction=nonstopmode $file_with_extension
      mv $file_only.pdf $1/figures/
-     convert -colorspace RGB -density 600 -quality 100 $1/figures/$file_only.pdf $1/images/$file_only.png
+     convert -colorspace RGB -density 600 -quality 100 -trim $1/figures/$file_only.pdf $1/images/$file_only.png
   fi
 done
 
