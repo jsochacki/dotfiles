@@ -29,6 +29,8 @@ nnoremap <F2> : silent exec '!diagrams-net-figures edit "'.b:vimtex.root.'/figur
 " Hotkey to copy all snippets to local images folder
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+nnoremap <F10> : silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &' <CR><CR>:redraw!<CR>
+
 " Hotkey to make all figures
 nnoremap <F11> : call ForceCompileAllFigures() <CR>
 

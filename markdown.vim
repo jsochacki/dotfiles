@@ -39,6 +39,8 @@ nnoremap <F4> : call PreviewPptx() <CR>
 "nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && cp ~/Snips/* ./images/ && rm ~/Snips/*' <CR><CR>:redraw!<CR>
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+nnoremap <F10> : silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &' <CR><CR>:redraw!<CR>
+
 " Hotkey to make all figures
 nnoremap <F11> : call ForceCompileAllFigures() <CR>
 
