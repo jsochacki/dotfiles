@@ -48,6 +48,7 @@ cat >> $full_file_out << 'EOF'
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{float}
 \usepackage[pdftex, letterpaper, margin=0pt]{geometry}
 % No page numbers and no paragraph indentation
 \pagestyle{empty}
