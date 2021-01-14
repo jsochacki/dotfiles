@@ -71,15 +71,14 @@ endfunction
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * call RecompileMarkdown()
 autocmd VimEnter * call StartupFunctions()
+autocmd VimLeave * call RecompileMarkdownFinal()
 
 function RecompileMarkdown()
   silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
   silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
-"  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
-"  Use this one unless it proves too slow or unstable for most accurate view
-  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
+  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
   :redraw!
 endfunction
 
@@ -96,6 +95,15 @@ endfunction
 function StartupFunctions()
   call RecompileMarkdown()
   silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
+endfunction
+
+function RecompileMarkdownFinal()
+  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
+  :redraw!
+  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
+  :redraw!
+  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
+  :redraw!
 endfunction
 
 " Activate this with K (shift-k)
