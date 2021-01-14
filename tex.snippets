@@ -24,7 +24,7 @@ snippet beg "begin{} / end{}" bA
 endsnippet
 
 snippet fig "Figure environment" b
-\begin{figure}[${1:!htpb}]
+\begin{figure}[${1:H}]
 	\centering
 	\incfig$2{$3}
 	\caption{${4:$3}}
@@ -33,7 +33,7 @@ snippet fig "Figure environment" b
 endsnippet
 
 snippet img "Image environment" b
-\begin{figure}[${1:!htpb}]
+\begin{figure}[${1:H}]
 	\centering
 	\incimg$2{$3.png}
 	\caption{${4:$3}}
@@ -374,7 +374,7 @@ snippet R0+ "R0+" iA
 endsnippet
 
 snippet plot "Plot" w
-\begin{figure}[$1]
+\begin{figure}[${1:H}]
 	\centering
 	\begin{tikzpicture}
 		\begin{axis}[
@@ -731,7 +731,7 @@ snippet tha6 "Heading Level 6 Alternate TOC text" bsA
 endsnippet
 
 snippet table "table environment" b
-\begin{table}[${1:htpb}]
+\begin{table}[${1:H}]
 \begin{center}
 \caption{$2}
 \label{tab:$2}
