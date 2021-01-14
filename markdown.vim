@@ -102,6 +102,7 @@ function RecompileMarkdownFinal()
   :redraw!
   silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
+  silent exec '!rm -f ' join([expand('%:p:h'),'/build/pandoc/.pandoc_lock'],'')
   silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
   :redraw!
 endfunction
