@@ -35,6 +35,17 @@ case "$2" in
       OUTFILE=$1/$3.pdf
       pandoc -s -f markdown -t pdf $INFILE -o $OUTFILE
       ;;
+   -markdown-to-tex-with-tex-figure-placement | -mdttexwtfp) echo "$2 selected"
+      INFILE=$1/$3.md
+      OUTFILE=$1/$3.tex
+      pandoc -s -f markdown -t latex $INFILE -o $OUTFILE
+      sed -i 's@begin{figure}$@begin{figure}[H]@g' $OUTFILE
+      # Need to run twice to get reference and bibtex to work for some reason
+      pdflatex -interaction=nonstopmode -output-directory=$1/build/pandoc $3.tex
+      pdflatex -interaction=nonstopmode -output-directory=$1/build/pandoc $3.tex
+      mv $1/build/pandoc/$3.pdf $1/
+      rm -f $3.tex
+      ;;
    -markdown-to-pptx | -mdtpptx) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.pptx
@@ -66,7 +77,9 @@ end, i.e. /home/project"
    exit 1
 fi
 
-MUTEX_LOCK="$1/build/pandoc/.pandoc_lock"
+BUILD_DIR=$1/build/pandoc
+
+MUTEX_LOCK="$BUILD_DIR/.pandoc_lock"
 RUN_BUILD=$(function_run_or_not $MUTEX_LOCK)
 
 # Exit if already in process
@@ -78,6 +91,12 @@ fi
 RETURN_STATUS=$(function_run_pandoc_command $1 $2 $3)
 
 echo $RETURN_STATUS
+
+FILES_TO_CLEAN=($(ls $BUILD_DIR))
+if [ ${#FILES_TO_CLEAN[@]} -gt 0 ]
+then
+   rm $BUILD_DIR/*
+fi
 
 # Only a nuclear 9 will skip this part i.e. kill -9
 trap "rm $MUTEX_LOCK" EXIT
