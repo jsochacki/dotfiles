@@ -86,6 +86,7 @@ function RecompileMarkdown()
   :redraw!
   if g:full_compilation_mode == 1
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
+    call CompilePptx()
   else
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
   endif
