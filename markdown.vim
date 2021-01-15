@@ -13,6 +13,9 @@ let g:ycm_key_list_previous_completion=['<C-J>']
 " Load YouCompleteMe
 packadd YouCompleteMe
 
+" Full Compilation switch
+let full_compilation_mode = 0
+
 " Saves as soon as you make the file so compilation works
 autocmd BufNewFile * :write
 
@@ -39,6 +42,10 @@ nnoremap <F4> : call PreviewPptx() <CR>
 "nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && cp ~/Snips/* ./images/ && rm ~/Snips/*' <CR><CR>:redraw!<CR>
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+" Add a key to toggle fast or full compile modes
+nnoremap <F9> : call ToggleCompilationMode() <CR>
+
+" Add key to reopen pdf viewer in the instance of a crash
 nnoremap <F10> : silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &' <CR><CR>:redraw!<CR>
 
 " Hotkey to make all figures
@@ -71,14 +78,17 @@ endfunction
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * call RecompileMarkdown()
 autocmd VimEnter * call StartupFunctions()
-autocmd VimLeave * call RecompileMarkdownFinal()
 
 function RecompileMarkdown()
   silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
   silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
   :redraw!
-  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
+  if g:full_compilation_mode == 1
+    silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
+  else
+    silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
+  endif
   :redraw!
 endfunction
 
@@ -97,14 +107,14 @@ function StartupFunctions()
   silent exec '!zathura ' join([split(expand('%:p'),'/')[-1][0:-4],'.pdf'],'') ' &'
 endfunction
 
-function RecompileMarkdownFinal()
-  silent exec '!update_tex_figures.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
-  :redraw!
-  silent exec '!make_gnuplots.sh ' expand('%:p:h') ' -m > /dev/null 2>&1 &'
-  :redraw!
-  silent exec '!rm -f ' join([expand('%:p:h'),'/build/pandoc/.pandoc_lock'],'')
-  silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
-  :redraw!
+function ToggleCompilationMode()
+   if g:full_compilation_mode == 1
+      let g:full_compilation_mode = 0
+      echom 'Going to fast compilation mode'
+   else
+      let g:full_compilation_mode = 1
+      echom 'Going to full compilation mode'
+   endif
 endfunction
 
 " Activate this with K (shift-k)
