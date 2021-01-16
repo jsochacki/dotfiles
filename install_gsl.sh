@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # This will get dev and debug headers and ensure libgslcblas0 is installed as
-# well  along with libgsl23
+# well along with libgsl23
 sudo apt-get install -y libgsl-dev libgsl-dbg
+
+# and get libatlas while you are at it anyways but not necessary at all
+sudo apt-get install -y libatlas-base-dev
 
 # Get the latest stable version
 wget https://mirror.ibcp.fr/pub/gnu/gsl/gsl-latest.tar.gz
