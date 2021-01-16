@@ -180,6 +180,10 @@ ln -s $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 
+# Opens vim, installs the plugins, then quits back to shell
+vim +PlugInstall +qa
+
+
 mkdir -p $homedir/Pictures
 mkdir -p $homedir/Snips
 
@@ -199,8 +203,6 @@ wget -O $homedir/Pictures/winter12.jpg https://images5.alphacoders.com/354/thumb
 wget -O $homedir/Pictures/winter13.jpg https://latestwallpapershd.com/wp-content/uploads/2019/03/Beautiful-winter-wallpaper-HD.jpg
 wget -O $homedir/Pictures/winter14.jpg https://animal-wallpaper.com/wallpaper/winter-wallpaper-desktop-background-For-Background-HD-Wallpaper.jpg
 
-# Opens vim, installs the plugins, then quits back to shell
-vim +PlugInstall +qa
 
 # Install a decent browser
 ./Chrome_Setup.sh
