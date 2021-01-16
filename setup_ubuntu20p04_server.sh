@@ -264,6 +264,11 @@ echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then' >> $homedir/.bash
 echo '   startx' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
 
+
+# Install gsl
+./install_gsl.sh
+
+
 # Do VMWARE specific setup at the end
 ./setup_vmware_clipboard.sh
 ./setup_vmware_share.sh
