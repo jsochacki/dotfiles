@@ -8,40 +8,58 @@ cd
 homedir=$(pwd)
 cd $TMPDIR
 
+function_apt_wait_for_unlock () {
+  while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; do
+    sleep 5
+  done
+  while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 ; do
+    sleep 5
+  done
+  while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
+    sleep 5
+  done
+  if [ -f /var/log/unattended-upgrades/unattended-upgrades.log ]; then
+    while sudo fuser /var/log/unattended-upgrades/unattended-upgrades.log >/dev/null 2>&1 ; do
+      sleep 5
+    done
+  fi
+  $@
+}
+
 # Inkscape fails to install if you don't
-sudo apt-get update -y
+function_apt_wait_for_unlock sudo apt-get update -y
 
 # Need to get X display server starter for i3
-sudo apt install -y xinit
+function_apt_wait_for_unlock sudo apt install -y xinit
 
 # Get git, curl, and make
-sudo apt-get install -y git curl make
+function_apt_wait_for_unlock sudo apt-get install -y git curl make
 
 # Get vim
-#sudo apt-get install -y vim build-essential clang-format
+#function_apt_wait_for_unlock sudo apt-get install -y vim build-essential clang-format
 
 # Get Cpp development dependencies
-sudo apt-get install -y build-essential clang-format
+function_apt_wait_for_unlock sudo apt-get install -y build-essential clang-format
 
 # you need to run this from the git directory
 
-./install_and_setup_texlive.sh
+function_apt_wait_for_unlock ./install_and_setup_texlive.sh
 
 # Get window managers and window management utilities
-sudo apt-get install -y tmux bspwm i3 feh rxvt
+function_apt_wait_for_unlock sudo apt-get install -y tmux bspwm i3 feh rxvt
 # https://i3wm.org/docs/userguide.html
 
 # Get PDF Viewer
-sudo apt-get install -y zathura zathura-pdf-poppler
+function_apt_wait_for_unlock sudo apt-get install -y zathura zathura-pdf-poppler
 
 # Get latex compiler for vimtex
-sudo apt-get install -y latexmk xzdec
+function_apt_wait_for_unlock sudo apt-get install -y latexmk xzdec
 # Get for forward searching in zatuhura with vimtex
-sudo apt-get install -y xdotool
+function_apt_wait_for_unlock sudo apt-get install -y xdotool
 # Get inkscape for non diagram figures and prefent "Failed to load module "canberra-gtk-module"" error
-sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module inkscape
+function_apt_wait_for_unlock sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module inkscape
 # Need these to support automated vimtex inkscape interaction
-sudo apt-get install -y python3.8-dev rofi python3-pip
+function_apt_wait_for_unlock sudo apt-get install -y python3.8-dev rofi python3-pip
 
 # Need to actually get pip3.8 as well
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -91,9 +109,9 @@ git clone https://github.com/jsochacki/inkscape-latex-shortcuts.git
 curl -fLo $homedir/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo apt-get install -y xclip pdf2svg
+function_apt_wait_for_unlock sudo apt-get install -y xclip pdf2svg
 # It isn't in his list but you need urxvt to use text insertion etc...
-#sudo apt-get install -y rxvt
+#function_apt_wait_for_unlock sudo apt-get install -y rxvt
 # I already get it though for i3 so we are good
 
 
@@ -141,10 +159,10 @@ ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
 
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3
-./setup_vim.sh
+function_apt_wait_for_unlock ./setup_vim.sh
 
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
-./install_and_setup_youcompleteme.sh
+function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
 
 
 # Copy over scripts and config files
@@ -205,7 +223,7 @@ wget -O $homedir/Pictures/winter14.jpg https://animal-wallpaper.com/wallpaper/wi
 
 
 # Install a decent browser
-./Chrome_Setup.sh
+function_apt_wait_for_unlock ./Chrome_Setup.sh
 
 # Install pandoc
 wget https://github.com/jgm/pandoc/releases/download/2.11.2/pandoc-2.11.2-linux-amd64.tar.gz
@@ -218,10 +236,10 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 sudo snap install drawio
 
 # Install Libre office
-sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
+function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
 
 # Install a rastered image editor since all you have is vector editors currently
-sudo apt-get install -y pinta
+function_apt_wait_for_unlock sudo apt-get install -y pinta
 
 
 # Get Data Grabbing Tools
@@ -246,7 +264,7 @@ export PATH=/opt/datathiefIII:/opt/digitizelt:$PATH
 
 
 # Install gnuplot
-sudo apt-get install -y gnuplot
+function_apt_wait_for_unlock sudo apt-get install -y gnuplot
 
 
 # Make it so ImageMagic Can turn pdf and PS files into png files
@@ -268,12 +286,15 @@ echo 'fi' >> $homedir/.bashrc
 
 
 # Install gsl
-./install_gsl.sh
+function_apt_wait_for_unlock ./install_gsl.sh
+
+# Install doxygen
+function_apt_wait_for_unlock ./install_doxygen.sh
 
 
 # Do VMWARE specific setup at the end
-./setup_vmware_clipboard.sh
-./setup_vmware_share.sh
+function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
+function_apt_wait_for_unlock ./setup_vmware_share.sh
 
 
 # Dont let there be swap, ever
