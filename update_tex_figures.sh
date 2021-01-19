@@ -170,8 +170,8 @@ function_render_tex_files $1
 
 if [ $# -lt 2 ] || [ $# -gt 3 ]
 then
-   echo "Usage : Argument 1: $1 needs to be the base dir of the project with the / at the
-end, i.e. /home/project"
+   echo "Usage : Argument 1: $1 needs to be the base dir of the project without
+   the / at the end, i.e. /home/project"
    echo "Usage : Argument 2: $2 needs to be the run mode command selected i.e.
    -force, -modified, etc...."
    echo "Usage : Argument 3 (optional): $3 the custom time to look for modified

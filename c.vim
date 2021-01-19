@@ -40,4 +40,41 @@ nnoremap <C-K> :py3f ~/.local/bin/clang-format.py<CR>
 "autocmd CursorHold * :py3f ~/.local/bin/clang-format.py
 "autocmd BufWrite * :py3f ~/.local/bin/clang-format.py
 
+
+" Saves as soon as you make the file so compilation works
+autocmd BufNewFile * :write
+
+" I turn on autosave on no activity in 500ms here for insert and non insert mode
+" many may not like this but after turning on continuous compilation with \ll
+" you get live updates without haveing to save manually in tex so im just putting this
+" in the tex specific file configuration
+autocmd CursorHold,CursorHoldI * update
+set updatetime=500
+
+" Add key to build the docs
+nnoremap <F3> : call BuildTheDocs() <CR>
+
+" Add key to view the docs
+nnoremap <F4> : call ViewThePdfDocs() <CR>
+nnoremap <F5> : call ViewTheHtmlDocs() <CR>
+
+
+" Force Build Full Docs
+function BuildTheDocs()
+   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -fbf > /dev/null 2>&1 &'
+   :redraw!
+endfunction
+
+" Preview the pdf if it exists
+function ViewThePdfDocs()
+   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vtpdfd > /dev/null 2>&1 &'
+   :redraw!
+endfunction
+
+" Preview the html documentation if it exists
+function ViewTheHtmlDocs()
+   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vthtmld > /dev/null 2>&1 &'
+   :redraw!
+endfunction
+
 "EOF

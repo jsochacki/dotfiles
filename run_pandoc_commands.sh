@@ -68,8 +68,8 @@ esac
 
 if [ $# -ne 3 ]
 then
-   echo "Usage : Argument 1: $1 needs to be the base dir of the project with the / at the
-end, i.e. /home/project"
+   echo "Usage : Argument 1: $1 needs to be the base dir of the project without
+   the / at the end, i.e. /home/project"
    echo "Usage : Argument 2: $2 needs to be the pandoc command selected i.e.
    -markdown-to-pdf, -markdown-to-pdf-with-tex-figure-placement, etc...."
    echo "Usage : Argument 3: $3 needs to be the pandoc input file name alone, no

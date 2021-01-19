@@ -9,7 +9,7 @@ PROJECT_NAME           = "My Project"
 PROJECT_NUMBER         = "0.0.0"
 PROJECT_BRIEF          =
 PROJECT_LOGO           =
-OUTPUT_DIRECTORY       = doc
+OUTPUT_DIRECTORY       = build/doc
 CREATE_SUBDIRS         = YES
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
@@ -315,7 +315,7 @@ MAN_LINKS              = NO
 # Configuration options related to the XML output
 #---------------------------------------------------------------------------
 
-GENERATE_XML           = YES
+GENERATE_XML           = NO
 XML_OUTPUT             = xml
 XML_PROGRAMLISTING     = YES
 XML_NS_MEMB_FILE_SCOPE = NO

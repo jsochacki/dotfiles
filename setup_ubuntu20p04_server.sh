@@ -120,6 +120,8 @@ cd $TMPDIR
 ln -s $TMPDIR/update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 ln -s $TMPDIR/make_gnuplots.sh $homedir/.local/bin/make_gnuplots.sh
 ln -s $TMPDIR/run_pandoc_commands.sh $homedir/.local/bin/run_pandoc_commands.sh
+ln -s $TMPDIR/run_doxygen_commands.sh $homedir/.local/bin/run_doxygen_commands.sh
+ln -s $TMPDIR/run_cmake_commands.sh $homedir/.local/bin/run_cmake_commands.sh
 #cp update_tex_figures.sh $homedir/.local/bin/update_tex_figures.sh
 
 # Do some vimrc setup
