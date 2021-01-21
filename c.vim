@@ -7,6 +7,16 @@
 let g:ycm_key_list_select_completion=['<C-B>']
 let g:ycm_key_list_previous_completion=['<C-J>']
 
+" Ensure automatic semantic completion
+let g:ycm_disable_signature_help = 0
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_semantic_triggers =  {
+  \   'c': ['(','->', '.'],
+  \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \   'cpp,cuda,objcpp': ['(','->', '.', '::']
+  \ }
+let g:ycm_auto_trigger = 1
+
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 
