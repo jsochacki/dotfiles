@@ -131,7 +131,14 @@ do
      file_with_extension=${i##*/} # just the filename with the extension i.e. "file.gp"
      file_only=${file_with_extension%.*} # just the filename without the extension i.e. "file"
      pdflatex -interaction=nonstopmode $file_with_extension
-     convert -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
+     if [ ${file_only:(-8)} == "-no-trim" ]
+     then
+       convert -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
+       convert -density 600 -quality 100 -shave 7x7 +repage $1/images/$file_only.png $1/images/$file_only.png
+       # Note that 7x7 removed the exact thickness of the default box from drawio
+     else
+       convert -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
+     fi
      #convert -colorspace RGB -density 600 -quality 100 -trim $file_only.pdf $1/images/$file_only.png
   fi
 done
