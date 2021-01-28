@@ -72,7 +72,7 @@ else
     let t:is_transparent = 1
 endif
 endfunction
-nnoremap <C-H> :call Toggle_transparent_background()<CR>
+nnoremap <C-P> :call Toggle_transparent_background()<CR>
 
 " remap for normal mode
 nnoremap j h

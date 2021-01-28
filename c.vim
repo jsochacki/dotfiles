@@ -4,8 +4,8 @@
 " Crucial to allow ycm and ultisnips to work together
 " cant tab complete ultisnips if you don't do this
 " free per https://vim.fandom.com/wiki/Unused_keys
-let g:ycm_key_list_select_completion=['<C-B>']
-let g:ycm_key_list_previous_completion=['<C-J>']
+let g:ycm_key_list_select_completion=['<C-N>']
+let g:ycm_key_list_previous_completion=['<C-H>']
 
 " Ensure automatic semantic completion
 let g:ycm_disable_signature_help = 0
@@ -35,7 +35,7 @@ let g:ycm_global_ycm_extra_conf = '~/.cfiles/.ycm_extra_conf.py'
 " S is a synonim for s and s is a synonim for cl
 " but we do use s from time to time so use x as that is a synonim for dl
 nnoremap S :YcmCompleter GoTo<CR>
-nnoremap x :YcmCompleter GetType<CR>
+nnoremap <C-J> :YcmCompleter GetType<CR>
 nnoremap _ :YcmCompleter RefactorRename 
 nnoremap Y :YcmCompleter GetDoc<CR>
 

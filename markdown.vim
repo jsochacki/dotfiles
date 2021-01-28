@@ -7,8 +7,8 @@ let g:ycm_filetype_blacklist = {}
 " Crucial to allow ycm and ultisnips to work together
 " cant tab complete ultisnips if you don't do this
 " free per https://vim.fandom.com/wiki/Unused_keys
-let g:ycm_key_list_select_completion=['<C-B>']
-let g:ycm_key_list_previous_completion=['<C-J>']
+let g:ycm_key_list_select_completion=['<C-N>']
+let g:ycm_key_list_previous_completion=['<C-H>']
 
 " Load YouCompleteMe
 packadd YouCompleteMe
