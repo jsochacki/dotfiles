@@ -92,4 +92,10 @@ xnoremap k j
 xnoremap l k
 xnoremap ; l
 
+" Remap window movements to match movement keys above
+nnoremap <C-w>j <C-w>h
+nnoremap <C-w>k <C-w>j
+nnoremap <C-w>l <C-w>k
+nnoremap <C-w>; <C-w>l
+
 "EOF
