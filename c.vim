@@ -60,30 +60,32 @@ autocmd BufNewFile * :write
 autocmd CursorHold,CursorHoldI * update
 set updatetime=500
 
+"CURRENTLY I NO LONGER PLAN TO DO THIS BUT RATHER TO JUST RUN A SCRIPT FROM THE
+"ROOT CODE DIR AS THAT IS EASIER TO SUPPORT AND VERY EASY TO DO
 " Add key to build the docs
-nnoremap <F3> : call BuildTheDocs() <CR>
+"nnoremap <F3> : call BuildTheDocs() <CR>
 
 " Add key to view the docs
-nnoremap <F4> : call ViewThePdfDocs() <CR>
-nnoremap <F5> : call ViewTheHtmlDocs() <CR>
+"nnoremap <F4> : call ViewThePdfDocs() <CR>
+"nnoremap <F5> : call ViewTheHtmlDocs() <CR>
 
 
 " Force Build Full Docs
-function BuildTheDocs()
-   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -fbf > /dev/null 2>&1 &'
-   :redraw!
-endfunction
+"function BuildTheDocs()
+"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -fbf > /dev/null 2>&1 &'
+"   :redraw!
+"endfunction
 
 " Preview the pdf if it exists
-function ViewThePdfDocs()
-   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vtpdfd > /dev/null 2>&1 &'
-   :redraw!
-endfunction
+"function ViewThePdfDocs()
+"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vtpdfd > /dev/null 2>&1 &'
+"   :redraw!
+"endfunction
 
 " Preview the html documentation if it exists
-function ViewTheHtmlDocs()
-   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vthtmld > /dev/null 2>&1 &'
-   :redraw!
-endfunction
+"function ViewTheHtmlDocs()
+"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vthtmld > /dev/null 2>&1 &'
+"   :redraw!
+"endfunction
 
 "EOF
