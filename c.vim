@@ -17,7 +17,7 @@ let g:ycm_semantic_triggers =  {
 let g:ycm_auto_trigger = 1
 
 " intelligent comments
-set comments=sl:/*,mb:\ *,elx:\ */
+" set comments=sl:/*,mb:\ *,elx:\ */
 
 " Load YouCompleteMe
 packadd YouCompleteMe
