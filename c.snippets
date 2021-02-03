@@ -22,3 +22,9 @@ snippet docfile "Documentation section for the top of a file" bA
  *
  */
 endsnippet
+
+snippet imgdoxmd "Add a markdown image for doxygen with the correct path to the image folder from the build folder" bA
+ * ![${4:${3/\w+\s*/\u$0/g}}]
+$5(../../../images/$1)
+$0 ${3:${2/\W+/ /gi}} ${2:${1/\.(\w{3,})$//gi}} ${1/\.(\w{3,})$//gi}
+endsnippet
