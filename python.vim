@@ -1,11 +1,30 @@
 "cat >> ~/.vim/ftplugin/python.vim << 'EOF'
 " Python3 specific settings
 
+" folding view saving specific stuff
+" " Turn on autosaving of the view as I like code folding
+let g:autosave_view = 0
+
+augroup AutoView
+    autocmd!
+    " Autosave & Load Views.
+    autocmd BufWritePre,BufWinLeave * execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+    autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+augroup END
+
 " Crucial to allow ycm and ultisnips to work together
 " cant tab complete ultisnips if you don't do this
 " free per https://vim.fandom.com/wiki/Unused_keys
 let g:ycm_key_list_select_completion=['<C-N>']
 let g:ycm_key_list_previous_completion=['<C-H>']
+
+" Ensure automatic semantic completion
+let g:ycm_disable_signature_help = 0
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_semantic_triggers =  {
+  \   'python': ['(','->', '.', '::']
+  \ }
+let g:ycm_auto_trigger = 1
 
 " intelligent comments (cant figure out right now)
 " set comments=sl:\"\"\",mb:\ ,elx:\ \"\"\"

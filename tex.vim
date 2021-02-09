@@ -1,6 +1,17 @@
 "cat >> ~/.vim/ftplugin/tex.vim << 'EOF'
 " tex specific settings
 
+" folding view saving specific stuff
+" " Turn on autosaving of the view as I like code folding
+let g:autosave_view = 0
+
+augroup AutoView
+    autocmd!
+    " Autosave & Load Views.
+    autocmd BufWritePre,BufWinLeave * execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+    autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+augroup END
+
 " Crucial to allow ycm and ultisnips to work together
 " cant tab complete ultisnips if you don't do this
 " free per https://vim.fandom.com/wiki/Unused_keys
