@@ -5,11 +5,17 @@
 " " Turn on autosaving of the view as I like code folding
 let g:autosave_view = 0
 
+" here we actually set this filetype to vim so that when the view loads the .md
+" file below we don't have two md files but just the one and that one is the
+" last one loaded which is the one from the view autocommand
+"set filetype=vim
+
 augroup AutoView
     autocmd!
     " Autosave & Load Views.
     autocmd BufWritePre,BufWinLeave * execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
     autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+"    autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view" " set filetype=vim"
 augroup END
 
 " Required to let YCM work on markdown
