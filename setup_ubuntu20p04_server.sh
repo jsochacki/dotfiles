@@ -130,6 +130,7 @@ ln -s $TMPDIR/.vimrc.normal $homedir/
 ln -s $TMPDIR/.vimrc.colors $homedir/
 ln -s $TMPDIR/.vimrc.custom $homedir/
 ln -s $TMPDIR/.vimrc $homedir/
+ln -sf $TMPDIR/en.utf-8.add $homedir/.vim/spell/
 #cp .vimrc.plugged $homedir/
 #cp .vimrc.normal $homedir/
 #cp .vimrc.colors $homedir/

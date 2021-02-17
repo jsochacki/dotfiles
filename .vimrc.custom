@@ -92,6 +92,12 @@ xnoremap k j
 xnoremap l k
 xnoremap ; l
 
+" remap for folding commands in normal mode
+nnoremap zj zh
+nnoremap zk zj
+nnoremap zl zk
+nnoremap z: zl
+
 " Remap window movements to match movement keys above
 nnoremap <C-w>j <C-w>h
 nnoremap <C-w>k <C-w>j
