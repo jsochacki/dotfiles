@@ -28,12 +28,6 @@ function! MakeViewCheck()
     return 1
 endfunction
 
-augroup AutoView
-    autocmd!
-    " Autosave & Load Views.
-    autocmd BufWritePre,BufWinLeave ?* if MakeViewCheck() | silent! mkview | endif
-    autocmd BufWinEnter ?* if MakeViewCheck() | silent! loadview | endif
-augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Shortcut (\t): Set 4 char space tabs
