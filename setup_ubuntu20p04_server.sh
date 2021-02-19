@@ -143,6 +143,7 @@ ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/python.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/tex.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/matlab.vim $homedir/.vim/ftplugin/
 #cp c.vim $homedir/.vim/ftplugin/
 #cp python.vim $homedir/.vim/ftplugin/
 #cp tex.vim $homedir/.vim/ftplugin/
@@ -155,6 +156,7 @@ ln -s $TMPDIR/markdown.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cpp.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/c.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/matlab.snippets $homedir/.vim/UltiSnips/
 #cp tex.snippets $homedir/.vim/UltiSnips/
 #cp cpp.snippets $homedir/.vim/UltiSnips/
 #cp c.snippets $homedir/.vim/UltiSnips/
@@ -167,6 +169,9 @@ function_apt_wait_for_unlock ./setup_vim.sh
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
 function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
 
+# Add matlab syntax file in case you decide to install matlab
+mkdir -p $homedir/.vim/syntax
+ln -s $TMPDIR/mymatlab.vim $homedir/.vim/syntax/
 
 # Copy over scripts and config files
 mkdir -p $homedir/.local/bin

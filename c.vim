@@ -28,6 +28,9 @@ let g:ycm_semantic_triggers =  {
 let g:ycm_auto_trigger = 1
 
 " intelligent comments
+" Cant use these as they insert extra * when entering math expressions and using
+" clang to reformat, all of a sudden you will have all sorts of extra * so do
+" not try to use even though they are very nice
 " set comments=sl:/*,mb:\ *,elx:\ */
 
 " Load YouCompleteMe

@@ -63,11 +63,13 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 " Get Colorschemes
 Plug 'flazz/vim-colorschemes'
 
+" Matching plugin
+Plug 'https://github.com/adelarsq/vim-matchit'
+
 " Get file specific setting plugins here
 "Plug 'vim-scripts/c.vim'
 "let  g:C_UseTool_cmake    = 'yes'
 "let  g:C_UseTool_doxygen = 'yes'
-
 
 " Initialize plugin system
 call plug#end()
