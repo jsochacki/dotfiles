@@ -18,3 +18,7 @@ to get the logical partition to resize to the filesystem size
 
 now it should be good
 
+## matlab
+
+dont forget to edit the codetools edit.m file so that xterm is replaced with
+rxvt
