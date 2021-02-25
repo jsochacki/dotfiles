@@ -25,7 +25,7 @@ let g:ycm_key_list_previous_completion=['<C-H>']
 let g:ycm_disable_signature_help = 0
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_semantic_triggers =  {
-  \   'matlab': ['(','->', '.', '::']
+  \   'cpp': ['(','->', '.', '::']
   \ }
 let g:ycm_auto_trigger = 1
 
@@ -34,6 +34,14 @@ set comments=sl:%\ ,mb:%\,elx:\ %
 
 " Load YouCompleteMe
 packadd YouCompleteMe
+
+" Add mappings for YCM
+" S is a synonim for s and s is a synonim for cl
+" but we do use s from time to time so use x as that is a synonim for dl
+nnoremap S :YcmCompleter GoTo<CR>
+nnoremap <C-J> :YcmCompleter GetType<CR>
+nnoremap _ :YcmCompleter RefactorRename 
+nnoremap Y :YcmCompleter GetDoc<CR>
 
 " Activate this with K (shift-k)
 command -nargs=1 Googleit :!python3 ~/.cfiles/Googleit.py <args>
