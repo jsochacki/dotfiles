@@ -23,6 +23,14 @@ snippet beg "begin{} / end{}" bA
 \\end{$1}
 endsnippet
 
+snippet deflist "Definition List" b
+\begin{description}
+  \item[$1] \hfill \\ $4
+  \item[$2] \hfill \\ $5
+  \item[$3] \hfill \\ $6
+\end{description}
+endsnippet
+
 snippet fig "Figure environment" b
 \begin{figure}[${1:H}]
 	\centering

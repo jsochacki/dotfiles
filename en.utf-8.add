@@ -7,3 +7,5 @@ rayleigh
 siso
 rician
 beamwidths
+beamformer
+SIMO
