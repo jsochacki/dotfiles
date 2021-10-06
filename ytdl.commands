@@ -1,0 +1,6 @@
+%youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata VIDEOURL
+%or
+%youtube-dl --extract-audio --audio-format mp3 VIDEOURL
+%youtube-dl -x --audio-quality 320K --audio-format mp3 VIDEOURL
+
+ youtube-dl -x --audio-quality 192K --audio-format mp3 VIDEOURL
