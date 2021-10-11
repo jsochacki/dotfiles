@@ -274,6 +274,8 @@ export PATH=/opt/datathiefIII:/opt/digitizelt:$PATH
 # Install gnuplot
 function_apt_wait_for_unlock sudo apt-get install -y gnuplot
 
+# Get sshfs for remote development using local system (mounts remotes filesystem locally)
+function_apt_wait_for_unlock sudo apt-get install -y sshfs
 
 # Make it so ImageMagic Can turn pdf and PS files into png files
 IMGMGK_FULLPATH=$(sudo find /etc/ -name 'ImageMagick*')
