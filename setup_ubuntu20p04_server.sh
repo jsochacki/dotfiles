@@ -301,6 +301,10 @@ function_apt_wait_for_unlock ./install_gsl.sh
 # Install doxygen
 function_apt_wait_for_unlock ./install_doxygen.sh
 
+# Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
+function_apt_wait_for_unlock sudo npm install -g mermaid
+function_apt_wait_for_unlock sudo npm install -g mermaid-cli
+function_apt_wait_for_unlock sudo apt-get install -y mermaid-filter
 
 # Do VMWARE specific setup at the end
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
