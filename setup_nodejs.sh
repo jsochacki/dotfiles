@@ -9,8 +9,7 @@
 curl https://nodejs.org/dist/v16.13.0/node-v16.13.0.tar.gz --output nodejs
 cd nodejs
 ./configure
-make
-make test
+make -j8
 sudo make install
 cd ../
 rm -rf nodejs
