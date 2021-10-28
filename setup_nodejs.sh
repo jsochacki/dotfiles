@@ -13,3 +13,4 @@ make -j8
 sudo make install
 cd ../
 rm -rf node
+rm -rf node-v16.13.0
