@@ -562,4 +562,135 @@ title-slide-attributes:
 $0
 endsnippet
 
+snippet mmdb "Inserting a Blank Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+$0
+~~~
+endsnippet
+
+snippet mmdf "Inserting a Flow Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
+$0
+~~~
+endsnippet
+
+snippet mmds "Inserting a Sequence Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+sequenceDiagram
+    Alice->>+John: Hello John, how are you?
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    John-->>-Alice: I feel great!
+$0
+~~~
+endsnippet
+
+snippet mmdc "Inserting a Class Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+      +String beakColor
+      +swim()
+      +quack()
+    }
+    class Fish{
+      -int sizeInFeet
+      -canEat()
+    }
+    class Zebra{
+      +bool is_wild
+      +run()
+    }
+$0
+~~~
+endsnippet
+
+snippet mmdt "Inserting a State Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+$0
+~~~
+endsnippet
+
+snippet mmda "Inserting a Gantt Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2014-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2014-01-12  , 12d
+    another task      : 24d
+$0
+~~~
+endsnippet
+
+snippet mmdp "Inserting a Pie Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+$0
+~~~
+endsnippet
+
+snippet mmde "Inserting an ER Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+erDiagram
+          CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+          CUSTOMER ||--o{ ORDER : places
+          CUSTOMER ||--o{ INVOICE : "liable for"
+          DELIVERY-ADDRESS ||--o{ ORDER : receives
+          INVOICE ||--|{ ORDER : covers
+          ORDER ||--|{ ORDER-ITEM : includes
+          PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+          PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+$0
+~~~
+endsnippet
+
+snippet mmdg "Inserting a Graph Mermaid Diagram" bA
+~~~{.mermaid format=pdf}
+gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+branch newbranch
+checkout newbranch
+commit
+commit
+checkout master
+commit
+commit
+merge newbranch
+$0
+~~~
+endsnippet
+
 # vim:ft=snippets

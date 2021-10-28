@@ -28,17 +28,17 @@ case "$2" in
    -markdown-to-pdf | -mdtpdf) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.pdf
-      pandoc -s -f markdown-implicit_figures -t pdf $INFILE -o $OUTFILE
+      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t pdf $INFILE -o $OUTFILE
       ;;
    -markdown-to-pdf-with-tex-figure-placement | -mdtpdfwtfp) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.pdf
-      pandoc -s -f markdown -t pdf $INFILE -o $OUTFILE
+      pandoc -s -f markdown -F mermaid-filter -t pdf $INFILE -o $OUTFILE
       ;;
    -markdown-to-tex-with-tex-figure-placement | -mdttexwtfp) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.tex
-      pandoc -s -f markdown -t latex $INFILE -o $OUTFILE
+      pandoc -s -f markdown -F mermaid-filter -t latex $INFILE -o $OUTFILE
       sed -i 's@begin{figure}$@begin{figure}[H]@g' $OUTFILE
       # Need to run twice to get reference and bibtex to work for some reason
       pdflatex -interaction=nonstopmode -output-directory=$1/build/pandoc $3.tex
@@ -49,15 +49,26 @@ case "$2" in
    -markdown-to-pptx | -mdtpptx) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.pptx
-      pandoc -s -f markdown-implicit_figures -t pptx $INFILE -o $OUTFILE --reference-doc template.pptx
+      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t pptx $INFILE -o $OUTFILE --reference-doc template.pptx
       ;;
    -markdown-to-pptx-no-template | -mdtpptxnt) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.pptx
-      pandoc -s -f markdown-implicit_figures -t pptx $INFILE -o $OUTFILE
+      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t pptx $INFILE -o $OUTFILE
+      ;;
+   -markdown-to-docx | -mdtdocx) echo "$2 selected"
+      INFILE=$1/$3.md
+      OUTFILE=$1/$3.docx
+      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE --reference-doc template.docx
+      ;;
+   -markdown-to-docx-no-template | -mdtdocxnt) echo "$2 selected"
+      INFILE=$1/$3.md
+      OUTFILE=$1/$3.docx
+      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE
       ;;
    *) echo "No such command $2 supported for run_pandoc_commands.sh currently"
       ;;
+ 
 esac
 
 }

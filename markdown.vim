@@ -59,6 +59,12 @@ nnoremap <F4> : call PreviewPptx() <CR>
 "nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && cp ~/Snips/* ./images/ && rm ~/Snips/*' <CR><CR>:redraw!<CR>
 nnoremap <F5> : silent exec '![[ $(ls -A ~/Snips/) ]] && mv ~/Snips/* ./images/' <CR><CR>:redraw!<CR>
 
+" Enable docx compilation from f6 keypress
+nnoremap <F6> : call CompileDocx() <CR>
+
+" Enable docx preview from f7 keypress
+nnoremap <F7> : call PreviewDocx() <CR>
+
 " Add a key to toggle fast or full compile modes
 nnoremap <F9> : call ToggleCompilationMode() <CR>
 
@@ -91,6 +97,25 @@ function PreviewPptx()
    :redraw!
 endfunction
 
+" Autodetects if template is there in root or not and compiles with it if
+" available
+function CompileDocx()
+   if filereadable("template.docx")
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocx ' expand('%:r') ' > /dev/null 2>&1 &'
+   else
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocxnt ' expand('%:r') ' > /dev/null 2>&1 &'
+   endif
+   :redraw!
+endfunction
+
+" Preview the pptx if it exists
+function PreviewDocx()
+   if filereadable(join([split(expand('%:p'),'/')[-1][0:-4],'.docx'],''))
+      silent exec '!libreoffice ' join([split(expand('%:p'),'/')[-1][0:-4],'.docx'],'') ' &'
+   endif
+   :redraw!
+endfunction
+
 "This is required to get actual auto figure insertion
 "along with the installation of the update_tex_figures.sh script
 autocmd CursorHold * call RecompileMarkdown()
@@ -104,6 +129,7 @@ function RecompileMarkdown()
   if g:full_compilation_mode == 1
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
     call CompilePptx()
+    call CompileDocx()
   else
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
   endif
