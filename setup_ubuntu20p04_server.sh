@@ -302,9 +302,11 @@ function_apt_wait_for_unlock ./install_gsl.sh
 function_apt_wait_for_unlock ./install_doxygen.sh
 
 # Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
-function_apt_wait_for_unlock sudo npm install -g mermaid
-function_apt_wait_for_unlock sudo npm install -g mermaid-cli
-function_apt_wait_for_unlock sudo npm install -g mermaid-filter
+# CURRENTLY MERMAID-FILTER IS WAY TO BUGGY TO USE SO TRY LATER
+# Additionally you can just use drawio todo mermaid diagrams
+#function_apt_wait_for_unlock sudo npm install -g mermaid
+#function_apt_wait_for_unlock sudo npm install -g mermaid-cli
+#function_apt_wait_for_unlock sudo npm install -g mermaid-filter
 
 # Do VMWARE specific setup at the end
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
