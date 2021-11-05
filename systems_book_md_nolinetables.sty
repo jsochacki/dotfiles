@@ -18,8 +18,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{amsmath} % For align
-%\usepackage{array} % For tabular formatting
-%\usepackage{multirow} % For multiple rows in one table entry
+\usepackage{array} % For tabular formatting
+\usepackage{multirow} % For multiple rows in one table entry
 %\usepackage{tabularx} % For tabular formatting
 \usepackage[justification=centering]{caption} %To get centered long captions
 \usepackage[nottoc]{tocbibind}
@@ -28,24 +28,6 @@
 %\usepackage{xargs} % for easier to use default arguements for functions
 \usepackage{indentfirst} % indents first paragraphs as well
 \usepackage{float} % Place all figures with \begin{figure}[H] to prevent floating
-
-\usepackage{etoolbox}
-\usepackage{xstring}
-\setlength{\aboverulesep}{0pt}
-\setlength{\belowrulesep}{0pt}
-\renewcommand{\arraystretch}{1.3}
-\makeatletter
-\patchcmd{\LT@array}{\@mkpream{#2}}{%
-\StrGobbleLeft{#2}{2}[\pream]%
-\StrGobbleRight{\pream}{2}[\pream]%
-\StrSubstitute{\pream}{l}{|l}[\pream]%
-\StrSubstitute{\pream}{c}{|c}[\pream]%
-\StrSubstitute{\pream}{r}{|r}[\pream]%
-\@mkpream{@{}\pream|@{}}%
-}{}{}
-\def\midrule{}
-\apptocmd{\LT@tabularcr}{\hline}{}{}
-\makeatother
 
 % for inkscape figures use
 \newcommand{\incfig}[2][1]{%
