@@ -8,6 +8,26 @@ $0
 endsnippet
 
 snippet table "Table" b
+
++-------------------------+-------------------------+-------------------------+
+| $2                      | $3                      | $4                      |
++:=======================:+:=======================:+:=======================:+
+|                         |                         |                         |
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+
+Table:  $1
+
+endsnippet
+
+snippet tablebasic "Basic Markdown Table" b
+
 |  $2  |  $3   |  $4  |
 | :--  | :--:  | --:  |
 |  $0  |       |      |
@@ -149,12 +169,12 @@ $1
 endsnippet
 
 snippet img "Insert Image"
-![${2:DisplayName}](${1:ImagePath})
+![${2:DisplayName}](${1:ImagePath}){width="${3:1}in"}
 $0
 endsnippet
 
 snippet imgp "Insert Image plus hover text"
-![${2:DisplayName}](${1:ImagePath} ${3:"Hover Text"})
+![${2:DisplayName}](${1:ImagePath} ${3:"Hover Text"}){width="${4:1}in"}
 $0
 endsnippet
 
@@ -169,7 +189,7 @@ $0
 endsnippet
 
 snippet ilinkedimg "Insert a Linked Image Inline" A
-[![${1:DisplayName}](${2:ImagePath})](${3:Link} ${4:"Hover Text"})
+[![${1:DisplayName}](${2:ImagePath})](${3:Link} ${4:"Hover Text"}){width="${5:1}in"}
 $0
 endsnippet
 
@@ -211,22 +231,30 @@ endsnippet
 # with no default that becomes ${VISUAL/search/replace/options}
 snippet limgfr "Insert Referencable Image Fast"
 ![${4:${3/\w+\s*/\u$0/g}}
-$5\label{fig:${1/\.(\w{3,})$//gi}}]
-$6(images/$1)
+$6\label{fig:${1/\.(\w{3,})$//gi}}]
+$7(images/$1){width="${5:1}in"}
 $0 ${3:${2/\W+/ /gi}} ${2:${1/\.(\w{3,})$//gi}}
 endsnippet
 
 snippet limgfrs "Insert Referencable Image Fast Safe"
-![${1/\W+/ /gi}$2\label{fig:${1/\.(\w{3,})$//gi}}](images/$1)
+![${1/\W+/ /gi}$2\label{fig:${1/\.(\w{3,})$//gi}}](images/$1){width="${3:1}in"}
 $0
 endsnippet
 
 snippet ltabler "Referenceable Table" b
 
-|  $2  |  $3   |  $4  |
-| :--  | :--:  | --:  |
-|  $0  |       |      |
-|      |       |      |
++-------------------------+-------------------------+-------------------------+
+| $2                      | $3                      | $4                      |
++:=======================:+:=======================:+:=======================:+
+|                         |                         |                         |
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
+|                         |                         |                         |
++-------------------------+-------------------------+-------------------------+
 
 Table: $1
 \label{tab:${1/\W+/-/g}}

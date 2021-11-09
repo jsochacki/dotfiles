@@ -130,8 +130,10 @@ function RecompileMarkdown()
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdttexwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
     call CompilePptx()
     call CompileDocx()
-  else
+  elseif g:full_compilation_mode == 0
     silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdf ' expand('%:r') ' > /dev/null 2>&1 &'
+  elseif g:full_compilation_mode == 2
+    silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtpdfwtfp ' expand('%:r') ' > /dev/null 2>&1 &'
   endif
   :redraw!
 endfunction
@@ -153,9 +155,12 @@ endfunction
 
 function ToggleCompilationMode()
    if g:full_compilation_mode == 1
+      let g:full_compilation_mode = 2
+      echom 'Going to mermaid compilation mode'
+   elseif g:full_compilation_mode == 2
       let g:full_compilation_mode = 0
       echom 'Going to fast compilation mode'
-   else
+   elseif g:full_compilation_mode == 0
       let g:full_compilation_mode = 1
       echom 'Going to full compilation mode'
    endif
