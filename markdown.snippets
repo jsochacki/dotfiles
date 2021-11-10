@@ -7,6 +7,14 @@ snippet comment "Insert A Comment" b
 $0
 endsnippet
 
+snippet centertext "Center the text" b
+\begin{center}
+
+$0
+
+\end{center}
+endsnippet
+
 snippet table "Table" b
 
 +-------------------------+-------------------------+-------------------------+
@@ -353,6 +361,14 @@ snippet lurefapp "insert an appendix reference"
 Appendix \ref{appendix:$1}$0
 endsnippet
 
+snippet lurefeq "insert an equation reference"
+Equation \ref{eq:$1}$0
+endsnippet
+
+snippet lurefeqpage "insert an equation page number reference"
+ \pageref{eq:$1}$0
+endsnippet
+
 # Avoid using these when possible as they don't serve much purpose on their own
 # and are dealt with above with figures and tables in a cohesive way that works
 # better
@@ -368,6 +384,10 @@ endsnippet
 snippet lumkapp "Make an appendix reference"
 \label{appendix:$1}
 $0
+endsnippet
+
+snippet lumkeq "Make Equation Label"
+\label{eq:$1}$0
 endsnippet
 
 # Pandoc LaTeX math Specific Markdown Snippets
