@@ -147,12 +147,12 @@ snippet hl6 "Header Level 6" bA
 ###### $0
 endsnippet
 
-#snippet refsec "Insert Section Reference" A
-#[$1]$0
-#endsnippet
-
 snippet refsec "Insert Section Reference" A
-[$1](#$0)
+[$1] $0
+endsnippet
+
+snippet refsecc "Insert Section Reference Custom Name" A
+[$1](#$2) $0
 endsnippet
 
 snippet mkfn "Define Footnote" A
