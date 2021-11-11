@@ -31,9 +31,11 @@
 
 \usepackage{etoolbox}
 \usepackage{xstring}
-\setlength{\aboverulesep}{0pt}
-\setlength{\belowrulesep}{0pt}
-\renewcommand{\arraystretch}{1.3}
+% THe following cause errors with image size being to large and fails to build
+% with pdf as the output so just leave it off
+%\setlength{\aboverulesep}{0pt}
+%\setlength{\belowrulesep}{0pt}
+%\renewcommand{\arraystretch}{1.3}
 \makeatletter
 \patchcmd{\LT@array}{\@mkpream{#2}}{%
 \StrGobbleLeft{#2}{2}[\pream]%
