@@ -3,7 +3,7 @@
 mkdir tempworkingdir
 mv "$1".docx tempworkingdir
 cd tempworkingdir
-pandoc -s -f docx -t markdown --extract-media ./ "$1".docx -o "$1".md
+pandoc -s -f docx+styles -t markdown --extract-media ./ "$1".docx -o "$1".md
 mv "$1".md ../
 cd media
 #libreoffice --headless --convert-to png *.emf

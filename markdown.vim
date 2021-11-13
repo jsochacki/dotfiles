@@ -101,9 +101,9 @@ endfunction
 " available
 function CompileDocx()
    if filereadable("template.docx")
-      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocx ' expand('%:r') ' > /dev/null 2>&1 &'
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocxtl ' expand('%:r') ' > /dev/null 2>&1 &'
    else
-      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocxnt ' expand('%:r') ' > /dev/null 2>&1 &'
+      silent exec '!run_pandoc_commands.sh ' expand('%:p:h') ' -mdtdocxtlnt ' expand('%:r') ' > /dev/null 2>&1 &'
    endif
    :redraw!
 endfunction

@@ -7,3 +7,6 @@ do
 done
 
 run_pandoc_commands.sh $(pwd) -mdttexwtfp "$1"
+# If you want word to have linked references you must build to latex and then to
+# docx
+run_pandoc_commands.sh $(pwd) -mdtdocxtl "$1"
