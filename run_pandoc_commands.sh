@@ -59,12 +59,30 @@ case "$2" in
    -markdown-to-docx | -mdtdocx) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.docx
-      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE --reference-doc template.docx
+      pandoc -s -f markdown -F mermaid-filter -t docx $INFILE -o $OUTFILE --reference-doc template.docx
+      # pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE --reference-doc template.docx
       ;;
    -markdown-to-docx-no-template | -mdtdocxnt) echo "$2 selected"
       INFILE=$1/$3.md
       OUTFILE=$1/$3.docx
-      pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE
+      pandoc -s -f markdown -F mermaid-filter -t docx $INFILE -o $OUTFILE
+      # pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE
+      ;;
+   -markdown-to-docx-through-latex | -mdtdocxtl) echo "$2 selected"
+      INFILE=$1/$3.md
+      TMPFILE=$1/$3.tex
+      OUTFILE=$1/$3.docx
+      pandoc -s -f markdown -F mermaid-filter -t latex $INFILE -o $TMPFILE
+      pandoc -s -f latex -t docx $TMPFILE -o $OUTFILE --reference-doc template.docx
+      # pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE --reference-doc template.docx
+      ;;
+   -markdown-to-docx-through-latex-no-template | -mdtdocxtlnt) echo "$2 selected"
+      INFILE=$1/$3.md
+      TMPFILE=$1/$3.tex
+      OUTFILE=$1/$3.docx
+      pandoc -s -f markdown -F mermaid-filter -t latex $INFILE -o $TMPFILE
+      pandoc -s -f latex -t docx $TMPFILE -o $OUTFILE
+      # pandoc -s -f markdown-implicit_figures -F mermaid-filter -t docx $INFILE -o $OUTFILE
       ;;
    *) echo "No such command $2 supported for run_pandoc_commands.sh currently"
       ;;
