@@ -188,12 +188,12 @@ $1
 endsnippet
 
 snippet img "Insert Image"
-![${2:DisplayName}](${1:ImagePath}){width="${3:1}in"}
+![${2:DisplayName}](${1:ImagePath}){width="${3:4}in"}
 $0
 endsnippet
 
 snippet imgp "Insert Image plus hover text"
-![${2:DisplayName}](${1:ImagePath} ${3:"Hover Text"}){width="${4:1}in"}
+![${2:DisplayName}](${1:ImagePath} ${3:"Hover Text"}){width="${4:4}in"}
 $0
 endsnippet
 
@@ -208,7 +208,7 @@ $0
 endsnippet
 
 snippet ilinkedimg "Insert a Linked Image Inline" A
-[![${1:DisplayName}](${2:ImagePath})](${3:Link} ${4:"Hover Text"}){width="${5:1}in"}
+[![${1:DisplayName}](${2:ImagePath})](${3:Link} ${4:"Hover Text"}){width="${5:4}in"}
 $0
 endsnippet
 
@@ -251,12 +251,12 @@ endsnippet
 snippet limgfr "Insert Referencable Image Fast"
 ![${4:${3/\w+\s*/\u$0/g}}
 $6\label{fig:${1/\.(\w{3,})$//gi}}]
-$7(images/$1){width="${5:1}in"}
+$7(images/$1){width="${5:4}in"}
 $0 ${3:${2/\W+/ /gi}} ${2:${1/\.(\w{3,})$//gi}}
 endsnippet
 
 snippet limgfrs "Insert Referencable Image Fast Safe"
-![${1/\W+/ /gi}$2\label{fig:${1/\.(\w{3,})$//gi}}](images/$1){width="${3:1}in"}
+![${1/\W+/ /gi}$2\label{fig:${1/\.(\w{3,})$//gi}}](images/$1){width="${3:4}in"}
 $0
 endsnippet
 
