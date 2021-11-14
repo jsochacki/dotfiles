@@ -57,7 +57,10 @@ function_apt_wait_for_unlock sudo apt-get install -y latexmk xzdec
 # Get for forward searching in zatuhura with vimtex
 function_apt_wait_for_unlock sudo apt-get install -y xdotool
 # Get inkscape for non diagram figures and prefent "Failed to load module "canberra-gtk-module"" error
-function_apt_wait_for_unlock sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module inkscape
+function_apt_wait_for_unlock sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module
+# The other option is inkscape=0.92.5-1ubuntu1 but i believe 1.1 is the one all
+# of this was developed around
+function_apt_wait_for_unlock sudo apt-get install -y inkscape=0.92.5-1ubuntu1.1
 # Need these to support automated vimtex inkscape interaction
 function_apt_wait_for_unlock sudo apt-get install -y python3.8-dev rofi python3-pip
 
@@ -241,7 +244,13 @@ sudo tar xvzf pandoc-2.11.2-linux-amd64.tar.gz --strip-components 1 -C /usr/loca
 rm pandoc-2.11.2-linux-amd64.tar.gz
 
 # install diagrams.net
-sudo snap install drawio
+# Version matters and must be 14.1.8
+#sudo snap install drawio
+# Cant snap install anymore as version 15 breaks everything and this was all
+# based around version 14.1.8 so we need to manually install that now
+wget https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
+sudo dpkg -i draw.io-amd64-14.1.8.deb
+rm draw.io-amd64-14.1.8.deb
 
 # Install Libre office
 function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
