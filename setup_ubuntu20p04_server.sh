@@ -143,6 +143,7 @@ ln -sf $TMPDIR/en.utf-8.add $homedir/.vim/spell/
 # Do some filetype specific setup
 mkdir -p  $homedir/.vim/ftplugin/
 ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/cpp.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/python.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/tex.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
