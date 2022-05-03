@@ -1,0 +1,14 @@
+grep -r 'search_term' ../*
+sed -i 's/search_term/modified_search_term/g' file_name
+
+You can supplement sed with find to expand your scope to all of the current folder’s subdirectories. This will include any hidden files.
+find . -type f -exec sed -i 's/foo/bar/g' {} +
+
+To ignore hidden files (such as .git) you can pass the negation modifier -not -path '*/\.*', like this:
+find . -type f -not -path '*/\.*' -exec sed -i 's/foo/bar/g' {} +
+
+This will exclude any file that has the string /. in its path.
+You can also limit this operation to file names that end in a certain extension, like Markdown:
+find . -type f -name "*.md" -exec sed -i 's/foo/bar/g' {} +
+
+egrep -lRZ 'foo' . | xargs -0 -l sed -i -e 's/foo/bar/g'
