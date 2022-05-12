@@ -48,7 +48,7 @@ URxvt*secondaryScroll: true
 *.color13:      #ffffff
 
 ! cyan
-*.color6:       #212121
+*.color6:       #e3e370
 *.color14:      #e5ffbb
 
 ! white
