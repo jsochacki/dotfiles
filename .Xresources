@@ -44,11 +44,11 @@ URxvt*secondaryScroll: true
 *.color12:      #befaff
 
 ! magenta
-*.color5:       #222222
+*.color5:       #a4bcff
 *.color13:      #ffffff
 
 ! cyan
-*.color6:       #e3e370
+*.color6:       #ff7b7b
 *.color14:      #e5ffbb
 
 ! white
