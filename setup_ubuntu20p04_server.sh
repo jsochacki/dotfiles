@@ -323,6 +323,8 @@ function_apt_wait_for_unlock sudo npm install -g mermaid.cli
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
 function_apt_wait_for_unlock ./setup_vmware_share.sh
 
+# Install git-lfs
+function_apt_wait_for_unlock sudo apt-get install -y git-lfs
 
 # Dont let there be swap, ever
 sudo swapoff -a
