@@ -18,6 +18,14 @@ endglobal
 
 # Basic Snippets
 
+snippet printcoutt "Print to std::cout" bA
+   std::cout << "$0" << std::endl;
+endsnippet
+
+snippet printcoutv "Print to std::cout" bA
+   std::cout << "$0" << $1 << std::endl;
+endsnippet
+
 snippet lin "Include Local Header File" bA
 #include "$1""
 $0
