@@ -3,4 +3,13 @@
 %youtube-dl --extract-audio --audio-format mp3 VIDEOURL
 %youtube-dl -x --audio-quality 320K --audio-format mp3 VIDEOURL
 
+% To get a playlist and use order to setup concatenation afterwards
+%youtube-dl --verbose -ci -x --audio-quality 192K --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s" PLAYLISTURL
+%ffmpeg -vn -ar 48000 -ac 2 -b:a 192k -f concat -safe 0 -i mylist.txt -c copy output.mp3
+% where mylist.txt says
+%file fullpathandnameoffile1
+%file fullpathandnameoffile2
+%etc...
+
+
  youtube-dl -x --audio-quality 192K --audio-format mp3 VIDEOURL
