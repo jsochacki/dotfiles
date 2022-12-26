@@ -5,6 +5,8 @@
 
 % To get a playlist and use order to setup concatenation afterwards
 %youtube-dl --verbose -ci -x --audio-quality 192K --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s" PLAYLISTURL
+% Or if you want to pick up where you left off
+%youtube-dl --playlist-start NUMBER --verbose -ci -x --audio-quality 192K --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s" PLAYLISTURL
 %ffmpeg -vn -ar 48000 -ac 2 -b:a 192k -f concat -safe 0 -i mylist.txt -c copy output.mp3
 % where mylist.txt says
 %file fullpathandnameoffile1
