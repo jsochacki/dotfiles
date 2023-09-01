@@ -347,6 +347,10 @@ function_apt_wait_for_unlock ./setup_vmware_share.sh
 # Install git-lfs
 function_apt_wait_for_unlock sudo apt-get install -y git-lfs
 
+#add openvpn script
+cd $TMPDIR
+ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
+
 # Dont let there be swap, ever
 sudo swapoff -a
 

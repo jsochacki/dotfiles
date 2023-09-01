@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # To build vim with literally all features use this
-sudo apt-get install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev  libxpm-dev libxt-dev python-dev ruby-dev mercurial
+sudo apt-get install -y libxt-dev ruby-dev mercurial python3-dev libxpm-dev libx11-dev libcairo2-dev libatk1.0-dev
+sudo apt-get install -y --allow-downgrades gir1.2-pango-1.0=1.50.6+ds-2 libpango-1.0-0=1.50.6+ds-2 libpangocairo-1.0-0=1.50.6+ds-2 libpangoft2-1.0-0=1.50.6+ds-2 libpangoxft-1.0-0=1.50.6+ds-2 pango1.0-tools=1.50.6+ds-2
+sudo apt-get install -y --allow-downgrades gir1.2-gdkpixbuf-2.0=2.42.8+dfsg-1ubuntu0.1 libgdk-pixbuf-2.0-0=2.42.8+dfsg-1ubuntu0.1 libgdk-pixbuf2.0-bin=2.42.8+dfsg-1ubuntu0.1
+sudo apt-get install -y libgtk2.0-dev
 
 # Get Vim (needed Python 3 all set up first sadly for vim build to support ultisnips)
 sudo apt-get install -y libncurses5-dev libncursesw5-dev build-essential
