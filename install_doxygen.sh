@@ -6,12 +6,12 @@
 sudo apt-get install -y bison flex libc6 make graphviz
 
 # Get the latest stable version
-wget https://doxygen.nl/files/doxygen-1.9.1.src.tar.gz
+wget https://www.doxygen.nl/files/doxygen-1.9.8.src.tar.gz
 
 # Make a tempdir since the version can change and you need to be able to figure
 # out the folder name
 mkdir tempdir
-tar -xf doxygen-1.9.1.src.tar.gz --directory tempdir
+tar -xf doxygen-1.9.8.src.tar.gz --directory tempdir
 cd tempdir
 FOLDER=$(ls ./)
 cd $FOLDER
@@ -30,7 +30,7 @@ sudo make install
 # Return to the root and cleanup
 cd ../../../
 sudo rm -rf tempdir
-rm doxygen-1.9.1.src.tar.gz
+rm doxygen-1.9.8.src.tar.gz
 
 # Note , some things to do in other files when you have the time
 # doxygen Doxyfile.in
