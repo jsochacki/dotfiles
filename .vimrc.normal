@@ -43,7 +43,7 @@ set number
 set ruler
 " Enable mouse
 set mouse=a
-set ttymouse=xterm2
+set ttymouse=sgr
 " Set terminal title
 set title
 " Lots of undo steps

@@ -347,9 +347,18 @@ function_apt_wait_for_unlock ./setup_vmware_share.sh
 # Install git-lfs
 function_apt_wait_for_unlock sudo apt-get install -y git-lfs
 
-#add openvpn script
+# git libfuse for appimage support
+function_apt_wait_for_unlock sudo apt-get install -y libfuse2
+
+# Add openvpn script
 cd $TMPDIR
 ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
+
+# Get and install obsidian
+cd $TMPDIR
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.3.7_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.5/obsidian_1.4.5_amd64.snap
+sudo snap install obsidian_1.3.7_amd64.snap --dangerous --classic
+rm obsidian_1.3.7_amd64.snap
 
 # Dont let there be swap, ever
 sudo swapoff -a
