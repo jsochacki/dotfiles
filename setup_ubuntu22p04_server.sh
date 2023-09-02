@@ -364,6 +364,13 @@ echo 'sudo tailscale up"' >> $homedir/.bashrc
 sudo ln -s $TMPDIR/K02tailscale_down /etc/rc0.d/K02tailscale_down
 sudo ln -s $TMPDIR/K02tailscale_down /etc/rc6.d/K02tailscale_down
 
+# Add bitwarden
+sudo snap install bitwarden
+sudo snap install bw
+
+# Add wire
+sudo snap install wire
+
 # Get and install obsidian
 cd $TMPDIR
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.3.7_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.5/obsidian_1.4.5_amd64.snap
