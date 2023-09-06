@@ -268,9 +268,12 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 #sudo snap install drawio
 # Cant snap install anymore as version 15 breaks everything and this was all
 # based around version 14.1.8 so we need to manually install that now
-wget https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
-sudo dpkg -i draw.io-amd64-14.1.8.deb
-rm draw.io-amd64-14.1.8.deb
+# COME BACK AND DEAL WITH LATER WHEN THE REST IS WORKING AND YOU FIX INKSCAPE AS WELL
+#wget https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
+#sudo dpkg -i draw.io-amd64-14.1.8.deb
+#rm draw.io-amd64-14.1.8.deb
+# for now just get the snap version as it is up to date far more than the deb version
+sudo snap install drawio
 
 # Install Libre office
 function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
