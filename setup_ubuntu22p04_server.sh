@@ -364,8 +364,8 @@ echo '# Adding tailscale autolaunch' >> $homedir/.bashrc
 echo 'sudo tailscale up"' >> $homedir/.bashrc
 
 # Add VPN shutdown script so it doesnt stay up on shutdown OR reboot
-sudo ln -s $TMPDIR/K02tailscale_down /etc/rc0.d/K02tailscale_down
-sudo ln -s $TMPDIR/K02tailscale_down /etc/rc6.d/K02tailscale_down
+function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc0.d/K02tailscale_down
+function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc6.d/K02tailscale_down
 
 # Add bitwarden
 sudo snap install bitwarden
@@ -373,6 +373,13 @@ sudo snap install bw
 
 # Add wire
 sudo snap install wire
+
+# Add Element
+sudo apt install -y wget apt-transport-https
+sudo wget -O /usr/share/keyrings/element-io-archive-keyring.gpg https://packages.element.io/debian/element-io-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main" | sudo tee /etc/apt/sources.list.d/element-io.list
+sudo apt update
+sudo apt install element-desktop
 
 # Get and install obsidian
 cd $TMPDIR
