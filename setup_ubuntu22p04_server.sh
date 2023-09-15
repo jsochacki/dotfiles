@@ -240,17 +240,20 @@ mkdir -p $homedir/Snips
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter1.jpg http://wallpaperim.net/_data/i/upload/2014/09/23/20140923661374-3acd5e08-me.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter2.jpg https://cache.desktopnexus.com/wallpapers/391/391188-1920x1080-beautiful-winter-landscape-1920x1080-wallpaper-568.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter3.jpg http://www.bhmpics.com/walls/dead_snow_winter-other.jpg
-#wget -O $homedir/Pictures/winter4.jpg https://wallpapercave.com/wp/0sCOQyE.jpg
-#wget -O $homedir/Pictures/winter5.jpg https://wallpapercave.com/wp/mc5kprj.jpg
-#wget -O $homedir/Pictures/winter6.jpg https://wallpapercave.com/wp/jNHBSir.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter4.jpg https://wallpapercave.com/wp/0sCOQyE.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter5.jpg https://wallpapercave.com/wp/mc5kprj.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter6.jpg https://wallpapercave.com/wp/jNHBSir.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter7.jpg https://images.alphacoders.com/727/727275.png
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter8.jpg https://images.unsplash.com/photo-1482358625854-d7d631ba1858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter9.jpg http://www.wallpaperstop.com/wallpapers/nature-wallpapers/winter-wallpapers/winter-candle-1920x1200-164125.jpg
+#wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter9.jpg http://www.wallpaperstop.com/wallpapers/nature-wallpapers/winter-wallpapers/winter-candle-1920x1200-164125.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter9.jpg https://wallpaperaccess.com/full/865840.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter10.jpg http://wallpaperswide.com/download/winter_cat-wallpaper-1920x1080.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter11.jpg https://images4.alphacoders.com/184/thumb-1920-184306.jpg
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter12.jpg https://images5.alphacoders.com/354/thumb-1920-354500.jpg
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter13.jpg https://latestwallpapershd.com/wp-content/uploads/2019/03/Beautiful-winter-wallpaper-HD.jpg
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter14.jpg https://animal-wallpaper.com/wallpaper/winter-wallpaper-desktop-background-For-Background-HD-Wallpaper.jpg
+#wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter13.jpg https://latestwallpapershd.com/wp-content/uploads/2019/03/Beautiful-winter-wallpaper-HD.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter13.jpg https://wallpaperaccess.com/full/1320394.jpg
+#wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter14.jpg https://animal-wallpaper.com/wallpaper/winter-wallpaper-desktop-background-For-Background-HD-Wallpaper.jpg
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Pictures/winter14.jpg https://wallpaperaccess.com/full/965543.jpg
 
 
 # Install a decent browser
@@ -371,21 +374,18 @@ function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc6.d/K02
 sudo snap install bitwarden
 sudo snap install bw
 
-# Add wire
-sudo snap install wire
-
-# Add Element
-sudo apt install -y wget apt-transport-https
-sudo wget -O /usr/share/keyrings/element-io-archive-keyring.gpg https://packages.element.io/debian/element-io-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main" | sudo tee /etc/apt/sources.list.d/element-io.list
-sudo apt update
-sudo apt install element-desktop
+# Install slack, wire, element-desktop, and signal-desktop
+function_apt_wait_for_unlock ./setup_chat_apps.sh
 
 # Get and install obsidian
 cd $TMPDIR
 wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.3.7_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.5/obsidian_1.4.5_amd64.snap
 sudo snap install obsidian_1.3.7_amd64.snap --dangerous --classic
 rm obsidian_1.3.7_amd64.snap
+
+# Install docker, ansible, TODO k3s, 
+function_apt_wait_for_unlock ./setup_docker.sh
+function_apt_wait_for_unlock ./setup_ansible.sh
 
 # Dont let there be swap, ever
 sudo swapoff -a
