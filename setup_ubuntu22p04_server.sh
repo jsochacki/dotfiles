@@ -387,6 +387,11 @@ rm obsidian_1.3.7_amd64.snap
 function_apt_wait_for_unlock ./setup_docker.sh
 function_apt_wait_for_unlock ./setup_ansible.sh
 
+# Allow docker containers to connect to the host X11 server
+echo '' >> $homedir/.bashrc
+echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
+echo 'xhost +local:docker' >> $homedir/.bashrc
+
 # Dont let there be swap, ever
 sudo swapoff -a
 
