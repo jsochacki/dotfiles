@@ -391,6 +391,10 @@ function_apt_wait_for_unlock sudo apt-get install -y python3.10-venv
 function_apt_wait_for_unlock ./setup_docker.sh
 function_apt_wait_for_unlock ./setup_ansible.sh
 
+# Add to dialout for hardware access
+sudo usermod -aG dialout $USER
+newgrp dialout
+
 # Allow docker containers to connect to the host X11 server
 echo '' >> $homedir/.bashrc
 echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
