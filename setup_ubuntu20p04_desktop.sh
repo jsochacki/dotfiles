@@ -174,6 +174,6 @@ sudo tar xvzf pandoc-2.11.2-linux-amd64.tar.gz --strip-components 1 -C /usr/loca
 rm pandoc-2.11.2-linux-amd64.tar.gz
 
 # install diagrams.net
-sudo snap install drawio
+sudo snap install drawio --devmode
 
 source $homedir/.bashrc

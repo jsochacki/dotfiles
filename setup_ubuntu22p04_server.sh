@@ -269,7 +269,7 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 
 # install diagrams.net
 # Version matters and must be 14.1.8
-#sudo snap install drawio
+#sudo snap install drawio --devmode
 # Cant snap install anymore as version 15 breaks everything and this was all
 # based around version 14.1.8 so we need to manually install that now
 # COME BACK AND DEAL WITH LATER WHEN THE REST IS WORKING AND YOU FIX INKSCAPE AS WELL
@@ -277,7 +277,9 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 #sudo dpkg -i draw.io-amd64-14.1.8.deb
 #rm draw.io-amd64-14.1.8.deb
 # for now just get the snap version as it is up to date far more than the deb version
-sudo snap install drawio
+# you need devmode to be able to open files on removable media due to mpn
+# permissions
+sudo snap install drawio --devmode
 
 # Install Libre office
 function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml

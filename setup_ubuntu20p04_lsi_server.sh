@@ -245,7 +245,7 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 
 # install diagrams.net
 # Version matters and must be 14.1.8
-#sudo snap install drawio
+#sudo snap install drawio --devmode
 # Cant snap install anymore as version 15 breaks everything and this was all
 # based around version 14.1.8 so we need to manually install that now
 wget https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
