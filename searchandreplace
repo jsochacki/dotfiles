@@ -20,4 +20,4 @@ awk '{cmd = "mv \"" $0 "\" ../newbase"; print cmd}' filelist.txt
 awk '{cmd = "mv \"" $0 "\" ../newbase"; system(cmd)}' filelist.txt
 
 # To make directories as such
-wk '{cmd = "mkdir -p " $0 ""; system(cmd)}' folderlist.txt
+awk '{cmd = "mkdir -p \"" $0 "\""; system(cmd)}' folderlist.txt
