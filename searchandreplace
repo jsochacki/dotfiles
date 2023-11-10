@@ -18,3 +18,6 @@ egrep -lRZ 'foo' . | xargs -0 -l sed -i -e 's/foo/bar/g'
 awk '{cmd = "mv \"" $0 "\" ../newbase"; print cmd}' filelist.txt 
 # actual
 awk '{cmd = "mv \"" $0 "\" ../newbase"; system(cmd)}' filelist.txt
+
+# To make directories as such
+wk '{cmd = "mkdir -p " $0 ""; system(cmd)}' folderlist.txt
