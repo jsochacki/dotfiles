@@ -259,6 +259,8 @@ wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Picture
 
 # Install a decent browser
 function_apt_wait_for_unlock ./Chrome_Setup.sh
+# to later tweak gnome
+sudo apt-get install chrome-gnome-shell
 
 # Install pandoc
 wget https://github.com/jgm/pandoc/releases/download/2.11.2/pandoc-2.11.2-linux-amd64.tar.gz
