@@ -384,9 +384,9 @@ function_apt_wait_for_unlock ./setup_chat_apps.sh
 
 # Get and install obsidian
 cd $TMPDIR
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.3.7_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.5/obsidian_1.4.5_amd64.snap
-sudo snap install obsidian_1.3.7_amd64.snap --dangerous --classic
-rm obsidian_1.3.7_amd64.snap
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.4.14_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.14/obsidian_1.4.14_amd64.snap
+sudo snap install obsidian_1.4.14_amd64.snap --dangerous --classic
+rm obsidian_1.4.14_amd64.snap
 
 # Get python 3 venv and set it up for common use
 function_apt_wait_for_unlock sudo apt-get install -y python3.10-venv
