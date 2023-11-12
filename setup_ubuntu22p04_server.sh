@@ -407,4 +407,10 @@ echo 'xhost +local:docker' >> $homedir/.bashrc
 # Dont let there be swap, ever
 sudo swapoff -a
 
+# Add ms fonts
+function_apt_wait_for_unlock sudo add-apt-repository -y multiverse
+function_apt_wait_for_unlock sudo apt update -y
+function_apt_wait_for_unlock sudo apt-get install -y ttf-mscorefonts-installer
+function_apt_wait_for_unlock sudo fc-cache -f -v
+
 source $homedir/.bashrc
