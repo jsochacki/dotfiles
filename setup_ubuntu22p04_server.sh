@@ -413,4 +413,18 @@ function_apt_wait_for_unlock sudo apt update -y
 function_apt_wait_for_unlock sudo apt-get install -y ttf-mscorefonts-installer
 function_apt_wait_for_unlock sudo fc-cache -f -v
 
+# Add 7zip
+cd $TMPDIR
+rm -rf /opt/7zip
+sudo mkdir -p /opt/7zip
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/7zip.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz
+sudo tar -xvf 7zip.tar.xz --directory /opt/7zip
+rm 7zip.tar.xz
+echo '' >> $homedir/.bashrc
+echo '# path for 7zip' >> $homedir/.bashrc
+echo 'export PATH="/opt/7zip:$PATH"' >> $homedir/.bashrc
+
+#Do now so you can finish setup without leaving the script
+export PATH=/opt/7zip:$PATH
+
 source $homedir/.bashrc
