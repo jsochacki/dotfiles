@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/usr/local/MATLAB/R2021a/bin/glnxa64/MATLAB -desktop
+Name=MATLAB R2021a
+Icon=/usr/local/MATLAB/R2021a/bin/glnxa64/cef_resources/matlab_icon.png
+Comment=MATLAB R2021a

@@ -427,4 +427,7 @@ echo 'export PATH="/opt/7zip:$PATH"' >> $homedir/.bashrc
 #Do now so you can finish setup without leaving the script
 export PATH=/opt/7zip:$PATH
 
+# Add matlab desktop icon if installing matlab
+sudo cp matlab.desktop /usr/share/applications/
+
 source $homedir/.bashrc
