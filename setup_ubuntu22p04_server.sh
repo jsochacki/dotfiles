@@ -427,6 +427,9 @@ echo 'export PATH="/opt/7zip:$PATH"' >> $homedir/.bashrc
 #Do now so you can finish setup without leaving the script
 export PATH=/opt/7zip:$PATH
 
+#Install a terminal emulator
+function_apt_wait_for_unlock sudo apt-get install -y screen
+
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
