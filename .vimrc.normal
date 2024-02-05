@@ -70,4 +70,7 @@ set autoindent
 set smartindent
 set cindent
 
+" turn off preview window
+set completeopt-=preview
+
 "EOF
