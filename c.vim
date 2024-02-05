@@ -8,7 +8,7 @@ let g:autosave_view = 0
 augroup AutoView
     autocmd!
     " Autosave & Load Views.
-    autocmd BufWritePre,BufWinLeave * execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+    autocmd BufWritePre,BufWinLeave * execute "mkview! " . expand('%:p:h') . "/." . expand('%:t') . ".view"
     autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
 augroup END
 
