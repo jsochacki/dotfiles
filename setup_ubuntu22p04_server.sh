@@ -370,6 +370,8 @@ curl -fsSL https://tailscale.com/install.sh | sh
 echo '' >> $homedir/.bashrc
 echo '# Adding tailscale autolaunch' >> $homedir/.bashrc
 echo 'sudo tailscale up"' >> $homedir/.bashrc
+cd $TMPDIR
+ln -s $TMPDIR/tailscale_resolve_dns.sh $homedir/.local/bin/tailscale_resolve_dns.sh
 
 # Add VPN shutdown script so it doesnt stay up on shutdown OR reboot
 function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc0.d/K02tailscale_down
