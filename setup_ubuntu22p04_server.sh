@@ -432,6 +432,10 @@ export PATH=/opt/7zip:$PATH
 #Install a terminal emulator
 function_apt_wait_for_unlock sudo apt-get install -y screen
 
+# Install cifs-utils so you can mount smb drives
+function_apt_wait_for_unlock sudo apt-get install -y cifs-utils
+# sudo mount -t cifs //IP/share_name /mnt/NAS -o username=uname,domain=domainname
+
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
