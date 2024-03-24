@@ -160,6 +160,9 @@ ln -sf $TMPDIR/en.utf-8.add $homedir/.vim/spell/
 #cp .vimrc.custom $homedir/
 #cp .vimrc $homedir/
 
+# Do tmux setup
+ln -s $TMPDIR/.tmux.conf $homedir/
+
 # Do some filetype specific setup
 mkdir -p  $homedir/.vim/ftplugin/
 ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
