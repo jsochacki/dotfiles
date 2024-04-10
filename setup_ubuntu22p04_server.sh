@@ -439,6 +439,9 @@ function_apt_wait_for_unlock sudo apt-get install -y screen
 function_apt_wait_for_unlock sudo apt-get install -y cifs-utils
 # sudo mount -t cifs //IP/share_name /mnt/NAS -o username=uname,domain=domainname
 
+# Setup go
+function_apt_wait_for_unlock ./setup_go.sh
+
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
