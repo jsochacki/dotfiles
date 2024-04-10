@@ -13,9 +13,9 @@ sudo tar -C /opt -xzf go1.22.2.linux-amd64.tar.gz
 
 echo '' >> $homedir/.bashrc
 echo '# Adding go environment variables' >> $homedir/.bashrc
-echo 'export PATH="/opt/go/bin:$PATH"' >> $homedir/.bashrc
-echo 'export GOROOT="/opt/go:$GOROOT"' >> $homedir/.bashrc
-echo 'export GOPATH="$HOME/go"' >> $homedir/.bashrc
+echo 'export PATH=/opt/go/bin:$PATH' >> $homedir/.bashrc
+echo 'export GOROOT=/opt/go' >> $homedir/.bashrc
+echo 'export GOPATH=$HOME/go' >> $homedir/.bashrc
 
-rm go1.22.2.linux-amd64.tar.gz
+sudo rm go1.22.2.linux-amd64.tar.gz
 
