@@ -442,6 +442,9 @@ function_apt_wait_for_unlock sudo apt-get install -y cifs-utils
 # Setup go
 function_apt_wait_for_unlock ./setup_go.sh
 
+# Setup Saleae
+function_apt_wait_for_unlock ./setup_saleae.sh
+
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
