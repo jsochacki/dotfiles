@@ -448,4 +448,7 @@ function_apt_wait_for_unlock ./setup_saleae.sh
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
+# Get coolkey for pki certs
+function_apt_wait_for_unlock sudo apt-get install -y coolkey
+
 source $homedir/.bashrc
