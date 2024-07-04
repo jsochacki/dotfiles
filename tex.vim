@@ -80,7 +80,7 @@ endfunction
 " Autorun and kill shortcut watcher run at .tex file launch each time and turn off when done
 function StartupFunctions()
   call vimtex#compiler#compile()
-  silent exec '!python3 ~/.local/lib/python3.8/site-packages/inkscape-latex-shortcuts/main.py &'
+  silent exec '!python3 ~/.local/lib/python3.10/site-packages/inkscape-latex-shortcuts/main.py &'
 endfunction
 function ShutdownFunctions()
   call vimtex#compiler#clean(0)
