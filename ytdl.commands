@@ -15,3 +15,4 @@
 
 
  youtube-dl -x --audio-quality 192K --audio-format mp3 VIDEOURL
+yt-dlp --cookies-from-browser chrome:Default https://www.youtube.com/watch?v=lR-5gywjQrI
