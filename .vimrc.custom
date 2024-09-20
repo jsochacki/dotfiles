@@ -104,4 +104,15 @@ nnoremap <C-w>K <C-w>J
 nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
 
+" Get the directory of the current .vimrc.custom file
+let vimrc_dir = expand('<sfile>:p:h')
+
+" Construct the path relative to the .vimrc.custom file
+let cscope_file = vimrc_dir . '/.vim/cscope/cscope_maps.vim'
+
+" Check if the file exists and is readable, then source it
+if filereadable(cscope_file)
+    execute 'source ' . cscope_file
+endif
+
 "EOF
