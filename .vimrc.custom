@@ -110,9 +110,15 @@ let vimrc_dir = expand('<sfile>:p:h')
 " Construct the path relative to the .vimrc.custom file
 let cscope_file = vimrc_dir . '/.vim/cscope/cscope_maps.vim'
 
-" Check if the file exists and is readable, then source it
-if filereadable(cscope_file)
-    execute 'source ' . cscope_file
-endif
+" Resolve in case it is a symbolic link
+let resolved_cscope_file = resolve(cscope_file)
 
+echom "UNResolved path: " . cscope_file
+
+echom "Resolved path: " . resolved_cscope_file
+
+if filereadable(resolved_cscope_file)
+    execute 'source ' . resolved_cscope_file
+endif
+"
 "EOF

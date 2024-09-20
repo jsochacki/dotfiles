@@ -191,7 +191,7 @@ ln -s $TMPDIR/matlab.snippets $homedir/.vim/UltiSnips/
 # Do cscope setup
 function_apt_wait_for_unlock sudo apt-get install -y cscope
 mkdir -p $homedir/.vim/cscope
-ln -s $TMPDIR/cscope_maps.vim $homedir/.vim/cscope
+ln -s $TMPDIR/cscope_maps.vim $homedir/.vim/cscope/
 
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3

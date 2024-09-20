@@ -28,6 +28,7 @@
 " when it was compiled.  If it wasn't, time to recompile vim... 
 if has("cscope")
 
+echom "cscope_maps.vim successfully sourced!"
     """"""""""""" Standard cscope/vim boilerplate
 
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
