@@ -113,10 +113,6 @@ let cscope_file = vimrc_dir . '/.vim/cscope/cscope_maps.vim'
 " Resolve in case it is a symbolic link
 let resolved_cscope_file = resolve(cscope_file)
 
-echom "UNResolved path: " . cscope_file
-
-echom "Resolved path: " . resolved_cscope_file
-
 if filereadable(resolved_cscope_file)
     execute 'source ' . resolved_cscope_file
 endif
