@@ -27,7 +27,7 @@ os.symlink(clang_file_fullpath, temporary_symbolic_link)
 
 # set g:clang_format_path to the path to clang-format if it is not on the path
 # Change this to the full path if clang-format is not on the path.
-binary = 'clang-format-10'
+binary = 'clang-format-14'
 if vim.eval('exists("g:clang_format_path")') == "1":
   binary = vim.eval('g:clang_format_path')
 
