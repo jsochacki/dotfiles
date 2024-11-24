@@ -413,6 +413,15 @@ function_apt_wait_for_unlock sudo apt-get install -y cifs-utils
 # Setup go
 function_apt_wait_for_unlock ./setup_go.sh
 
+# setup Intel SDE
+wget https://downloadmirror.intel.com/831748/sde-external-9.44.0-2024-08-22-lin.tar.xz
+tar -xvf sde-external-9.44.0-2024-08-22-lin.tar.xz
+chmod ugo+x sde-external-9.44.0-2024-08-22-lin/sde
+sudo mv sde-external-9.44.0-2024-08-22-lin /opt/intel-sde
+rm sde-external-9.44.0-2024-08-22-lin.tar.xz
+echo '# path for Intel SDE' >> $homedir/.bashrc
+echo 'export PATH="/opt/intel-sde:$PATH"' >> $homedir/.bashrc
+
 # Setup Saleae
 function_apt_wait_for_unlock ./setup_saleae.sh
 
