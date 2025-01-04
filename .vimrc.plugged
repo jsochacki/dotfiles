@@ -66,6 +66,9 @@ Plug 'flazz/vim-colorschemes'
 " Matching plugin
 Plug 'https://github.com/adelarsq/vim-matchit'
 
+" Verilog and SystemVerilog plugin
+Plug 'vhda/verilog_systemverilog.vim'
+
 " Get file specific setting plugins here
 "Plug 'vim-scripts/c.vim'
 "let  g:C_UseTool_cmake    = 'yes'
