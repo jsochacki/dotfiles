@@ -67,7 +67,7 @@ set termencoding=utf-8
 
 " to taste, disble if you don't like
 set autoindent
-set smartindent
+"set smartindent
 set cindent
 
 " turn off preview window

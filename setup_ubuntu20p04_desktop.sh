@@ -163,6 +163,11 @@ wget -O $homedir/Pictures/winter14.jpg https://animal-wallpaper.com/wallpaper/wi
 # Opens vim, installs the plugins, then quits back to shell
 vim +PlugInstall +qa
 
+# MUST BE AFTER vim +PlugInstall +qa
+# Patch the verilog_systemverilog.vim file
+mv $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vimold
+ln -s $TMPDIR/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/
+
 # Install a decent browser
 ./Chrome_Setup.sh
 
