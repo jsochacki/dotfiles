@@ -361,6 +361,7 @@ function_apt_wait_for_unlock sudo npm install -g mermaid
 function_apt_wait_for_unlock sudo npm install -g mermaid-filter
 function_apt_wait_for_unlock sudo npm install -g mermaid-cli
 function_apt_wait_for_unlock sudo npm install -g mermaid.cli
+function_apt_wait_for_unlock sudo npm install -g prettier
 
 # Do VMWARE specific setup at the end
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh

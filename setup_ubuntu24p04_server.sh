@@ -104,6 +104,9 @@ git clone https://github.com/jsochacki/inkscape-latex-shortcuts.git
 curl -fLo $homedir/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+curl -fLo $homedir/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 function_apt_wait_for_unlock sudo apt-get install -y xclip pdf2svg
 # It isn't in his list but you need urxvt to use text insertion etc...
 #function_apt_wait_for_unlock sudo apt-get install -y rxvt
@@ -128,6 +131,9 @@ ln -s $TMPDIR/.vimrc.colors $homedir/
 ln -s $TMPDIR/.vimrc.custom $homedir/
 ln -s $TMPDIR/.vimrc $homedir/
 ln -sf $TMPDIR/en.utf-8.add $homedir/.vim/spell/
+mkdir -p $homedir/.config/nvim
+ln -s $TMPDIR/init.vim $homedir/.config/nvim/
+ln -s $homedir/.vim/spell $homedir/.config/nvim/
 #cp .vimrc.plugged $homedir/
 #cp .vimrc.normal $homedir/
 #cp .vimrc.colors $homedir/
@@ -141,9 +147,15 @@ ln -s $TMPDIR/.tmux.conf $homedir/
 mkdir -p  $homedir/.vim/ftplugin/
 ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/python.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/json.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/javascript.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/javascriptreact.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/typescript.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/typescriptreact.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/tex.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/matlab.vim $homedir/.vim/ftplugin/
+ln -s $homedir/.vim/ftplugin $homedir/.config/nvim/
 #cp c.vim $homedir/.vim/ftplugin/
 #cp python.vim $homedir/.vim/ftplugin/
 #cp tex.vim $homedir/.vim/ftplugin/
@@ -157,22 +169,41 @@ ln -s $TMPDIR/cpp.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/c.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/matlab.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/javascript.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/javascriptreact.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/typescript.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/typescriptreact.snippets $homedir/.vim/UltiSnips/
+ln -s $homedir/.vim/UltiSnips $homedir/.config/nvim/
 #cp tex.snippets $homedir/.vim/UltiSnips/
 #cp cpp.snippets $homedir/.vim/UltiSnips/
 #cp c.snippets $homedir/.vim/UltiSnips/
 #cp cu.snippets $homedir/.vim/UltiSnips/
 
+# JS and TS setup
+mkdir -p $homedir/.config/eslint
+mkdir -p $homedir/.config/prettier
+ln -s $TMPDIR/eslint.config.mjs $homedir/.config/eslint/
+ln -s $TMPDIR/.prettierrc $homedir/.config/prettier/
+ln -s $TMPDIR/coc-settings.json $homedir/.vim/
+
 # Do cscope setup
 function_apt_wait_for_unlock sudo apt-get install -y cscope
 mkdir -p $homedir/.vim/cscope
 ln -s $TMPDIR/cscope_maps.vim $homedir/.vim/cscope/
+mkdir -p $homedir/.config/nvim/cscope
+ln -s $TMPDIR/cscope_maps.nvim $homedir/.config/nvim/cscope/
 
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3
 function_apt_wait_for_unlock ./setup_vim.sh
+function_apt_wait_for_unlock ./setup_nvim.sh
 
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
 function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
+
+# this is done in install_and_setup_youcompleteme above but we will soon
+# deprecate that package so we will inline below to prevent issues
+sudo apt-get install -y clangd
 
 # Add matlab syntax file in case you decide to install matlab
 mkdir -p $homedir/.vim/syntax
@@ -210,14 +241,6 @@ ln -s $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
 ln -s $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
-
-# Opens vim, installs the plugins, then quits back to shell
-vim +PlugInstall +qa
-
-# MUST BE AFTER vim +PlugInstall +qa
-# Patch the verilog_systemverilog.vim file
-mv $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vimold
-ln -s $TMPDIR/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/
 
 mkdir -p $homedir/Pictures
 mkdir -p $homedir/Snips
@@ -337,6 +360,51 @@ function_apt_wait_for_unlock sudo npm install -g mermaid
 function_apt_wait_for_unlock sudo npm install -g mermaid-filter
 function_apt_wait_for_unlock sudo npm install -g mermaid-cli
 function_apt_wait_for_unlock sudo npm install -g mermaid.cli
+function_apt_wait_for_unlock sudo npm install -g fixjson
+function_apt_wait_for_unlock sudo npm install -g jsonlint
+function_apt_wait_for_unlock sudo npm install -g prettier
+function_apt_wait_for_unlock sudo npm install -g eslint
+function_apt_wait_for_unlock sudo npm install -g globals
+function_apt_wait_for_unlock sudo npm install -g @eslint/js
+function_apt_wait_for_unlock sudo npm install -g typescript-eslint
+function_apt_wait_for_unlock sudo npm install -g eslint-config-prettier
+function_apt_wait_for_unlock sudo npm install -g eslint-plugin-prettier
+function_apt_wait_for_unlock sudo npm install -g eslint-plugin-react
+function_apt_wait_for_unlock sudo npm install -g @typescript-eslint/parser
+function_apt_wait_for_unlock sudo npm install -g @typescript-eslint/eslint-plugin
+
+echo '' >> $homedir/.bashrc
+echo '# Adding prettier setup' >> $homedir/.bashrc
+echo 'export PRETTIER_CONFIG_PATH="$HOME/.config/prettier/.prettierrc"' >> $homedir/.bashrc
+
+echo '' >> $homedir/.bashrc
+echo '# Adding eslint setup' >> $homedir/.bashrc
+echo 'export ESLINT_USE_FLAT_CONFIG=1' >> $homedir/.bashrc
+echo 'export ESLINT_CONFIG_PATH="$HOME/.config/eslint/eslint.config.mjs"' >> $homedir/.bashrc
+
+echo '' >> $homedir/.bashrc
+echo '# Adding global NODE path for access to global libraries' >> $homedir/.bashrc
+echo 'export NODE_PATH=$(npm root -g)' >> $homedir/.bashrc
+
+pipx install --force black
+pipx install --force python-lsp-server[rope,jedi]
+pipx install --force pylint
+pipx install --force mypy
+pipx install --force autoflake
+pipx install --force isort
+#pipx install autopep8
+
+# Opens vim, installs the plugins, then quits back to shell
+vim +PlugInstall +qa
+nvim +PlugInstall +qa
+
+vim +'CocInstall -sync coc-calc coc-clangd coc-cmake coc-css coc-docker coc-eslint coc-git coc-go coc-html coc-java coc-jedi coc-json coc-markdownlint coc-prettier coc-python coc-pyright coc-sh coc-swagger coc-tsserver coc-yaml | q'
+
+
+# MUST BE AFTER vim +PlugInstall +qa
+# Patch the verilog_systemverilog.vim file
+mv $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vimold
+ln -s $TMPDIR/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/
 
 
 # Install git-lfs

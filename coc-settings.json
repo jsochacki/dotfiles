@@ -1,0 +1,80 @@
+{
+   "coc.source.around.enable": true,
+   "coc.source.buffer.enable": true,
+   "coc.source.file.enable": true,
+   "coc.source.issues.enable": true,
+   "coc.source.around.priority": 1,
+   "coc.source.buffer.priority": 2,
+   "coc.source.file.priority": 3,
+   "coc.source.issues.priority": 4,
+   "coc.source.around.shortcut": "A",
+   "coc.source.buffer.shortcut": "B",
+   "coc.source.file.shortcut": "F",
+   "coc.source.issues.shortcut": "[I]",
+   "coc.source.around.disableSyntaxes": [],
+   "coc.preferences.extensionUpdateCheck": "never",
+   "clangd.path": "/usr/bin/clangd",
+   "python.analysis.autoSearchPaths": true,
+   "python.analysis.diagnosticMode": "openFilesOnly",
+   "python.analysis.useLibraryCodeForTypes": true,
+   "python.jediEnabled": false,
+   "python.linting.enabled": false,
+   "python.formatting.provider": "none",
+   "languageserver": {
+      "pylsp": {
+         "command": "pylsp",
+         "filetypes": [
+            "python"
+         ],
+         "initializationOptions": {
+            "pylsp": {
+               "plugins": {
+                  "jedi_completion": {
+                     "enabled": true
+                  },
+                  "jedi_hover": {
+                     "enabled": true
+                  },
+                  "jedi_references": {
+                     "enabled": true
+                  },
+                  "jedi_signature_help": {
+                     "enabled": true
+                  },
+                  "jedi_symbols": {
+                     "enabled": true
+                  },
+                  "pylsp_mypy": {
+                     "enabled": false
+                  },
+                  "flake8": {
+                     "enabled": false
+                  },
+                  "pycodestyle": {
+                     "enabled": false
+                  },
+                  "pydocstyle": {
+                     "enabled": false
+                  },
+                  "autopep8": {
+                     "enabled": false
+                  }
+               }
+            }
+         }
+      },
+      "jedi-language-server": {
+         "command": "jedi-language-server",
+         "filetypes": [
+            "python"
+         ],
+         "trace.server": "verbose"
+      }
+   },
+   "eslint.enable": false,
+   "eslint.options": {
+      "configFile": "~/.config/eslint/eslint.config.mjs"
+   },
+   "prettier.enable": false,
+   "prettier.configPath": "~/.config/prettier/.prettierrc"
+}

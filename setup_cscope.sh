@@ -4,7 +4,7 @@
 cd
 homedir=$(pwd)
 
-sudo find $1 -name '*.c' -o -name '*.h' > $1/cscope.files
+sudo find $1 -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' > $1/cscope.files
 cd $1
 cscope -Rb
 

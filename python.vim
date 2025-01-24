@@ -3,6 +3,8 @@
 
 " folding view saving specific stuff
 " " Turn on autosaving of the view as I like code folding
+
+" Only do these calls for python files:
 let g:autosave_view = 0
 
 augroup AutoView
@@ -12,46 +14,63 @@ augroup AutoView
     autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
 augroup END
 
-" Crucial to allow ycm and ultisnips to work together
-" cant tab complete ultisnips if you don't do this
-" free per https://vim.fandom.com/wiki/Unused_keys
-let g:ycm_key_list_select_completion=['<C-N>']
-let g:ycm_key_list_previous_completion=['<C-H>']
+let g:ale_fixers = {
+    \ 'python': ['autoflake', 'isort', 'black'],
+    \ '*': ['add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace'],
+\ }
+let g:ale_linters = {
+    \ 'python': ['pylint', 'mypy'],
+\ }
 
-" Ensure automatic semantic completion
-let g:ycm_disable_signature_help = 0
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_semantic_triggers =  {
-  \   'python': ['(','->', '.', '::']
-  \ }
-let g:ycm_auto_trigger = 1
+let g:ale_fix_on_save = 0
+let g:ale_python_black_options = '--line-length 79 --target-version py311 --skip-magic-trailing-comma'
 
-" intelligent comments (cant figure out right now)
-" set comments=sl:\"\"\",mb:\ ,elx:\ \"\"\"
+let g:ale_linters_ignore = {
+    \ 'python': ['pylsp', 'jedi-language-server'],
+\ }
 
-" Load YouCompleteMe
-packadd YouCompleteMe
+nnoremap <C-K> :ALEFix<CR>
 
-" ycm python Setup
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-" Set path to global conf file
-let g:ycm_global_ycm_extra_conf = '~/.pyfiles/.ycm_extra_conf.py'
-
-" Add mappings for YCM
-" S is a synonim for s and s is a synonim for cl
-" but we do use s from time to time so use x as that is a synonim for dl
-nnoremap S :YcmCompleter GoTo<CR>
-nnoremap <C-J> :YcmCompleter GetType<CR>
-nnoremap _ :YcmCompleter RefactorRename 
-nnoremap Y :YcmCompleter GetDoc<CR>
-
-" Activate this with K (shift-k)
-command -nargs=1 Googleit :!python3 ~/.pyfiles/Googleit.py <args>
-set keywordprg=:Googleit
+"" Crucial to allow ycm and ultisnips to work together
+"" cant tab complete ultisnips if you don't do this
+"" free per https://vim.fandom.com/wiki/Unused_keys
+"let g:ycm_key_list_select_completion=['<C-N>']
+"let g:ycm_key_list_previous_completion=['<C-H>']
+"
+"" Ensure automatic semantic completion
+"let g:ycm_disable_signature_help = 0
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_semantic_triggers =  {
+"  \   'python': ['(','->', '.', '::']
+"  \ }
+"let g:ycm_auto_trigger = 1
+"
+"" intelligent comments (cant figure out right now)
+"" set comments=sl:\"\"\",mb:\ ,elx:\ \"\"\"
+"
+"" Load YouCompleteMe
+"packadd YouCompleteMe
+"
+"" ycm python Setup
+"let g:ycm_python_interpreter_path = ''
+"let g:ycm_python_sys_path = []
+"let g:ycm_extra_conf_vim_data = [
+"  \  'g:ycm_python_interpreter_path',
+"  \  'g:ycm_python_sys_path'
+"  \]
+"" Set path to global conf file
+"let g:ycm_global_ycm_extra_conf = '~/.pyfiles/.ycm_extra_conf.py'
+"
+"" Add mappings for YCM
+"" S is a synonim for s and s is a synonim for cl
+"" but we do use s from time to time so use x as that is a synonim for dl
+"nnoremap S :YcmCompleter GoTo<CR>
+"nnoremap <C-J> :YcmCompleter GetType<CR>
+"nnoremap _ :YcmCompleter RefactorRename 
+"nnoremap Y :YcmCompleter GetDoc<CR>
+"
+"" Activate this with K (shift-k)
+"command -nargs=1 Googleit :!python3 ~/.pyfiles/Googleit.py <args>
+"set keywordprg=:Googleit
 
 "EOF

@@ -105,16 +105,16 @@ nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
 
 " Get the directory of the current .vimrc.custom file
-"let vimrc_dir = expand('<sfile>:p:h')
-"
-"" Construct the path relative to the .vimrc.custom file
-"let cscope_file = vimrc_dir . '/.vim/cscope/cscope_maps.vim'
-"
-"" Resolve in case it is a symbolic link
-"let resolved_cscope_file = resolve(cscope_file)
-"
-"if filereadable(resolved_cscope_file)
-"    execute 'source ' . resolved_cscope_file
-"endif
+let vimrc_dir = expand('<sfile>:p:h')
+
+" Construct the path relative to the .vimrc.custom file
+let cscope_file = vimrc_dir . '/.vim/cscope/cscope_maps.vim'
+
+" Resolve in case it is a symbolic link
+let resolved_cscope_file = resolve(cscope_file)
+
+if filereadable(resolved_cscope_file)
+    execute 'source ' . resolved_cscope_file
+endif
 "
 "EOF

@@ -12,46 +12,31 @@ augroup AutoView
     autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
 augroup END
 
-" Crucial to allow ycm and ultisnips to work together
-" cant tab complete ultisnips if you don't do this
-" free per https://vim.fandom.com/wiki/Unused_keys
-let g:ycm_key_list_select_completion=['<C-N>']
-let g:ycm_key_list_previous_completion=['<C-H>']
+let g:ale_fixers = {
+    \ 'cpp': ['clang-format'],
+    \ 'c': ['clang-format'],
+    \ '*': ['remove_trailing_lines', 'trim_whitespace']
+\ }
+let g:ale_linters = {
+    \ 'cpp': ['clangd'],
+    \ 'c': ['clangd']
+\ }
 
-" Ensure automatic semantic completion
-let g:ycm_disable_signature_help = 0
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_semantic_triggers =  {
-  \   'c': ['(','->', '.'],
-  \   'cpp,cuda,objcpp': ['(','->', '.', '::']
-  \ }
-let g:ycm_auto_trigger = 1
+let g:ale_fix_on_save = 0
 
-" intelligent comments
-" Cant use these as they insert extra * when entering math expressions and using
-" clang to reformat, all of a sudden you will have all sorts of extra * so do
-" not try to use even though they are very nice
-" set comments=sl:/*,mb:\ *,elx:\ */
+"nnoremap <C-K> :ALEFix<CR>
 
-" Load YouCompleteMe
-packadd YouCompleteMe
+let g:ale_c_cc_executable = 'gcc'
+let g:ale_cpp_cc_executable = 'g++'
+let g:__my_gcc_flags__ = '-Wall -Wextra -Wshadow -Wnull-dereference'
+let g:ale_c_cc_options = '-std=c17 ' . g:__my_gcc_flags__
+let g:ale_cpp_cc_options = '-std=c++17 ' . g:__my_gcc_flags__
+"let g:ale_c_clangtidy_checks = [
+"         \ '-clang-diagnostic-error',
+"         \ '-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling'
+"         \ '-clang-analyzer-security.insecureAPI.strcpy'
+"         \ ]
 
-" Clangd Setup
-" Let clangd fully control code completion
-let g:ycm_clangd_uses_ycmd_caching = 0
-" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args = ['-log=verbose', '-pretty']
-" Set path to global conf file
-let g:ycm_global_ycm_extra_conf = '~/.cfiles/.ycm_extra_conf.py'
-
-" Add mappings for YCM
-" S is a synonim for s and s is a synonim for cl
-" but we do use s from time to time so use x as that is a synonim for dl
-nnoremap S :YcmCompleter GoTo<CR>
-nnoremap <C-J> :YcmCompleter GetType<CR>
-nnoremap _ :YcmCompleter RefactorRename 
-nnoremap Y :YcmCompleter GetDoc<CR>
 
 " Activate this with K (shift-k)
 command -nargs=1 Googleit :!python3 ~/.cfiles/Googleit.py <args>
@@ -74,32 +59,3 @@ autocmd BufNewFile * :write
 autocmd CursorHold,CursorHoldI * update
 set updatetime=500
 
-"CURRENTLY I NO LONGER PLAN TO DO THIS BUT RATHER TO JUST RUN A SCRIPT FROM THE
-"ROOT CODE DIR AS THAT IS EASIER TO SUPPORT AND VERY EASY TO DO
-" Add key to build the docs
-"nnoremap <F3> : call BuildTheDocs() <CR>
-
-" Add key to view the docs
-"nnoremap <F4> : call ViewThePdfDocs() <CR>
-"nnoremap <F5> : call ViewTheHtmlDocs() <CR>
-
-
-" Force Build Full Docs
-"function BuildTheDocs()
-"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -fbf > /dev/null 2>&1 &'
-"   :redraw!
-"endfunction
-
-" Preview the pdf if it exists
-"function ViewThePdfDocs()
-"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vtpdfd > /dev/null 2>&1 &'
-"   :redraw!
-"endfunction
-
-" Preview the html documentation if it exists
-"function ViewTheHtmlDocs()
-"   silent exec '!run_doxygen_commands.sh ' expand('%:p:h') ' -vthtmld > /dev/null 2>&1 &'
-"   :redraw!
-"endfunction
-
-"EOF

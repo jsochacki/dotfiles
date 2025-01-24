@@ -69,22 +69,9 @@ Plug 'https://github.com/adelarsq/vim-matchit'
 " Verilog and SystemVerilog plugin
 Plug 'vhda/verilog_systemverilog.vim'
 
-"Plug 'neoclide/jsonc.vim'
-
 Plug 'dense-analysis/ale'
 
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm ci'}
-inoremap <expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : coc#refresh()
-inoremap <expr> <C-H> coc#pum#visible() ? coc#pum#prev(1) : coc#refresh()
-inoremap <expr> <C-y> coc#pum#visible() ? coc#pum#confirm() : coc#refresh()
-nnoremap _ <Plug>(coc-rename)
-xnoremap <C-k> <Plug>(coc-format-selected)
-nnoremap <C-K> <Plug>(coc-format-selected)
-"nnoremap <C-\>g <Plug>(coc-definition)
-"nnoremap <C-\>c <Plug>(coc-references)
-"nnoremap <C-\>t <Plug>(coc-type-definition)
-"nnoremap <C-\>d <Plug>(coc-implementation)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Get file specific setting plugins here
 "Plug 'vim-scripts/c.vim'
