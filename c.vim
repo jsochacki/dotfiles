@@ -12,6 +12,10 @@ augroup AutoView
     autocmd BufWinEnter * execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
 augroup END
 
+" IN THE END, ALE IS ONLY LINTING HERE, coc with ccls is doing code completion
+" and clang-format is doing formatting, so you can clean up someday when you
+" have time to test
+
 let g:ale_fixers = {
     \ 'cpp': ['clang-format'],
     \ 'c': ['clang-format'],
@@ -22,6 +26,9 @@ let g:ale_linters = {
     \ 'c': ['clangd']
 \ }
 
+autocmd BufReadPost *.cpp let b:ale_cpp_clangd_options = '--compile-commands-dir=' . getcwd()
+let g:ale_c_clangformat_options = '--style=file:~/.clang-format'
+let g:ale_cpp_clangformat_options = '--style=file:~/.clang-format'
 let g:ale_fix_on_save = 0
 
 "nnoremap <C-K> :ALEFix<CR>
@@ -59,3 +66,10 @@ autocmd BufNewFile * :write
 autocmd CursorHold,CursorHoldI * update
 set updatetime=500
 
+"let g:ycm_language_server =
+"  \ [{
+"  \   'name': 'ccls',
+"  \   'cmdline': [ 'ccls' ],
+"  \   'filetypes': [ 'c', 'cpp', 'h', 'hpp', 'cuda', 'objc', 'objcpp' ],
+"  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+"  \ }]

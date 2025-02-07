@@ -394,6 +394,9 @@ pipx install --force autoflake
 pipx install --force isort
 #pipx install autopep8
 
+function_apt_wait_for_unlock ./setup_ccls.sh
+function_apt_wait_for_unlock ./setup_bear.sh
+
 # Opens vim, installs the plugins, then quits back to shell
 vim +PlugInstall +qa
 nvim +PlugInstall +qa
