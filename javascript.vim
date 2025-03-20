@@ -8,6 +8,9 @@ endif
 
 let g:autosave_view = 0
 
+" Enable gutentags
+let g:gutentags_enabled = 1
+
 augroup AutoView
     autocmd!
     " Autosave & Load Views.

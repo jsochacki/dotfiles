@@ -104,6 +104,88 @@ nnoremap <C-w>K <C-w>J
 nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
 
+
+" Gutentags enables in specific ft files rather than for all files
+
+" Cache tags in a common location (~/.cache/tags) to avoid re-scanning large projects repeatedly.
+let g:gutentags_cache_dir = expand('~/.cache/vim/tags')
+
+" Define the project root as the first folder upward containing a directory named "src".
+" Gutentags will traverse upward from the file being edited until it finds a directory that matches the marker.
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['include', 'src']
+
+" Always generate tags when a file is written and if tags are missing.
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_empty_buffer = 0
+
+" (Optional) If you wish to refresh tags after saving, ensure the refresh is done immediately.
+let g:gutentags_refresh_after_save = 1
+
+" Setup for the following Explaining --fields=+ailmnS (info gathered from: $ ctags --list-fields)
+" a: Access (or export) of class members
+" i: Inheritance information
+" l: Language of input file containing tag
+" m: Implementation information
+" n: Line number of tag definition
+" S: Signature of routine (e.g. prototype or parameter list)
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
+
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+
 " Get the directory of the current .vimrc.custom file
 let vimrc_dir = expand('<sfile>:p:h')
 

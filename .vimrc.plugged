@@ -91,6 +91,8 @@ nnoremap <C-K> <Plug>(coc-format-selected)
 "let  g:C_UseTool_cmake    = 'yes'
 "let  g:C_UseTool_doxygen = 'yes'
 
+Plug 'ludovicchabant/vim-gutentags'
+
 " Initialize plugin system
 call plug#end()
 
