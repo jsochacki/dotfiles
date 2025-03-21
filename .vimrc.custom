@@ -104,6 +104,12 @@ nnoremap <C-w>K <C-w>J
 nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
 
+" Remap tag movement
+nnoremap <C-y> <C-]>
+nnoremap <C-h> <C-o>
+nnoremap <C-n> <C-i>
+nnoremap <C-j> <C-t>
+
 
 " Gutentags enables in specific ft files rather than for all files
 
