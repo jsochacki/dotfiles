@@ -90,7 +90,7 @@ xnoremap ; l
 nnoremap zj zh
 nnoremap zk zj
 nnoremap zl zk
-nnoremap z: zl
+nnoremap z; zl
 
 " Remap window traversal to match movement keys above
 nnoremap <C-w>j <C-w>h
@@ -103,6 +103,14 @@ nnoremap <C-w>J <C-w>H
 nnoremap <C-w>K <C-w>J
 nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
+
+" Remap buffer movement
+nnoremap <Esc>n :enew<CR>
+nnoremap <Esc>h :ls<CR>
+nnoremap <Esc>j :bprev<CR>
+nnoremap <Esc>k :bdelete<CR>
+nnoremap <Esc>l :sbuffer<CR>
+nnoremap <Esc>; :bnext<CR>
 
 " Remap tag movement
 nnoremap <C-y> <C-]>
