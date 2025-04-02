@@ -105,18 +105,27 @@ nnoremap <C-w>L <C-w>K
 nnoremap <C-w>: <C-w>L
 
 " Remap buffer movement
-nnoremap <Esc>n :enew<CR>
-nnoremap <Esc>h :ls<CR>
-nnoremap <Esc>j :bprev<CR>
-nnoremap <Esc>k :bdelete<CR>
-nnoremap <Esc>l :sbuffer<CR>
-nnoremap <Esc>; :bnext<CR>
+"nnoremap <Esc>n :enew<CR>
+"nnoremap <Esc>h :ls<CR>
+"nnoremap <Esc>j :bprev<CR>
+"nnoremap <Esc>k :bdelete<CR>
+"nnoremap <Esc>l :sbuffer<CR>
+"nnoremap <Esc>; :bnext<CR>
+nnoremap <C-j> <Nop>
+nnoremap <C-j>n :enew<CR>
+nnoremap <C-j>h :ls<CR>
+nnoremap <C-j>j :bprev<CR>
+nnoremap <C-j>k :bdelete<CR>
+nnoremap <C-j>l :sbuffer<CR>
+nnoremap <C-j>; :bnext<CR>
 
 " Remap tag movement
-nnoremap <C-y> <C-]>
-nnoremap <C-h> <C-o>
-nnoremap <C-n> <C-i>
-nnoremap <C-j> <C-t>
+nnoremap <ESC>y <C-]>
+nnoremap <ESC>h <C-o>
+nnoremap <ESC>n <C-i>
+nnoremap <ESC>j <C-t>
+
+"note new mapping leavs c-y, c-h, and c-n open for use
 
 
 " Gutentags enables in specific ft files rather than for all files
