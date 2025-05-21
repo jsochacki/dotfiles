@@ -17,7 +17,7 @@ URxvt*scrollstyle: plain
 URxvt*scrollWidthBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*cursorBlink: true
-URxvt*cursorUnderline: true
+!URxvt*cursorUnderline: true
 URxvt*secondaryScroll: true
 !Done use this with i3 as it malfunctions
 !URxvt*borderLess: true

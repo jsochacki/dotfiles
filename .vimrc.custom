@@ -115,8 +115,8 @@ nnoremap <C-j> <Nop>
 nnoremap <C-j>n :enew<CR>
 nnoremap <C-j>h :ls<CR>
 nnoremap <C-j>j :bprev<CR>
-nnoremap <C-j>k :bdelete<CR>
-nnoremap <C-j>l :sbuffer<CR>
+nnoremap <C-j>k :terminal<CR>
+nnoremap <C-j>l :vsplit<CR>
 nnoremap <C-j>; :bnext<CR>
 
 " Remap tag movement
