@@ -338,7 +338,8 @@ echo '' >> $homedir/.bashrc
 echo '# To mount NAS' >> $homedir/.bashrc
 echo 'if [ ! -d "/mnt/NAS/BHD" ]; then' >> $homedir/.bashrc
 #echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=none,iocharset=utf8,actimeo=2,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
-echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=loose,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+#echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=loose,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=strict,actimeo=1,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
 echo 'fi' >> $homedir/.bashrc
 
 # Install git-lfs
