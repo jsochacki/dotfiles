@@ -367,6 +367,13 @@ function_apt_wait_for_unlock sudo npm install -g prettier
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
 function_apt_wait_for_unlock ./setup_vmware_share.sh
 
+#make sure you have IP NAS in your /etc/hosts
+echo '' >> $homedir/.bashrc
+echo '# To mount NAS' >> $homedir/.bashrc
+echo 'if [ ! -d "/mnt/NAS/BHD" ]; then' >> $homedir/.bashrc
+echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=none,iocharset=utf8,actimeo=2,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+echo 'fi' >> $homedir/.bashrc
+
 # Install git-lfs
 function_apt_wait_for_unlock sudo apt-get install -y git-lfs
 
