@@ -222,4 +222,28 @@ if filereadable(resolved_cscope_file)
     execute 'source ' . resolved_cscope_file
 endif
 
+" Keeps vim from telling me a file has changed when working on the nas
+set backupcopy=yes
+
+" Make backups of each file edited
+set backup
+set writebackup
+set undofile
+set backupdir=~/.vim/backups//
+set directory=~/.vim/swaps//
+set undodir=~/.vim/undo//
+
+" Add autoreload as well so files are freshest version always
+" Reload a file if it changed on disk
+set autoread
+" Poll for changes when you're idle and when focus/ buffers change
+set updatetime=1000   " 1s idle before CursorHold fires (tweak as you like)
+augroup autoreload_on_change
+  autocmd!
+  " When Vim regains focus or you switch back to the buffer, check for changes
+  autocmd FocusGained,BufEnter * checktime
+  " Also check periodically while you're idle in normal/insert mode
+  autocmd CursorHold,CursorHoldI * checktime
+augroup END
+
 "EOF

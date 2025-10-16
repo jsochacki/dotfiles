@@ -41,7 +41,6 @@ autocmd BufNewFile * :write
 " you get live updates without haveing to save manually in tex so im just putting this
 " in the tex specific file configuration
 autocmd CursorHold,CursorHoldI * update
-set updatetime=500
 
 inoremap <F1> <Esc>: silent exec '.!inkscape-figures markdown-create "'.getline('.').'" "./figures/"'<CR><CR>:w<CR>
 nnoremap <F1> : silent exec '!inkscape-figures edit "./figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>

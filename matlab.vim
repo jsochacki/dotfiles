@@ -56,7 +56,6 @@ autocmd BufNewFile * :write
 
 " I turn on autosave on no activity in 500ms here for insert and non insert mode
 autocmd CursorHold,CursorHoldI * update
-set updatetime=500
 
 augroup AutoSyntax
     " Autosave & Load Views.

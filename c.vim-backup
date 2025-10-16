@@ -72,7 +72,6 @@ autocmd BufNewFile * :write
 " you get live updates without haveing to save manually in tex so im just putting this
 " in the tex specific file configuration
 autocmd CursorHold,CursorHoldI * update
-set updatetime=500
 
 "CURRENTLY I NO LONGER PLAN TO DO THIS BUT RATHER TO JUST RUN A SCRIPT FROM THE
 "ROOT CODE DIR AS THAT IS EASIER TO SUPPORT AND VERY EASY TO DO

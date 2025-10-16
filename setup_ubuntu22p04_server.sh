@@ -478,4 +478,26 @@ sudo cp matlab.desktop /usr/share/applications/
 # Get coolkey for pki certs
 function_apt_wait_for_unlock sudo apt-get install -y coolkey
 
+# Make a vim doc backup dir and clear on size limit
+mkdir -p $homedir/.vim/{backups,swaps,undo}
+echo '##### Auto-purge vim_backups when it reaches 100 KB #####' >> $homedir/.bashrc
+echo 'purge_dir_if_over() {' >> $homedir/.bashrc
+echo '    local dir="$1"' >> $homedir/.bashrc
+echo '    local limit_kb="$2"' >> $homedir/.bashrc
+echo '    [[ -z "$dir" || "$dir" = "/" || "$dir" = "/*" ]] && return 0' >> $homedir/.bashrc
+echo '    [[ ! -d "$dir" ]] && return 0' >> $homedir/.bashrc
+echo '    local limit_bytes=$(( limit_kb * 1024 ))' >> $homedir/.bashrc
+echo '    local size_bytes' >> $homedir/.bashrc
+echo '    size_bytes=$(du -sb -- "$dir" 2>/dev/null | awk '{print $1}')' >> $homedir/.bashrc
+echo '    [[ -z "$size_bytes" ]] && return 0' >> $homedir/.bashrc
+echo '    if [[ "$size_bytes" -ge "$limit_bytes" ]]; then' >> $homedir/.bashrc
+echo '        find -- "$dir" -type f -print -delete' >> $homedir/.bashrc
+echo '        find -- "$dir" -mindepth 1 -type d -empty -print -delete' >> $homedir/.bashrc
+echo '        echo "[purge] Cleared files in  (threshold ${limit_kb}KB reached)."' >> $homedir/.bashrc
+echo '    fi' >> $homedir/.bashrc
+echo '}' >> $homedir/.bashrc
+echo 'purge_dir_if_over "$HOME/.vim/backups" "100"' >> $homedir/.bashrc
+echo 'purge_dir_if_over "$HOME/.vim/swaps" "100"' >> $homedir/.bashrc
+echo 'purge_dir_if_over "$HOME/.vim/undo" "100"' >> $homedir/.bashrc
+
 source $homedir/.bashrc

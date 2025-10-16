@@ -67,7 +67,6 @@ autocmd BufNewFile * :write
 " you get live updates without haveing to save manually in tex so im just putting this
 " in the tex specific file configuration
 autocmd CursorHold,CursorHoldI * update
-set updatetime=500
 
 "let g:ycm_language_server =
 "  \ [{
