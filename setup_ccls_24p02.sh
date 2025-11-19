@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install clang libclang-18-dev
+sudo apt-get install -y clang libclang-18-dev
 
 git clone --depth=1 --recursive https://github.com/MaskRay/ccls
 cd ccls

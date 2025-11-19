@@ -1,8 +1,8 @@
 #!/bin/bash
 
 sudo apt-get update -y
-sudo apt-get install qtbase5-dev libfftw3-dev cmake pkg-config libliquid-dev 
-sudo apt-get install build-essential git
+sudo apt-get install -y qtbase5-dev libfftw3-dev cmake pkg-config libliquid-dev 
+sudo apt-get install -y build-essential git
 git clone https://github.com/miek/inspectrum.git
 
 pushd inspectrum/
@@ -17,3 +17,6 @@ sudo make install
 
 popd
 popd
+
+rm -rf inspectrum
+

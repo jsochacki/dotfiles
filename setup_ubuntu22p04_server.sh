@@ -154,6 +154,9 @@ ln -s $TMPDIR/.vimrc.colors $homedir/
 ln -s $TMPDIR/.vimrc.custom $homedir/
 ln -s $TMPDIR/.vimrc $homedir/
 ln -sf $TMPDIR/en.utf-8.add $homedir/.vim/spell/
+mkdir -p $homedir/.config/nvim
+ln -s $TMPDIR/init.vim $homedir/.config/nvim/
+ln -s $homedir/.vim/spell $homedir/.config/nvim/
 #cp .vimrc.plugged $homedir/
 #cp .vimrc.normal $homedir/
 #cp .vimrc.colors $homedir/
@@ -167,9 +170,15 @@ ln -s $TMPDIR/.tmux.conf $homedir/
 mkdir -p  $homedir/.vim/ftplugin/
 ln -s $TMPDIR/c.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/python.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/json.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/javascript.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/javascriptreact.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/typescript.vim $homedir/.vim/ftplugin/
+ln -s $TMPDIR/typescriptreact.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/tex.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/markdown.vim $homedir/.vim/ftplugin/
 ln -s $TMPDIR/matlab.vim $homedir/.vim/ftplugin/
+ln -s $homedir/.vim/ftplugin $homedir/.config/nvim/
 #cp c.vim $homedir/.vim/ftplugin/
 #cp python.vim $homedir/.vim/ftplugin/
 #cp tex.vim $homedir/.vim/ftplugin/
@@ -183,22 +192,42 @@ ln -s $TMPDIR/cpp.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/c.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/cu.snippets $homedir/.vim/UltiSnips/
 ln -s $TMPDIR/matlab.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/javascript.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/javascriptreact.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/typescript.snippets $homedir/.vim/UltiSnips/
+ln -s $TMPDIR/typescriptreact.snippets $homedir/.vim/UltiSnips/
+ln -s $homedir/.vim/UltiSnips $homedir/.config/nvim/
 #cp tex.snippets $homedir/.vim/UltiSnips/
 #cp cpp.snippets $homedir/.vim/UltiSnips/
 #cp c.snippets $homedir/.vim/UltiSnips/
 #cp cu.snippets $homedir/.vim/UltiSnips/
 
+# JS and TS setup
+mkdir -p $homedir/.config/eslint
+mkdir -p $homedir/.config/prettier
+ln -s $TMPDIR/eslint.config.mjs $homedir/.config/eslint/
+ln -s $TMPDIR/.prettierrc $homedir/.config/prettier/
+ln -s $TMPDIR/coc-settings.json $homedir/.vim/
+
 # Do cscope setup
 function_apt_wait_for_unlock sudo apt-get install -y cscope
 mkdir -p $homedir/.vim/cscope
 ln -s $TMPDIR/cscope_maps.vim $homedir/.vim/cscope/
+mkdir -p $homedir/.config/nvim/cscope
+ln -s $TMPDIR/cscope_maps.nvim $homedir/.config/nvim/cscope/
 
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3
 function_apt_wait_for_unlock ./setup_vim.sh
+#function_apt_wait_for_unlock ./setup_nvim.sh
 
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
 function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
+
+
+# this is done in install_and_setup_youcompleteme above but we will soon
+# deprecate that package so we will inline below to prevent issues
+sudo apt-get install -y clangd
 
 # Add matlab syntax file in case you decide to install matlab
 mkdir -p $homedir/.vim/syntax
@@ -237,14 +266,6 @@ ln -s $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.pyfiles/
 #cp $homedir/.cfiles/Googleit.py $homedir/.vimfiles/
 
-# Opens vim, installs the plugins, then quits back to shell
-vim +PlugInstall +qa
-
-# MUST BE AFTER vim +PlugInstall +qa
-# Patch the verilog_systemverilog.vim file
-mv $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vimold
-ln -s $TMPDIR/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/
-
 mkdir -p $homedir/Pictures
 mkdir -p $homedir/Snips
 
@@ -271,7 +292,7 @@ wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Picture
 # Install a decent browser
 function_apt_wait_for_unlock ./Chrome_Setup.sh
 # to later tweak gnome
-sudo apt-get install chrome-gnome-shell
+sudo apt-get install -y chrome-gnome-shell
 
 # Install pandoc
 wget https://github.com/jgm/pandoc/releases/download/2.11.2/pandoc-2.11.2-linux-amd64.tar.gz
@@ -298,7 +319,9 @@ sudo snap install drawio --devmode
 function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
 
 # Install a rastered image editor since all you have is vector editors currently
-function_apt_wait_for_unlock sudo apt-get install -y pinta
+# Kolourpaint is better imo
+#snap install pinta
+sudo apt-get install -y kolourpaint
 
 
 # Get Data Grabbing Tools
@@ -347,34 +370,70 @@ echo 'fi' >> $homedir/.bashrc
 
 
 # Install gsl
-function_apt_wait_for_unlock ./install_gsl.sh
+#function_apt_wait_for_unlock ./install_gsl.sh
 
 # Install doxygen
 function_apt_wait_for_unlock ./install_doxygen.sh
 
 # Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
 # Need to get newer version of Node.js first
-function_apt_wait_for_unlock ./setup_nodejs.sh
+function_apt_wait_for_unlock ./setup_nodejs_22p4p0.sh
 #function_apt_wait_for_unlock sudo npm install -g npm@8.1.1 to update
 function_apt_wait_for_unlock sudo npm install -g npm
 function_apt_wait_for_unlock sudo npm install -g mermaid
 function_apt_wait_for_unlock sudo npm install -g mermaid-filter
 function_apt_wait_for_unlock sudo npm install -g mermaid-cli
 function_apt_wait_for_unlock sudo npm install -g mermaid.cli
+function_apt_wait_for_unlock sudo npm install -g fixjson
+function_apt_wait_for_unlock sudo npm install -g jsonlint
 function_apt_wait_for_unlock sudo npm install -g prettier
+function_apt_wait_for_unlock sudo npm install -g eslint
+function_apt_wait_for_unlock sudo npm install -g globals
+function_apt_wait_for_unlock sudo npm install -g @eslint/js
+function_apt_wait_for_unlock sudo npm install -g typescript-eslint
+function_apt_wait_for_unlock sudo npm install -g eslint-config-prettier
+function_apt_wait_for_unlock sudo npm install -g eslint-plugin-prettier
+function_apt_wait_for_unlock sudo npm install -g eslint-plugin-react
+function_apt_wait_for_unlock sudo npm install -g @typescript-eslint/parser
+function_apt_wait_for_unlock sudo npm install -g @typescript-eslint/eslint-plugin
 
-# Do VMWARE specific setup at the end
-function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
-function_apt_wait_for_unlock ./setup_vmware_share.sh
 
-#make sure you have IP NAS in your /etc/hosts
 echo '' >> $homedir/.bashrc
-echo '# To mount NAS' >> $homedir/.bashrc
-echo 'if [ ! -d "/mnt/NAS/BHD" ]; then' >> $homedir/.bashrc
-#echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=none,iocharset=utf8,actimeo=2,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
-#echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=loose,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
-echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=strict,actimeo=1,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
-echo 'fi' >> $homedir/.bashrc
+echo '# Adding prettier setup' >> $homedir/.bashrc
+echo 'export PRETTIER_CONFIG_PATH="$HOME/.config/prettier/.prettierrc"' >> $homedir/.bashrc
+
+echo '' >> $homedir/.bashrc
+echo '# Adding eslint setup' >> $homedir/.bashrc
+echo 'export ESLINT_USE_FLAT_CONFIG=1' >> $homedir/.bashrc
+echo 'export ESLINT_CONFIG_PATH="$HOME/.config/eslint/eslint.config.mjs"' >> $homedir/.bashrc
+
+echo '' >> $homedir/.bashrc
+echo '# Adding global NODE path for access to global libraries' >> $homedir/.bashrc
+echo 'export NODE_PATH=$(npm root -g)' >> $homedir/.bashrc
+
+pip3.10 install --force black
+pip3.10 install --force python-lsp-server[rope,jedi]
+pip3.10 install --force pylint
+pip3.10 install --force mypy
+pip3.10 install --force autoflake
+pip3.10 install --force isort
+#pip3.10 install autopep8
+
+function_apt_wait_for_unlock ./setup_ccls.sh
+function_apt_wait_for_unlock ./setup_bear.sh
+
+# Opens vim, installs the plugins, then quits back to shell
+vim +PlugInstall +qa
+##nvim +PlugInstall +qa
+
+vim +'CocInstall -sync coc-calc coc-clangd coc-cmake coc-css coc-docker coc-eslint coc-git coc-go coc-html coc-java coc-jedi coc-json coc-markdownlint coc-prettier coc-python coc-pyright coc-sh coc-swagger coc-tsserver coc-yaml | q'
+
+
+# MUST BE AFTER vim +PlugInstall +qa
+# Patch the verilog_systemverilog.vim file
+mv $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/verilog_systemverilog.vimold
+ln -s $TMPDIR/verilog_systemverilog.vim $homedir/.vim/plugged/verilog_systemverilog.vim/ftplugin/
+
 
 # Install git-lfs
 function_apt_wait_for_unlock sudo apt-get install -y git-lfs
@@ -386,42 +445,21 @@ function_apt_wait_for_unlock sudo apt-get install -y libfuse2
 cd $TMPDIR
 ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
 
-# Install tailscale and run it on status
-curl -fsSL https://tailscale.com/install.sh | sh
-echo '' >> $homedir/.bashrc
-echo '# Adding tailscale autolaunch' >> $homedir/.bashrc
-echo 'sudo tailscale up"' >> $homedir/.bashrc
-cd $TMPDIR
-ln -s $TMPDIR/tailscale_resolve_dns.sh $homedir/.local/bin/tailscale_resolve_dns.sh
-
-# Add VPN shutdown script so it doesnt stay up on shutdown OR reboot
-function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc0.d/K02tailscale_down
-function_apt_wait_for_unlock sudo ln -s $TMPDIR/K02tailscale_down /etc/rc6.d/K02tailscale_down
-
-# Add bitwarden
-sudo snap install bitwarden
-sudo snap install bw
 
 # Install slack, wire, element-desktop, and signal-desktop
-function_apt_wait_for_unlock ./setup_chat_apps.sh
+#function_apt_wait_for_unlock ./setup_chat_apps.sh
 
 # Get and install obsidian
-cd $TMPDIR
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/obsidian_1.4.14_amd64.snap https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.14/obsidian_1.4.14_amd64.snap
-sudo snap install obsidian_1.4.14_amd64.snap --dangerous --classic
-rm obsidian_1.4.14_amd64.snap
+#cd $TMPDIR
+#sudo snap install obsidian --classic
 
 # Get python 3 venv and set it up for common use
 function_apt_wait_for_unlock sudo apt-get install -y python3.10-venv
 
-# Install docker, ansible, TODO k3s, 
-function_apt_wait_for_unlock ./setup_docker.sh
-function_apt_wait_for_unlock ./setup_ansible.sh
-
 # Add to dialout for hardware access
 sudo usermod -aG dialout $USER
 newgrp dialout
-
+cat 
 # Allow docker containers to connect to the host X11 server
 echo '' >> $homedir/.bashrc
 echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
@@ -438,11 +476,11 @@ function_apt_wait_for_unlock sudo fc-cache -f -v
 
 # Add 7zip
 cd $TMPDIR
-rm -rf /opt/7zip
+sudo rm -rf /opt/7zip
 sudo mkdir -p /opt/7zip
-wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/7zip.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz
+wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $TMPDIR/7zip.tar.xz https://www.7-zip.org/a/7z2407-linux-x64.tar.xz
 sudo tar -xvf 7zip.tar.xz --directory /opt/7zip
-rm 7zip.tar.xz
+sudo rm 7zip.tar.xz
 echo '' >> $homedir/.bashrc
 echo '# path for 7zip' >> $homedir/.bashrc
 echo 'export PATH="/opt/7zip:$PATH"' >> $homedir/.bashrc
@@ -454,29 +492,45 @@ export PATH=/opt/7zip:$PATH
 function_apt_wait_for_unlock sudo apt-get install -y screen
 
 # Install cifs-utils so you can mount smb drives
-function_apt_wait_for_unlock sudo apt-get install -y cifs-utils
+function_apt_wait_for_unlock sudo apt-get install -y cifs-utils smbclient
 # sudo mount -t cifs //IP/share_name /mnt/NAS -o username=uname,domain=domainname
 
 # Setup go
 function_apt_wait_for_unlock ./setup_go.sh
 
-# setup Intel SDE
-wget https://downloadmirror.intel.com/831748/sde-external-9.44.0-2024-08-22-lin.tar.xz
-tar -xvf sde-external-9.44.0-2024-08-22-lin.tar.xz
-chmod ugo+x sde-external-9.44.0-2024-08-22-lin/sde
-sudo mv sde-external-9.44.0-2024-08-22-lin /opt/intel-sde
-rm sde-external-9.44.0-2024-08-22-lin.tar.xz
-echo '# path for Intel SDE' >> $homedir/.bashrc
-echo 'export PATH="/opt/intel-sde:$PATH"' >> $homedir/.bashrc
-
 # Setup Saleae
-function_apt_wait_for_unlock ./setup_saleae.sh
+#function_apt_wait_for_unlock ./setup_saleae.sh
 
 # Add matlab desktop icon if installing matlab
 sudo cp matlab.desktop /usr/share/applications/
 
 # Get coolkey for pki certs
-function_apt_wait_for_unlock sudo apt-get install -y coolkey
+#function_apt_wait_for_unlock sudo apt-get install -y coolkey
+
+#Fix Ubuntu Toolbar
+function_apt_wait_for_unlock ./install_dash_to_panel.sh
+
+# Do at the end as causes shell issues with newgrp docker
+# Install docker, ansible, TODO k3s, 
+function_apt_wait_for_unlock ./setup_docker.sh
+#function_apt_wait_for_unlock ./setup_ansible.sh
+
+function_apt_wait_for_unlock ./install_inspectrum.sh
+
+# Do VMWARE specific setup at the end
+function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
+function_apt_wait_for_unlock ./setup_vmware_share.sh
+
+sudo mkdir /mnt/NAS
+
+#make sure you have IP NAS in your /etc/hosts
+echo '' >> $homedir/.bashrc
+echo '# To mount NAS' >> $homedir/.bashrc
+echo 'if [ ! -d "/mnt/NAS/BHD" ]; then' >> $homedir/.bashrc
+#echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=none,iocharset=utf8,actimeo=2,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+#echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=loose,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+echo '   sudo mount -t cifs //NAS/home /mnt/NAS -o username=jsochacki,vers=3.1.1,sec=ntlmssp,nounix,rw,serverino,cache=strict,actimeo=1,iocharset=utf8,rsize=1048576,wsize=1048576,soft,echo_interval=60,nofail,_netdev,uid=$(id -u $USER),gid=$(id -g $USER)' >> $homedir/.bashrc
+echo 'fi' >> $homedir/.bashrc
 
 # Make a vim doc backup dir and clear on size limit
 mkdir -p $homedir/.vim/{backups,swaps,undo}

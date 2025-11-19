@@ -268,7 +268,7 @@ wget --timeout=1 --waitretry=0 --tries=5 --retry-connrefused -O $homedir/Picture
 # Install a decent browser
 function_apt_wait_for_unlock ./Chrome_Setup.sh
 # to later tweak gnome
-sudo apt-get install chrome-gnome-shell
+sudo apt-get install -y chrome-gnome-shell
 
 # Install pandoc
 wget https://github.com/jgm/pandoc/releases/download/2.11.2/pandoc-2.11.2-linux-amd64.tar.gz
@@ -297,7 +297,7 @@ function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-num
 # Install a rastered image editor since all you have is vector editors currently
 # Kolourpaint is better imo
 #snap install pinta
-sudo apt-get install kolourpaint
+sudo apt-get install -y kolourpaint
 
 
 # Get Data Grabbing Tools
