@@ -33,7 +33,7 @@ function_apt_wait_for_unlock sudo apt-get update -y
 function_apt_wait_for_unlock sudo apt install -y xinit
 
 # Get git, curl, and make
-function_apt_wait_for_unlock sudo apt-get install -y git curl make
+function_apt_wait_for_unlock sudo apt-get install -y git curl make cmake libcurl4-openssl-dev libedit-dev
 
 # Get Cpp development dependencies (note make is part of build-essential)
 function_apt_wait_for_unlock sudo apt-get install -y build-essential clang-format
@@ -394,7 +394,7 @@ pipx install --force autoflake
 pipx install --force isort
 #pipx install autopep8
 
-function_apt_wait_for_unlock ./setup_ccls.sh
+function_apt_wait_for_unlock ./setup_ccls_24p02.sh
 function_apt_wait_for_unlock ./setup_bear.sh
 
 # Opens vim, installs the plugins, then quits back to shell
