@@ -414,6 +414,7 @@ pip3.9 install --force autoflake
 pip3.9 install --force isort
 #pip3.9 install autopep8
 
+
 function_apt_wait_for_unlock ./setup_ccls.sh
 function_apt_wait_for_unlock ./setup_bear.sh
 
