@@ -358,7 +358,7 @@ echo '    [[ -z "$dir" || "$dir" = "/" || "$dir" = "/*" ]] && return 0' >> $home
 echo '    [[ ! -d "$dir" ]] && return 0' >> $homedir/.bashrc
 echo '    local limit_bytes=$(( limit_kb * 1024 ))' >> $homedir/.bashrc
 echo '    local size_bytes' >> $homedir/.bashrc
-echo '    size_bytes=$(du -sb -- "$dir" 2>/dev/null | awk '{print $1}')' >> $homedir/.bashrc
+echo '    size_bytes=$(du -sb -- "$dir" 2>/dev/null | awk '\''{print $1}'\'')' >> $homedir/.bashrc
 echo '    [[ -z "$size_bytes" ]] && return 0' >> $homedir/.bashrc
 echo '    if [[ "$size_bytes" -ge "$limit_bytes" ]]; then' >> $homedir/.bashrc
 echo '        find -- "$dir" -type f -print -delete' >> $homedir/.bashrc
