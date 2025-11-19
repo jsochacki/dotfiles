@@ -38,6 +38,11 @@ function_apt_wait_for_unlock sudo apt-get install -y git curl make cmake libcurl
 # Get Cpp development dependencies (note make is part of build-essential)
 function_apt_wait_for_unlock sudo apt-get install -y build-essential clang-format
 
+function_apt_wait_for_unlock sudo apt-get install -y g++-12 gcc-12
+
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 60
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 60
+
 # you need to run this from the git directory
 
 function_apt_wait_for_unlock ./install_and_setup_texlive.sh
@@ -353,7 +358,7 @@ function_apt_wait_for_unlock ./install_doxygen.sh
 
 # Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
 # Need to get newer version of Node.js first
-function_apt_wait_for_unlock ./setup_nodejs_22p4p0.sh
+function_apt_wait_for_unlock ./setup_nodejs_25p2p1.sh
 #function_apt_wait_for_unlock sudo npm install -g npm@8.1.1 to update
 function_apt_wait_for_unlock sudo npm install -g npm
 function_apt_wait_for_unlock sudo npm install -g mermaid
