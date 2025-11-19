@@ -519,6 +519,8 @@ function_apt_wait_for_unlock ./setup_vmware_share.sh
 
 sudo mkdir /mnt/NAS
 
+# Dont forget to set your MTU to 9014 in windows for the virtual nics and in linux
+# and to change ethernet0.virtualDev = "e1000" to ethernet0.virtualDev = "vmxnet3"
 #make sure you have IP NAS in your /etc/hosts
 echo '' >> $homedir/.bashrc
 echo '# To mount NAS' >> $homedir/.bashrc
