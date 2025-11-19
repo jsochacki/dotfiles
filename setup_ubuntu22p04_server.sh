@@ -45,6 +45,12 @@ function_apt_wait_for_unlock sudo apt-get install -y libc6-dbg
 # Get Cpp development dependencies (note make is part of build-essential)
 function_apt_wait_for_unlock sudo apt-get install -y build-essential clang-format
 
+function_apt_wait_for_unlock sudo apt-get install -y g++-12 gcc-12
+
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 60
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 60
+
+
 # you need to run this from the git directory
 
 function_apt_wait_for_unlock ./install_and_setup_texlive.sh
@@ -229,6 +235,7 @@ function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
 # deprecate that package so we will inline below to prevent issues
 sudo apt-get install -y clangd
 
+
 # Add matlab syntax file in case you decide to install matlab
 mkdir -p $homedir/.vim/syntax
 ln -s $TMPDIR/mymatlab.vim $homedir/.vim/syntax/
@@ -256,6 +263,7 @@ ln -s $TMPDIR/py.ycm_extra_conf.py $homedir/.pyfiles/.ycm_extra_conf.py
 # Dont actually need to do this below to get urxvt settings to take
 #echo 'xrdb $homedir/.Xresources' >> $homedir/.xinitrc
 mkdir -p $homedir/.vimfiles
+
 
 # Setup auto google
 ln -s $TMPDIR/Googleit.py $homedir/.cfiles/
@@ -314,6 +322,7 @@ rm pandoc-2.11.2-linux-amd64.tar.gz
 # you need devmode to be able to open files on removable media due to mpn
 # permissions
 sudo snap install drawio --devmode
+
 
 # Install Libre office
 function_apt_wait_for_unlock sudo apt-get install -y libreoffice libreoffice-numbertext libreoffice-ogltrans libreoffice-writer2latex libreoffice-writer2xhtml
@@ -377,7 +386,7 @@ function_apt_wait_for_unlock ./install_doxygen.sh
 
 # Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
 # Need to get newer version of Node.js first
-function_apt_wait_for_unlock ./setup_nodejs_22p4p0.sh
+function_apt_wait_for_unlock ./setup_nodejs_25p2p1.sh
 #function_apt_wait_for_unlock sudo npm install -g npm@8.1.1 to update
 function_apt_wait_for_unlock sudo npm install -g npm
 function_apt_wait_for_unlock sudo npm install -g mermaid
