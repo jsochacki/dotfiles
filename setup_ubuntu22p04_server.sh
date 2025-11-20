@@ -94,8 +94,8 @@ echo 'export PATH="'$homedir'/.local/bin:$PATH"' >> $homedir/.bashrc
 export PATH=$homedir/.local/bin:$PATH
 
 # Can skip this now that you are using distribution python
-#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2
-#sudo update-alternatives  --set python3 /usr/bin/python3.8
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2
+sudo update-alternatives  --set python3 /usr/bin/python3.10
 
 #Can run this to visually check
 #sudo update-alternatives --config python
@@ -428,7 +428,7 @@ pip3.10 install --force autoflake
 pip3.10 install --force isort
 #pip3.10 install autopep8
 
-function_apt_wait_for_unlock ./setup_ccls.sh
+function_apt_wait_for_unlock ./setup_ccls_u22p04.sh
 function_apt_wait_for_unlock ./setup_bear.sh
 
 # Opens vim, installs the plugins, then quits back to shell
