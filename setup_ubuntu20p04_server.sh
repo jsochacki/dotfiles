@@ -518,7 +518,7 @@ function_apt_wait_for_unlock ./install_inspectrum.sh
 
 # Do VMWARE specific setup at the end
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
-function_apt_wait_for_unlock ./setup_vmware_share.sh
+#function_apt_wait_for_unlock ./setup_vmware_share.sh
 
 sudo mkdir /mnt/NAS
 

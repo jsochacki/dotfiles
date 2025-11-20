@@ -465,14 +465,6 @@ ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
 # Get python 3 venv and set it up for common use
 function_apt_wait_for_unlock sudo apt-get install -y python3.10-venv
 
-# Add to dialout for hardware access
-sudo usermod -aG dialout $USER
-newgrp dialout
-cat 
-# Allow docker containers to connect to the host X11 server
-echo '' >> $homedir/.bashrc
-echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
-echo 'xhost +local:docker' >> $homedir/.bashrc
 
 # Dont let there be swap, ever
 sudo swapoff -a
@@ -519,6 +511,16 @@ sudo cp matlab.desktop /usr/share/applications/
 #Fix Ubuntu Toolbar
 function_apt_wait_for_unlock ./install_dash_to_panel.sh
 
+
+# Add to dialout for hardware access
+sudo usermod -aG dialout $USER
+newgrp dialout
+
+# Allow docker containers to connect to the host X11 server
+echo '' >> $homedir/.bashrc
+echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
+echo 'xhost +local:docker' >> $homedir/.bashrc
+
 # Do at the end as causes shell issues with newgrp docker
 # Install docker, ansible, TODO k3s, 
 function_apt_wait_for_unlock ./setup_docker.sh
@@ -528,7 +530,7 @@ function_apt_wait_for_unlock ./install_inspectrum.sh
 
 # Do VMWARE specific setup at the end
 function_apt_wait_for_unlock ./setup_vmware_clipboard.sh
-function_apt_wait_for_unlock ./setup_vmware_share.sh
+#function_apt_wait_for_unlock ./setup_vmware_share.sh
 
 sudo mkdir /mnt/NAS
 
