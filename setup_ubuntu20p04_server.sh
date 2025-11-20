@@ -372,7 +372,7 @@ function_apt_wait_for_unlock ./install_doxygen.sh
 
 # Install mermaid and mermaid-cli for system and mermaid-filter for pandoc
 # Need to get newer version of Node.js first
-function_apt_wait_for_unlock ./setup_nodejs_22p4p0.sh
+function_apt_wait_for_unlock ./setup_nodejs_22p9p0.sh
 #function_apt_wait_for_unlock sudo npm install -g npm@8.1.1 to update
 function_apt_wait_for_unlock sudo npm install -g npm
 function_apt_wait_for_unlock sudo npm install -g mermaid
