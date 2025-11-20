@@ -6,12 +6,12 @@
 #sudo apt-get install -y python3 g++ make
 
 # Get Vim (needed Python 3 all set up first sadly for vim build to support ultisnips)
-curl https://nodejs.org/dist/v25.2.1/node-v25.2.1.tar.gz --output node
+curl https://nodejs.org/dist/v24.11.1/node-v24.11.1.tar.gz --output node
 tar -xvf node
-cd node-v25.2.1
+cd node-v24.11.1
 ./configure
 make -j8
 sudo make install
 cd ../
 rm -rf node
-rm -rf node-v25.2.1
+rm -rf node-v24.11.1
