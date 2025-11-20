@@ -84,6 +84,9 @@ echo 'export PATH="'$homedir'/.local/bin:$PATH"' >> $homedir/.bashrc
 #Do now so you can finish setup without leaving the script
 export PATH=$homedir/.local/bin:$PATH
 
+# on 20p04 3.8 is the system version and if you do this gnome-terminal will not
+# open up but since SO MUCH depends on the call to python3 and get-pip.py only
+# works wiht 3.9 just od it anyways and use uxrvt
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
 sudo update-alternatives  --set python3 /usr/bin/python3.9
 #Can run this to visually check
