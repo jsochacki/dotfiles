@@ -71,12 +71,12 @@ function_apt_wait_for_unlock sudo apt-get install -y libcanberra-gtk-module libc
 # of this was developed around
 function_apt_wait_for_unlock sudo apt-get install -y inkscape=0.92.5-1ubuntu1.1
 # Need these to support automated vimtex inkscape interaction
-function_apt_wait_for_unlock sudo apt-get install -y python3.9-dev rofi python3-pip
+function_apt_wait_for_unlock sudo apt-get install -y python3.8-dev rofi python3-pip
 
-# Need to actually get pip3.9 as well
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python3.9 get-pip.py
-rm get-pip.py
+# Need to actually get pip3.8 as well
+#curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+#python3.8 get-pip.py
+#rm get-pip.py
 echo '' >> $homedir/.bashrc
 echo '# Adding path for latex helpers' >> $homedir/.bashrc
 echo 'export PATH="'$homedir'/.local/bin:$PATH"' >> $homedir/.bashrc
@@ -86,9 +86,9 @@ export PATH=$homedir/.local/bin:$PATH
 
 # on 20p04 3.8 is the system version and if you do this gnome-terminal will not
 # open up but since SO MUCH depends on the call to python3 and get-pip.py only
-# works wiht 3.9 just od it anyways and use uxrvt
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
-sudo update-alternatives  --set python3 /usr/bin/python3.9
+# works wiht 3.8 just od it anyways and use uxrvt
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2
+sudo update-alternatives  --set python3 /usr/bin/python3.8
 #Can run this to visually check
 #sudo update-alternatives --config python
 #or this
@@ -98,26 +98,26 @@ sudo update-alternatives  --set python3 /usr/bin/python3.9
 cd
 git clone https://github.com/jsochacki/inkscape-latex-figures.git
 cd inkscape-latex-figures
-pip3.9 install --user .
+pip3 install --user .
 cd ../
 rm -rf inkscape-latex-figures
 
 # Install the python version i made for diagrams.net images
 git clone https://github.com/jsochacki/diagrams-net-figures.git
 cd diagrams-net-figures
-pip3.9 install --user .
+pip3 install --user .
 cd ../
 rm -rf diagrams-net-figures
 
 #inkscape shortcut manager setup
 git clone https://github.com/python-xlib/python-xlib.git
 cd python-xlib
-pip3.9 install --user .
+pip3 install --user .
 cd ../
 rm -rf python-xlib
 
 # Just clone from mine instead
-cd $homedir/.local/lib/python3.9/site-packages/
+cd $homedir/.local/lib/python3.8/site-packages/
 git clone https://github.com/jsochacki/inkscape-latex-shortcuts.git
 
 # Get vim-plug and set it up
@@ -409,13 +409,13 @@ echo '' >> $homedir/.bashrc
 echo '# Adding global NODE path for access to global libraries' >> $homedir/.bashrc
 echo 'export NODE_PATH=$(npm root -g)' >> $homedir/.bashrc
 
-pip3.9 install --force black
-pip3.9 install --force python-lsp-server[rope,jedi]
-pip3.9 install --force pylint
-pip3.9 install --force mypy
-pip3.9 install --force autoflake
-pip3.9 install --force isort
-#pip3.9 install autopep8
+pip3 install --force black
+pip3 install --force python-lsp-server[rope,jedi]
+pip3 install --force pylint
+pip3 install --force mypy
+pip3 install --force autoflake
+pip3 install --force isort
+#pip3 install autopep8
 
 
 function_apt_wait_for_unlock ./setup_ccls.sh
@@ -453,16 +453,7 @@ ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
 #sudo snap install obsidian --classic
 
 # Get python 3 venv and set it up for common use
-function_apt_wait_for_unlock sudo apt-get install -y python3.9-venv
-
-# Add to dialout for hardware access
-sudo usermod -aG dialout $USER
-newgrp dialout
-cat 
-# Allow docker containers to connect to the host X11 server
-echo '' >> $homedir/.bashrc
-echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
-echo 'xhost +local:docker' >> $homedir/.bashrc
+function_apt_wait_for_unlock sudo apt-get install -y python3.8-venv
 
 # Dont let there be swap, ever
 sudo swapoff -a
@@ -508,6 +499,15 @@ sudo cp matlab.desktop /usr/share/applications/
 
 #Fix Ubuntu Toolbar
 function_apt_wait_for_unlock ./install_dash_to_panel.sh
+
+# Add to dialout for hardware access
+sudo usermod -aG dialout $USER
+newgrp dialout
+
+# Allow docker containers to connect to the host X11 server
+echo '' >> $homedir/.bashrc
+echo '# Allow docker containers to connect to the host X11 server' >> $homedir/.bashrc
+echo 'xhost +local:docker' >> $homedir/.bashrc
 
 # Do at the end as causes shell issues with newgrp docker
 # Install docker, ansible, TODO k3s, 
