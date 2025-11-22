@@ -15,10 +15,10 @@ exec --no-startup-id vmware-user-suid-wrapper
 exec --no-startup-id feh --randomize --bg-fill ~/Pictures/*
 
 # Update dotfiles repo
-exec --no-startup-id bash ~/git/dotfiles/update_git.sh
+exec --no-startup-id bash ~/git/jsochacki/dotfiles/update_git.sh
 
 # Bind screenshot button
-bindsym Print --release exec "bash ~/git/dotfiles/snip.sh"
+bindsym Print --release exec "bash ~/git/jsochacki/dotfiles/snip.sh"
 
 # Set up near borderless windows for URxvt
 #hide_edge_borders both
@@ -30,7 +30,7 @@ new_float pixel 0
 set $mod Mod1+Ctrl
 
 # Bind clipboard to snip button
-bindsym Shift+Print --release exec "bash ~/git/dotfiles/clip2snip.sh"
+bindsym Shift+Print --release exec "bash ~/git/jsochacki/dotfiles/clip2snip.sh"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
