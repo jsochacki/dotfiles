@@ -500,6 +500,7 @@ sudo cp matlab.desktop /usr/share/applications/
 #function_apt_wait_for_unlock sudo apt-get install -y coolkey
 
 #Fix Ubuntu Toolbar
+function_apt_wait_for_unlock sudo apt install gnome-shell-extension-prefs
 function_apt_wait_for_unlock ./install_dash_to_panel.sh
 
 # Add to dialout for hardware access
