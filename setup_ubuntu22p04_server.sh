@@ -222,6 +222,9 @@ ln -s $TMPDIR/cscope_maps.vim $homedir/.vim/cscope/
 mkdir -p $homedir/.config/nvim/cscope
 ln -s $TMPDIR/cscope_maps.nvim $homedir/.config/nvim/cscope/
 
+# Do ctags setup
+function_apt_wait_for_unlock sudo apt install -y universal-ctags
+
 # Install vim, you need to wait until python 3 is setup as we compile with
 # python 3
 function_apt_wait_for_unlock ./setup_vim.sh
