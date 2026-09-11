@@ -214,7 +214,6 @@ function_apt_wait_for_unlock sudo apt install -y universal-ctags
 function_apt_wait_for_unlock ./setup_vim.sh
 #function_apt_wait_for_unlock ./setup_nvim.sh
 
-############################   PICKUP HERE    ############################################
 #Manual youcompletemeinstall if plug doesn't work which it shouldnt
 function_apt_wait_for_unlock ./install_and_setup_youcompleteme.sh
 
@@ -408,15 +407,15 @@ echo '' >> $homedir/.bashrc
 echo '# Adding global NODE path for access to global libraries' >> $homedir/.bashrc
 echo 'export NODE_PATH=$(npm root -g)' >> $homedir/.bashrc
 
-python3.14 -m pip install --force black
-python3.14 -m pip install --force python-lsp-server[rope,jedi]
-python3.14 -m pip install --force pylint
-python3.14 -m pip install --force mypy
-python3.14 -m pip install --force autoflake
-python3.14 -m pip install --force isort
-#python3.14 -m pip install autopep8
+pipx install black
+pipx install python-lsp-server[rope,jedi]
+pipx install pylint
+pipx install mypy
+pipx install autoflake
+pipx install isort
+#pipx install autopep8
 
-function_apt_wait_for_unlock ./setup_ccls_u22p04.sh
+function_apt_wait_for_unlock ./setup_ccls_u26p04.sh
 function_apt_wait_for_unlock ./setup_bear.sh
 
 # Opens vim, installs the plugins, then quits back to shell
@@ -438,6 +437,7 @@ function_apt_wait_for_unlock sudo apt-get install -y git-lfs
 # git libfuse for appimage support
 function_apt_wait_for_unlock sudo apt-get install -y libfuse2
 
+############################   PICKUP HERE    ############################################
 # Add openvpn script
 cd $TMPDIR
 ln -s $TMPDIR/start_openvpn_lsi.sh $homedir/.local/bin/start_openvpn_lsi.sh
